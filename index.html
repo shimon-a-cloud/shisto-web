@@ -258,6 +258,20 @@
       object-fit: cover;
       opacity: 0.55;
     }
+    @media(max-width:768px){ .hero-video{ display: none; } }
+    @media(max-width:768px){
+      .hero::before {
+        content: '';
+        position: absolute; inset: 0; z-index: 0;
+        background: radial-gradient(ellipse 120% 80% at 50% 60%, rgba(60,40,80,0.35) 0%, transparent 70%),
+                    radial-gradient(ellipse 80% 60% at 80% 30%, rgba(30,30,60,0.3) 0%, transparent 60%);
+        animation: hero-glow 8s ease-in-out infinite alternate;
+      }
+    }
+    @keyframes hero-glow {
+      0%   { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.05); }
+    }
 
     .hero-grad {
       position: absolute; inset: 0; z-index: 1;
@@ -1224,16 +1238,6 @@
   }
 })();
 
-// Hero video autoplay fallback (iOS Low Power Mode対策)
-(function(){
-  var v = document.getElementById('hero-video');
-  if (!v) return;
-  v.addEventListener('loadedmetadata', function() {
-    setTimeout(function() {
-      if (v.paused) v.style.display = 'none';
-    }, 500);
-  });
-})();
 </script>
 </body>
 </html>

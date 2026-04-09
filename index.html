@@ -647,7 +647,7 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero grain">
-  <video class="hero-video" autoplay muted loop playsinline>
+  <video class="hero-video" id="hero-video" autoplay muted loop playsinline webkit-playsinline>
     <source src="videos/hero-bg.mp4" type="video/mp4">
   </video>
   <div class="hero-grad"></div>
@@ -1221,6 +1221,16 @@
         btn.textContent = '無料相談を申し込む';
       }
     });
+  }
+})();
+
+// Hero video autoplay fallback (iOS Low Power Mode対策)
+(function(){
+  var v = document.getElementById('hero-video');
+  if (!v) return;
+  var p = v.play();
+  if (p !== undefined) {
+    p.catch(function() { v.style.display = 'none'; });
   }
 })();
 </script>

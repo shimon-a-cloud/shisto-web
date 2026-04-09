@@ -1228,10 +1228,11 @@
 (function(){
   var v = document.getElementById('hero-video');
   if (!v) return;
-  var p = v.play();
-  if (p !== undefined) {
-    p.catch(function() { v.style.display = 'none'; });
-  }
+  v.addEventListener('loadedmetadata', function() {
+    setTimeout(function() {
+      if (v.paused) v.style.display = 'none';
+    }, 500);
+  });
 })();
 </script>
 </body>

@@ -477,7 +477,9 @@
     }
     .svc-row:hover .svc-num,
     .svc-row:hover .svc-desc,
-    .svc-row:hover .svc-arr { color: rgba(245,245,243,0.4); }
+    .svc-row:hover .svc-arr,
+    .svc-row:hover .svc-icon { color: rgba(245,245,243,0.4); }
+    .svc-icon { transition: color 0.25s ease; }
 
     /* ─── SERVICE ACCORDION ────────────────── */
     .svc-detail {
@@ -692,9 +694,12 @@
       <div class="fade-up" style="transition-delay:.5s">
         <h2 class="hero-headline">AIと実行力で、<br>事業を前へ。</h2>
       </div>
-      <div class="fade-up flex flex-col sm:flex-row gap-3 flex-shrink-0" style="transition-delay:.6s">
-        <a href="#contact" class="btn-primary btn-accent w-full sm:w-auto text-center">無料で相談する</a>
-        <a href="#services" class="btn-primary btn-ghost w-full sm:w-auto text-center">サービスを見る</a>
+      <div class="fade-up flex flex-col gap-2 flex-shrink-0" style="transition-delay:.6s">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#contact" class="btn-primary btn-accent w-full sm:w-auto text-center">無料で相談する</a>
+          <a href="#services" class="btn-primary btn-ghost w-full sm:w-auto text-center">サービスを見る</a>
+        </div>
+        <p style="font-size:0.65rem;font-weight:300;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-align:center;">30分のオンライン相談 · 費用は一切かかりません</p>
       </div>
     </div>
   </div>
@@ -735,7 +740,10 @@
         <div class="svc-row" onclick="toggleSvc(this)">
           <span class="svc-num text-xs font-mono" style="color:#555;">01</span>
           <div>
-            <h3 class="text-lg md:text-xl font-light tracking-wide">AI業務効率化支援</h3>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 flex-shrink-0 svc-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:#888;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+              <h3 class="text-lg md:text-xl font-light tracking-wide">AI業務効率化支援</h3>
+            </div>
             <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">AIを「使ってみる」で終わらせず、実務に定着する形まで設計・支援します。</p>
           </div>
           <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">生成AI活用設計・ツール導入・社内定着まで</p>
@@ -758,7 +766,10 @@
         <div class="svc-row" onclick="toggleSvc(this)">
           <span class="svc-num text-xs font-mono" style="color:#555;">02</span>
           <div>
-            <h3 class="text-lg md:text-xl font-light tracking-wide">Webサイト・LP制作</h3>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 flex-shrink-0 svc-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:#888;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>
+              <h3 class="text-lg md:text-xl font-light tracking-wide">Webサイト・LP制作</h3>
+            </div>
             <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">伝わる構成・導線・成果まで考えたWeb制作を行います。</p>
           </div>
           <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">コーポレート・サービスサイト・LP・UI設計</p>
@@ -781,7 +792,10 @@
         <div class="svc-row" onclick="toggleSvc(this)">
           <span class="svc-num text-xs font-mono" style="color:#555;">03</span>
           <div>
-            <h3 class="text-lg md:text-xl font-light tracking-wide">Web運用・改善支援</h3>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 flex-shrink-0 svc-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:#888;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+              <h3 class="text-lg md:text-xl font-light tracking-wide">Web運用・改善支援</h3>
+            </div>
             <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">公開して終わりではなく、成果につながる状態まで改善します。</p>
           </div>
           <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">文言改善・CV導線強化・SEO基礎改善</p>
@@ -804,7 +818,10 @@
         <div class="svc-row" onclick="toggleSvc(this)">
           <span class="svc-num text-xs font-mono" style="color:#555;">04</span>
           <div>
-            <h3 class="text-lg md:text-xl font-light tracking-wide">SNS運用支援</h3>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 flex-shrink-0 svc-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:#888;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+              <h3 class="text-lg md:text-xl font-light tracking-wide">SNS運用支援</h3>
+            </div>
             <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">発信の方向性設計から運用改善まで、継続しやすい形でサポートします。</p>
           </div>
           <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">LinkedIn・X・発信設計・継続サポート</p>
@@ -827,7 +844,10 @@
         <div class="svc-row" onclick="toggleSvc(this)">
           <span class="svc-num text-xs font-mono" style="color:#555;">05</span>
           <div>
-            <h3 class="text-lg md:text-xl font-light tracking-wide">AI研修・ハンズオン</h3>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 flex-shrink-0 svc-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:#888;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+              <h3 class="text-lg md:text-xl font-light tracking-wide">AI研修・ハンズオン</h3>
+            </div>
             <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">「AIを使ってみたい」を、実務で使える状態に変えます。</p>
           </div>
           <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">個人・社内研修・オンライン対応</p>
@@ -1101,9 +1121,19 @@
 
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer style="background:#0A0A0A;border-top:0.5px solid rgba(255,255,255,0.06);padding:1.75rem 1.5rem;" class="md:!px-16">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <p style="font-size:0.8rem;color:rgba(255,255,255,0.7);letter-spacing:0.06em;">© 2026 合同会社Shisto. All rights reserved.</p>
-    <div style="display:flex;gap:2.5rem;">
+    <div style="display:flex;align-items:center;gap:2rem;">
+      <!-- SNS icons -->
+      <div style="display:flex;gap:1.25rem;align-items:center;">
+        <a href="#" aria-label="LinkedIn" style="color:rgba(255,255,255,0.5);transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="#" aria-label="X (Twitter)" style="color:rgba(255,255,255,0.5);transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.722-8.817-8.154-10.683h7.44l4.264 5.636L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+        </a>
+      </div>
+      <div style="width:1px;height:14px;background:rgba(255,255,255,0.12);"></div>
       <a href="privacy.html" style="font-size:0.8rem;color:rgba(255,255,255,0.7);letter-spacing:0.06em;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">プライバシーポリシー</a>
       <a href="#contact" style="font-size:0.8rem;color:rgba(255,255,255,0.7);letter-spacing:0.06em;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Contact</a>
     </div>
@@ -1264,7 +1294,7 @@
         status.style.display = 'block';
         status.style.color = 'rgba(255,100,100,0.8)';
         btn.disabled = false;
-        btn.textContent = '無料相談を申し込む';
+        btn.textContent = '無料で相談する';
       }
     });
   }

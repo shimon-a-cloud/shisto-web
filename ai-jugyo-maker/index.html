@@ -346,6 +346,44 @@
       color: rgba(255,255,255,0.25);
       letter-spacing: 0.04em;
     }
+
+    /* ─── MOBILE ─────────────────────────── */
+    @media(max-width:768px){
+      .section { padding: 3.5rem 1.25rem; }
+
+      /* Pain section: 番号+悩み full width, 解決策を下に */
+      .pain-row {
+        grid-template-columns: 2rem 1fr !important;
+        grid-template-rows: auto auto;
+      }
+      .pain-row .pain-solution {
+        grid-column: 1 / -1;
+        padding-left: 0 !important;
+        border-left: none !important;
+        border-top: 1px solid rgba(79,70,229,0.3);
+        padding-top: 1rem;
+        margin-top: 0.5rem;
+      }
+      .pain-header { display: none !important; }
+
+      /* Why: 4列→2列 */
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .why-grid > div {
+        border-right: none !important;
+        border-bottom: 0.5px solid rgba(0,0,0,0.08);
+      }
+      .why-grid > div:nth-child(odd) {
+        border-right: 0.5px solid rgba(0,0,0,0.08) !important;
+      }
+
+      /* How: 横並び→縦スタック */
+      .how-flow {
+        grid-template-columns: 1fr !important;
+      }
+      .how-arrow { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -392,52 +430,52 @@
     </div>
 
     <!-- ヘッダー行 -->
-    <div style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:0.75rem 0;border-top:0.5px solid rgba(255,255,255,0.1);border-bottom:0.5px solid rgba(255,255,255,0.08);">
+    <div class="pain-header" style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:0.75rem 0;border-top:0.5px solid rgba(255,255,255,0.1);border-bottom:0.5px solid rgba(255,255,255,0.08);">
       <span></span>
       <p style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;color:rgba(255,255,255,0.55);">悩み</p>
       <p style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;color:#818cf8;">AI授業メーカーの解決策</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;border-bottom:0.5px solid rgba(255,255,255,0.08);align-items:start;" data-reveal data-d="1">
+    <div class="pain-row" style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;border-bottom:0.5px solid rgba(255,255,255,0.08);align-items:start;" data-reveal data-d="1">
       <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:rgba(255,255,255,0.2);line-height:1;">01</span>
       <div>
         <p style="font-size:0.92rem;font-weight:500;color:#fff;letter-spacing:0.02em;margin-bottom:0.5rem;">授業の流れをゼロから考えている</p>
         <p style="font-size:0.78rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.85;">何をどの順番で教えるか毎回悩む。過去の指導案を引っ張り出してアレンジするだけで1時間以上かかる。</p>
       </div>
-      <div style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
+      <div class="pain-solution" style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
         <p style="font-size:0.78rem;font-weight:400;color:#c7d2fe;line-height:1.85;">単元名・授業回数・学年を入力するだけで、45分×n時間分の授業の流れをフェーズごとに即座に生成。ゼロから考える必要はありません。</p>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;border-bottom:0.5px solid rgba(255,255,255,0.08);align-items:start;" data-reveal data-d="2">
+    <div class="pain-row" style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;border-bottom:0.5px solid rgba(255,255,255,0.08);align-items:start;" data-reveal data-d="2">
       <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:rgba(255,255,255,0.2);line-height:1;">02</span>
       <div>
         <p style="font-size:0.92rem;font-weight:500;color:#fff;letter-spacing:0.02em;margin-bottom:0.5rem;">評価規準の3観点を毎年どう書くか迷う</p>
         <p style="font-size:0.78rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.85;">知識・技能／思考・判断・表現／主体的な態度の3つをA〜Cで書くよう求められるが、単元ごとに何を書けばいいかわからない。</p>
       </div>
-      <div style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
+      <div class="pain-solution" style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
         <p style="font-size:0.78rem;font-weight:400;color:#c7d2fe;line-height:1.85;">学習指導要領準拠の3観点を、授業で観察できる行動レベルで自動生成。「これを書けばいい」がすぐわかります。</p>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;border-bottom:0.5px solid rgba(255,255,255,0.08);align-items:start;" data-reveal data-d="3">
+    <div class="pain-row" style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;border-bottom:0.5px solid rgba(255,255,255,0.08);align-items:start;" data-reveal data-d="3">
       <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:rgba(255,255,255,0.2);line-height:1;">03</span>
       <div>
         <p style="font-size:0.92rem;font-weight:500;color:#fff;letter-spacing:0.02em;margin-bottom:0.5rem;">振り返りフォームも毎回手作りしている</p>
         <p style="font-size:0.78rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.85;">授業内容が決まった後もGoogleフォームの設問入力・低学年用プリント作成・単元末の総括フォームと作業が続く。</p>
       </div>
-      <div style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
+      <div class="pain-solution" style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
         <p style="font-size:0.78rem;font-weight:400;color:#c7d2fe;line-height:1.85;">毎回の振り返り（小1〜2は印刷プリント・小3〜6はGoogleフォーム用）と単元末の総括フォームを授業計画と同時に生成します。</p>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;align-items:start;" data-reveal data-d="4">
+    <div class="pain-row" style="display:grid;grid-template-columns:3rem 1fr 1fr;gap:2rem;padding:2.25rem 0;align-items:start;" data-reveal data-d="4">
       <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:rgba(255,255,255,0.2);line-height:1;">04</span>
       <div>
         <p style="font-size:0.92rem;font-weight:500;color:#fff;letter-spacing:0.02em;margin-bottom:0.5rem;">ChatGPTに頼んでも手直しが多い</p>
         <p style="font-size:0.78rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.85;">学習指導要領の観点が抜ける・低学年向けの表現にならない・授業構成が現場と合わないなど、結局大幅な修正が必要になる。</p>
       </div>
-      <div style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
+      <div class="pain-solution" style="padding-left:1.25rem;border-left:1px solid rgba(79,70,229,0.4);">
         <p style="font-size:0.78rem;font-weight:400;color:#c7d2fe;line-height:1.85;">小学校の授業設計に特化した専用ツールのため、プロンプト不要で必要なものが最初から揃います。別のAIが品質を自動チェックし、不備があれば再生成します。</p>
       </div>
     </div>
@@ -451,7 +489,7 @@
       <p class="sec-label" style="margin-bottom:0.75rem;">Why AI授業メーカー</p>
       <h2 class="sec-title">選ばれる4つの理由</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:0.5px solid rgba(0,0,0,0.08);">
+    <div class="why-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:0.5px solid rgba(0,0,0,0.08);">
       <div style="padding:2rem 1.5rem;border-right:0.5px solid rgba(0,0,0,0.08);" data-reveal data-d="1">
         <p style="font-size:0.6rem;letter-spacing:0.2em;color:#4F46E5;margin-bottom:1.25rem;">01</p>
         <h3 style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.9rem;font-weight:500;line-height:1.55;margin-bottom:0.75rem;">観点別評価規準を自動生成</h3>
@@ -483,19 +521,19 @@
       <p class="sec-label" style="margin-bottom:0.75rem;">How it works</p>
       <h2 class="sec-title">使い方は3ステップ</h2>
     </div>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;">
+    <div class="how-flow" style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;">
       <div style="background:#fff;border:0.5px solid rgba(0,0,0,0.08);padding:2rem 1.75rem;" data-reveal data-d="1">
         <p style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:rgba(10,10,10,0.12);line-height:1;margin-bottom:1.25rem;">01</p>
         <h3 style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.95rem;font-weight:500;margin-bottom:0.6rem;">単元情報を入力</h3>
         <p style="font-size:0.78rem;font-weight:300;color:rgba(10,10,10,0.5);line-height:1.85;">単元名・授業回数・学年グループを選択するだけ。難しい設定は一切ありません。</p>
       </div>
-      <div style="padding:0 1.5rem;color:rgba(0,0,0,0.15);font-size:1.2rem;" data-reveal>→</div>
+      <div class="how-arrow" style="padding:0 1.5rem;color:rgba(0,0,0,0.15);font-size:1.2rem;" data-reveal>→</div>
       <div style="background:#fff;border:0.5px solid rgba(0,0,0,0.08);padding:2rem 1.75rem;" data-reveal data-d="2">
         <p style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:rgba(10,10,10,0.12);line-height:1;margin-bottom:1.25rem;">02</p>
         <h3 style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.95rem;font-weight:500;margin-bottom:0.6rem;">AIが一括生成</h3>
         <p style="font-size:0.78rem;font-weight:300;color:rgba(10,10,10,0.5);line-height:1.85;">授業の流れ・評価規準・振り返りフォームの3点をAIが同時に生成します。</p>
       </div>
-      <div style="padding:0 1.5rem;color:rgba(0,0,0,0.15);font-size:1.2rem;" data-reveal>→</div>
+      <div class="how-arrow" style="padding:0 1.5rem;color:rgba(0,0,0,0.15);font-size:1.2rem;" data-reveal>→</div>
       <div style="background:#fff;border:0.5px solid rgba(0,0,0,0.08);padding:2rem 1.75rem;" data-reveal data-d="3">
         <p style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:rgba(10,10,10,0.12);line-height:1;margin-bottom:1.25rem;">03</p>
         <h3 style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.95rem;font-weight:500;margin-bottom:0.6rem;">そのままコピー＆活用</h3>

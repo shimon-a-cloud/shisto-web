@@ -13,98 +13,485 @@
   <meta property="og:image" content="https://shisto.jp/og-image.png">
   <meta property="og:url" content="https://shisto.jp/ai-jugyo-maker/">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0A0A0A',
+            paper: '#F5F5F3',
+            snow: '#FAFAF8',
+            mid: '#888',
+            rule: 'rgba(0,0,0,0.1)',
+            accent: '#4F46E5',
+            'accent-hover': '#4338CA',
+          },
+          fontFamily: { sans: ['Inter','Noto Sans JP','sans-serif'] },
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Noto Sans JP', sans-serif; background: #0A0A0A; color: #fff; }
-    .grad { background: linear-gradient(135deg, #1a1a2e 0%, #0A0A0A 60%); }
-    .card { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; }
-    .badge { background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 999px; display: inline-block; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ease-expo: cubic-bezier(0.16, 1, 0.3, 1); }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Shippori Mincho','Noto Sans JP',serif;
+      background: #F5F5F3;
+      color: #0A0A0A;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.75rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.5s ease, border-color 0.5s ease, padding 0.4s ease;
+      border-bottom: 0.5px solid transparent;
+    }
+    #nav.scrolled {
+      background: rgba(245,245,243,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: rgba(0,0,0,0.08);
+      padding-top: 1.1rem;
+      padding-bottom: 1.1rem;
+    }
+    @media(max-width:768px){ #nav{ padding:1.25rem 1.25rem; } }
+    #nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300;
+      letter-spacing: 0.14em;
+      color: white;
+      transition: color 0.4s ease;
+      text-decoration: none;
+    }
+    #nav.scrolled #nav-logo { color: #0A0A0A; }
+    #nav-back {
+      font-size: 0.7rem; font-weight: 300; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    #nav-back:hover { color: rgba(255,255,255,0.95); }
+    #nav.scrolled #nav-back { color: rgba(10,10,10,0.5); }
+    #nav.scrolled #nav-back:hover { color: #0A0A0A; }
+    #nav-cta {
+      font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 1.5rem;
+      border-radius: 99px;
+      border: 1px solid #4F46E5;
+      color: white;
+      background: #4F46E5;
+      text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #nav-cta:hover { background: #4338CA; border-color: #4338CA; box-shadow: 0 4px 16px rgba(79,70,229,0.3); }
+
+    /* ─── HERO ──────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      background: #0A0A0A;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 10rem 3rem 5rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    @media(max-width:768px){ .hero{ padding: 8rem 1.5rem 4rem; } }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(79,70,229,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 56rem; }
+    .hero-eyebrow {
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2rem;
+    }
+    .hero-title {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 1.75rem;
+    }
+    .hero-lead {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,0.55);
+      line-height: 1.9;
+      max-width: 38rem;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+    }
+    .hero-rule {
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 2.5rem auto;
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────── */
+    [data-reveal] {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo);
+    }
+    [data-reveal].in { opacity: 1; transform: none; }
+    [data-d="1"] { transition-delay: 0.06s; }
+    [data-d="2"] { transition-delay: 0.12s; }
+    [data-d="3"] { transition-delay: 0.18s; }
+    [data-d="4"] { transition-delay: 0.24s; }
+
+    /* ─── SECTION ──────────────────────── */
+    .section { padding: 6rem 3rem; }
+    @media(max-width:768px){ .section{ padding: 4rem 1.5rem; } }
+    .section-inner { max-width: 64rem; margin: 0 auto; }
+    .sec-label {
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: #555;
+    }
+    .sec-title {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      line-height: 1.35;
+      color: #0A0A0A;
+    }
+
+    /* ─── FEATURE CARDS ───────────────── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0;
+    }
+    .feat-card {
+      padding: 2.5rem 2rem;
+      border: 0.5px solid rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .feat-card:not(:last-child) { border-right: none; }
+    @media(max-width:768px){
+      .feat-card { border-right: 0.5px solid rgba(0,0,0,0.08) !important; border-bottom: none; }
+      .feat-card:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+    }
+    .feat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300;
+      color: rgba(10,10,10,0.08);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .feat-title {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 1rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+    .feat-desc {
+      font-size: 0.85rem; font-weight: 300;
+      color: rgba(10,10,10,0.55);
+      line-height: 1.85;
+    }
+
+    /* ─── FLOW / STEPS ────────────────── */
+    .step-row {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1.5rem;
+      padding: 2rem 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.1);
+      align-items: start;
+    }
+    .step-row:first-child { border-top: 0.5px solid rgba(0,0,0,0.1); }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300;
+      color: rgba(10,10,10,0.25);
+      padding-top: 0.15rem;
+    }
+    .step-title {
+      font-size: 0.95rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+    .step-desc {
+      font-size: 0.82rem; font-weight: 300;
+      color: rgba(10,10,10,0.55);
+      line-height: 1.8;
+    }
+
+    /* ─── PRICING ─────────────────────── */
+    .price-card {
+      background: #0A0A0A;
+      border-radius: 2px;
+      padding: 3.5rem 3rem;
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+    @media(max-width:768px){ .price-card{ padding: 2.5rem 1.75rem; } }
+    .price-plan-label {
+      font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 2rem;
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .price-unit {
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      margin-top: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .price-divider {
+      height: 0.5px; background: rgba(255,255,255,0.1);
+      margin: 2rem 0;
+    }
+    .price-item {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      font-size: 0.82rem; font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .price-item::before {
+      content: '—'; color: rgba(255,255,255,0.2); flex-shrink: 0;
+    }
+
+    /* ─── BUTTONS ────────────────────── */
+    .btn-accent {
+      display: inline-block; text-align: center;
+      padding: 1rem 2.25rem; border-radius: 99px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+      background: #4F46E5; color: white;
+      border: 0.5px solid #4F46E5;
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .btn-accent:hover {
+      background: #4338CA; border-color: #4338CA;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(79,70,229,0.35);
+    }
+    .btn-white {
+      display: inline-block; text-align: center;
+      padding: 1rem 2.25rem; border-radius: 99px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+      background: white; color: #0A0A0A;
+      border: 0.5px solid rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .btn-white:hover { background: rgba(255,255,255,0.88); transform: translateY(-1px); }
+
+    /* ─── FOOTER ─────────────────────── */
+    footer {
+      background: #0A0A0A;
+      border-top: 0.5px solid rgba(255,255,255,0.06);
+      padding: 2.5rem 3rem;
+    }
+    @media(max-width:768px){ footer{ padding: 2rem 1.5rem; } }
+    .footer-inner {
+      max-width: 64rem; margin: 0 auto;
+      display: flex; flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media(min-width:768px){
+      .footer-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 300;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+    .footer-links {
+      display: flex; align-items: center;
+      gap: 1.75rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.72rem; font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
+    }
   </style>
 </head>
 <body>
 
-<!-- ナビゲーション -->
-<nav style="border-bottom:0.5px solid rgba(255,255,255,0.06);padding:1rem 1.5rem;" class="md:!px-16">
-  <div class="max-w-5xl mx-auto flex justify-between items-center">
-    <a href="https://shisto.jp" style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;">← 合同会社Shisto</a>
-    <span style="font-size:0.9rem;font-weight:500;letter-spacing:0.06em;">AI授業メーカー</span>
-  </div>
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="nav">
+  <a href="https://shisto.jp" id="nav-logo">Shisto</a>
+  <a href="https://shisto.jp" id="nav-back">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    合同会社Shisto
+  </a>
+  <a href="mailto:info@shisto.jp?subject=AI授業メーカー お問い合わせ" id="nav-cta" class="hidden md:inline-block">お問い合わせ</a>
 </nav>
 
-<!-- ヒーロー -->
-<section class="grad" style="padding:5rem 1.5rem 4rem;" class="md:!px-16">
-  <div class="max-w-3xl mx-auto text-center">
-    <span class="badge" style="font-size:0.75rem;padding:0.3rem 1rem;color:rgba(255,255,255,0.6);letter-spacing:0.1em;margin-bottom:1.5rem;">合同会社Shisto プロダクト</span>
-    <h1 style="font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.25;letter-spacing:0.02em;margin:1rem 0 1.25rem;">AI授業メーカー</h1>
-    <p style="font-size:clamp(1rem,2.5vw,1.25rem);color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:2.5rem;">小学校教員のための授業計画生成AI。<br>単元名を入れるだけで、授業の流れから<br>評価規準・振り返りフォームまで一括生成。</p>
-    <a href="mailto:info@shisto.jp?subject=AI授業メーカー お問い合わせ" style="display:inline-block;background:#fff;color:#0A0A0A;font-weight:700;font-size:0.95rem;padding:0.85rem 2.5rem;border-radius:6px;text-decoration:none;letter-spacing:0.04em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">お問い合わせ・申し込み</a>
-  </div>
-</section>
-
-<!-- 特徴 -->
-<section style="padding:4rem 1.5rem;" class="md:!px-16">
-  <div class="max-w-4xl mx-auto">
-    <h2 style="font-size:1.1rem;font-weight:500;letter-spacing:0.12em;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:3rem;">FEATURES</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;">
-
-      <div class="card" style="padding:2rem;">
-        <div style="font-size:1.5rem;margin-bottom:1rem;">📋</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.75rem;line-height:1.4;">学年別・単元別に授業計画を即座に生成</h3>
-        <p style="font-size:0.875rem;color:rgba(255,255,255,0.55);line-height:1.7;">小1〜小6・体育・保健に対応。単元名と授業回数を入力するだけで、45分×n時間分の授業の流れをフェーズごとに自動作成します。</p>
-      </div>
-
-      <div class="card" style="padding:2rem;">
-        <div style="font-size:1.5rem;margin-bottom:1rem;">📏</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.75rem;line-height:1.4;">学習指導要領準拠の評価規準を自動作成</h3>
-        <p style="font-size:0.875rem;color:rgba(255,255,255,0.55);line-height:1.7;">知識・技能／思考・判断・表現／主体的な学びの3観点でA〜C評価を生成。授業中に観察できる具体的な行動で記述されます。</p>
-      </div>
-
-      <div class="card" style="padding:2rem;">
-        <div style="font-size:1.5rem;margin-bottom:1rem;">📝</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.75rem;line-height:1.4;">振り返りフォーム・まとめフォームも同時生成</h3>
-        <p style="font-size:0.875rem;color:rgba(255,255,255,0.55);line-height:1.7;">毎回の振り返り（Googleフォーム用テキスト or 印刷プリント）と単元末の総括フォームをそのままコピーして使えます。</p>
-      </div>
-
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-reveal>合同会社Shisto プロダクト</p>
+    <h1 class="hero-title" data-reveal data-d="1">AI授業メーカー</h1>
+    <div class="hero-rule" data-reveal data-d="2"></div>
+    <p class="hero-lead" data-reveal data-d="2">
+      単元名を入れるだけで、授業の流れから<br>
+      評価規準・振り返りフォームまで一括生成。<br>
+      小学校教員のための授業計画 AI。
+    </p>
+    <div data-reveal data-d="3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:info@shisto.jp?subject=AI授業メーカー お問い合わせ" class="btn-white">お問い合わせ・申し込み</a>
     </div>
   </div>
 </section>
 
-<!-- 料金 -->
-<section style="padding:4rem 1.5rem;border-top:0.5px solid rgba(255,255,255,0.06);" class="md:!px-16">
-  <div class="max-w-xl mx-auto text-center">
-    <h2 style="font-size:1.1rem;font-weight:500;letter-spacing:0.12em;color:rgba(255,255,255,0.4);margin-bottom:2.5rem;">PRICING</h2>
-    <div class="card" style="padding:2.5rem 2rem;">
-      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;margin-bottom:0.5rem;">買い切りプラン</p>
-      <p style="font-size:3rem;font-weight:700;line-height:1;margin-bottom:0.25rem;">¥15,000</p>
-      <p style="font-size:0.85rem;color:rgba(255,255,255,0.45);margin-bottom:2rem;">消費税込 / 年額</p>
-      <ul style="text-align:left;font-size:0.875rem;color:rgba(255,255,255,0.65);line-height:1.8;list-style:none;padding:0;margin-bottom:2rem;">
-        <li>✓ 利用期間：1年間</li>
-        <li>✓ 生成回数：無制限</li>
-        <li>✓ 支払方法：銀行振込</li>
-        <li>✓ アクセス開始：入金確認後3営業日以内</li>
-      </ul>
-      <a href="mailto:info@shisto.jp?subject=AI授業メーカー 申し込み" style="display:block;background:#fff;color:#0A0A0A;font-weight:700;font-size:0.9rem;padding:0.8rem;border-radius:6px;text-decoration:none;letter-spacing:0.04em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">info@shisto.jp に申し込む</a>
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="section" style="background:#F5F5F3;">
+  <div class="section-inner">
+    <div style="margin-bottom:3.5rem;" data-reveal>
+      <p class="sec-label" style="margin-bottom:0.75rem;">Features</p>
+      <h2 class="sec-title">3つのドキュメントを<br>ワンクリックで生成</h2>
+    </div>
+
+    <div class="feat-grid" style="border:0.5px solid rgba(0,0,0,0.08);">
+      <div class="feat-card" data-reveal data-d="1">
+        <p class="feat-num">01</p>
+        <h3 class="feat-title">授業の流れ</h3>
+        <p class="feat-desc">小1〜小6・体育・保健に対応。単元名と授業回数を入力するだけで、45分×n時間分の授業の流れをフェーズごとに自動作成します。</p>
+      </div>
+      <div class="feat-card" data-reveal data-d="2">
+        <p class="feat-num">02</p>
+        <h3 class="feat-title">評価規準</h3>
+        <p class="feat-desc">学習指導要領準拠。知識・技能／思考・判断・表現／主体的な学びの3観点でA〜C評価を生成。授業中に観察できる具体的な行動で記述されます。</p>
+      </div>
+      <div class="feat-card" data-reveal data-d="3">
+        <p class="feat-num">03</p>
+        <h3 class="feat-title">振り返りフォーム</h3>
+        <p class="feat-desc">毎回の振り返り（Googleフォーム用テキスト or 印刷プリント）と単元末の総括フォームをそのままコピーして使えます。</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- フッター -->
-<footer style="background:#0A0A0A;border-top:0.5px solid rgba(255,255,255,0.06);padding:1.75rem 1.5rem;" class="md:!px-16">
-  <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-    <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);letter-spacing:0.06em;">© 2026 合同会社Shisto. All rights reserved.</p>
-    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
-      <a href="terms.html" style="font-size:0.8rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">利用規約</a>
-      <div style="width:1px;height:14px;background:rgba(255,255,255,0.12);"></div>
-      <a href="privacy.html" style="font-size:0.8rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">プライバシーポリシー</a>
-      <div style="width:1px;height:14px;background:rgba(255,255,255,0.12);"></div>
-      <a href="tokusho.html" style="font-size:0.8rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">特定商取引法</a>
-      <div style="width:1px;height:14px;background:rgba(255,255,255,0.12);"></div>
-      <a href="mailto:info@shisto.jp" style="font-size:0.8rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Contact</a>
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="section" style="background:#fff;border-top:0.5px solid rgba(0,0,0,0.06);">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr;gap:4rem;" class="md:grid-cols-2">
+      <div data-reveal>
+        <p class="sec-label" style="margin-bottom:0.75rem;">How it works</p>
+        <h2 class="sec-title">入力から完成まで<br>3分以内</h2>
+      </div>
+      <div>
+        <div class="step-row" data-reveal data-d="1">
+          <span class="step-num">01</span>
+          <div>
+            <p class="step-title">単元情報を入力</p>
+            <p class="step-desc">単元名・授業回数・学年グループを選択するだけ。難しい設定は一切ありません。</p>
+          </div>
+        </div>
+        <div class="step-row" data-reveal data-d="2">
+          <span class="step-num">02</span>
+          <div>
+            <p class="step-title">AIが一括生成</p>
+            <p class="step-desc">授業の流れ・評価規準・振り返りフォームの3点をAIが同時に生成します。</p>
+          </div>
+        </div>
+        <div class="step-row" data-reveal data-d="3">
+          <span class="step-num">03</span>
+          <div>
+            <p class="step-title">そのままコピー＆活用</p>
+            <p class="step-desc">Googleフォームにそのまま貼り付けるか、印刷用プリントとしてそのまま出力できます。</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section class="section" style="background:#F5F5F3;border-top:0.5px solid rgba(0,0,0,0.06);">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:3.5rem;" data-reveal>
+      <p class="sec-label" style="margin-bottom:0.75rem;">Pricing</p>
+      <h2 class="sec-title">シンプルな料金体系</h2>
+    </div>
+
+    <div class="price-card" data-reveal data-d="1">
+      <p class="price-plan-label">買い切りプラン</p>
+      <p class="price-amount">¥15,000</p>
+      <p class="price-unit">消費税込 / 年額</p>
+      <div class="price-divider"></div>
+      <div style="margin-bottom:2.5rem;">
+        <p class="price-item">利用期間：1年間</p>
+        <p class="price-item">生成回数：無制限</p>
+        <p class="price-item">支払方法：銀行振込</p>
+        <p class="price-item">アクセス開始：入金確認後3営業日以内</p>
+      </div>
+      <a href="mailto:info@shisto.jp?subject=AI授業メーカー 申し込み" class="btn-white" style="display:block;">
+        info@shisto.jp に申し込む
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-inner">
+    <a href="https://shisto.jp" class="footer-logo">Shisto</a>
+    <div class="footer-links">
+      <a href="terms.html">利用規約</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="tokusho.html">特定商取引法</a>
+      <a href="mailto:info@shisto.jp">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 合同会社Shisto</p>
   </div>
 </footer>
 
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

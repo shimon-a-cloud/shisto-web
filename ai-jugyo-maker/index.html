@@ -146,6 +146,28 @@
       margin: 2.5rem auto;
     }
 
+    /* ─── TYPEWRITER BG ──────────────────── */
+    #tw-bg {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      display: flex; align-items: flex-start;
+      padding: 7rem 4rem 4rem;
+    }
+    #tw-text {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(0.6rem, 1.1vw, 0.78rem);
+      line-height: 1.85;
+      color: rgba(255,255,255,0.09);
+      white-space: pre;
+      opacity: 1;
+      transition: opacity 1.4s ease;
+      max-width: 36rem;
+    }
+    #tw-text.fade-out { opacity: 0; }
+    @media(max-width:768px){ #tw-bg { display: none; } }
+
     /* ─── SCROLL REVEAL ──────────────────── */
     [data-reveal] {
       opacity: 0; transform: translateY(28px);
@@ -388,6 +410,7 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
+  <div id="tw-bg"><div id="tw-text"></div></div>
   <div class="hero-content">
     <p class="hero-eyebrow" data-reveal>小学校教員のための授業計画 AI</p>
     <h1 class="hero-title" data-reveal data-d="1">AI授業メーカー</h1>
@@ -582,6 +605,53 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+  // ── Typewriter background ──────────────────────────────
+  const TW_SNIPPETS = [
+    `■ 跳び箱（小3・4年）第2時\n\n【展開①】踏み切り練習（8分）\n全員が踏み切り板の前に集合し、助走のリズムを\n身につける。先生はこう言う：「3歩で踏み切り、\n両足をそろえてジャンプしてみよう！」\n\n【評価規準 A】\n助走から踏み切りまでの動作が連続して行え、\n安定した着地を3回連続でできる。`,
+
+    `■ ボール運動（小5・6年）第4時\n\n【本時のめあて】\nチームの作戦を立て、パスとシュートを組み合わせた\n攻撃を実践する。\n\n【展開②】戦術練習（10分）\n4チームに分かれ、Aゾーン〜Dゾーンに配置。\n先生：「ディフェンスの動きを読んで、\nどこに空きスペースがあるか確認してから\nパスを出してみよう」`,
+
+    `■ 保健（小5・6年）第1時\n\n単元目標：心の健康と自分の生活習慣の\n関係を理解し、ストレスへの対処法を考える。\n\n【本時の評価ポイント】\n知識・技能：心の健康に影響する生活習慣を\n　3つ以上具体的に挙げられているか。\n思考・判断：自分の生活と結びつけて\n　改善策を記述できているか。`,
+
+    `■ なわとび（小1・2年）第3時\n\n準備物：短縄 32本、長縄 4本、コーン 8個\n\n【展開①】基礎練習（8分）\n体育館を4コースに分け、前跳びの連続を練習。\nできた子は後ろ跳びに挑戦。\n先生：「縄が足に引っかかったら、\nまたすぐチャレンジ！何回でも大丈夫だよ」\n\n振り返りQ1：今日、新しい技ができましたか？`,
+
+    `■ 水泳（小3・4年）第5時\n\nA評価基準：\n　25mをクロールで泳ぎ切り、途中で\n　立たずに壁にタッチできる。\nB評価基準：\n　15m以上をクロールで泳ぐことができる。\nC評価（支援）：\n　ビート板を使い、バタ足で5m進む練習から始める。\n　教師が横について一緒に呼吸のタイミングを声かけ。`,
+  ];
+
+  const twEl = document.getElementById('tw-text');
+  if (twEl) {
+    let snippetIdx = 0, charIdx = 0, typing = true, timer;
+
+    function typeNext() {
+      const snippet = TW_SNIPPETS[snippetIdx];
+      if (charIdx <= snippet.length) {
+        twEl.textContent = snippet.slice(0, charIdx);
+        charIdx++;
+        timer = setTimeout(typeNext, charIdx < 10 ? 60 : 28);
+      } else {
+        // 全文表示後: 2.5秒待ってフェードアウト
+        timer = setTimeout(() => {
+          twEl.classList.add('fade-out');
+          timer = setTimeout(() => {
+            twEl.classList.remove('fade-out');
+            twEl.textContent = '';
+            snippetIdx = (snippetIdx + 1) % TW_SNIPPETS.length;
+            charIdx = 0;
+            timer = setTimeout(typeNext, 400);
+          }, 1400);
+        }, 2500);
+      }
+    }
+
+    // ヒーローが見えている間だけ動作
+    const heroEl = document.querySelector('.hero');
+    const twObserver = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { typeNext(); }
+      else { clearTimeout(timer); }
+    }, { threshold: 0.1 });
+    twObserver.observe(heroEl);
+  }
 </script>
 </body>
 </html>

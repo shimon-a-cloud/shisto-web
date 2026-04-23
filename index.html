@@ -306,7 +306,7 @@
     .hero-video {
       position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
       object-fit: cover;
-      opacity: 0.55;
+      opacity: 0;
     }
     @media(max-width:768px){ .hero-video{ opacity: 0.45; } }
     @media(max-width:768px){
@@ -1191,6 +1191,15 @@
   /* ── HERO VIDEO ── */
   const heroVideo = document.getElementById('hero-video');
   if(heroVideo){
+    heroVideo.style.opacity = '0';
+    heroVideo.style.transition = 'opacity 1.2s ease';
+
+    const showVideo = () => {
+      const isMobile = window.innerWidth <= 768;
+      heroVideo.style.opacity = isMobile ? '0.45' : '0.55';
+    };
+    heroVideo.addEventListener('playing', showVideo, { once: true });
+
     const tryPlay = () => {
       heroVideo.play().catch(() => {});
     };

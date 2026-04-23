@@ -308,7 +308,7 @@
       object-fit: cover;
       opacity: 0.55;
     }
-    @media(max-width:768px){ .hero-video{ opacity: 0.45; } }
+    @media(max-width:768px){ .hero-video{ display: none; } }
     @media(max-width:768px){
       .hero::before {
         content: '';
@@ -397,6 +397,7 @@
       transform: translateY(110%);
       opacity: 0;
       transition: transform 1.2s var(--ease-expo), opacity 0.8s ease;
+      will-change: transform, opacity;
     }
     .split-char.show {
       transform: translateY(0);
@@ -1213,12 +1214,16 @@
 
   function revealHero(baseDelay){
     const d = baseDelay || 0;
-    revealSplit(document.getElementById('brand-origin'), d + 200, 40);
-    revealSplit(document.getElementById('brand-name'), d + 600, 80);
-    revealSplit(document.getElementById('brand-sub'), d + 1400, 30);
     setTimeout(() => {
-      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('show'));
-    }, d + 2000);
+      requestAnimationFrame(() => {
+        revealSplit(document.getElementById('brand-origin'), 200, 40);
+        revealSplit(document.getElementById('brand-name'), 600, 80);
+        revealSplit(document.getElementById('brand-sub'), 1400, 30);
+        setTimeout(() => {
+          document.querySelectorAll('.fade-up').forEach(el => el.classList.add('show'));
+        }, 2000);
+      });
+    }, d);
   }
 
   if(skipIntro){

@@ -308,7 +308,7 @@
       object-fit: cover;
       opacity: 0.55;
     }
-    @media(max-width:768px){ .hero-video{ display: none; } }
+    @media(max-width:768px){ .hero-video{ opacity: 0.45; } }
     @media(max-width:768px){
       .hero::before {
         content: '';
@@ -715,7 +715,7 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero grain">
-  <video class="hero-video" id="hero-video" autoplay muted loop playsinline webkit-playsinline preload="none">
+  <video class="hero-video" id="hero-video" autoplay muted loop playsinline webkit-playsinline style="pointer-events:none;">
     <source src="videos/hero-bg.mp4" type="video/mp4">
   </video>
   <div class="hero-grad"></div>
@@ -1188,6 +1188,15 @@
 <!-- ═══════════ JS ═══════════ -->
 <script>
 (function(){
+  /* ── HERO VIDEO ── */
+  const heroVideo = document.getElementById('hero-video');
+  if(heroVideo){
+    const p = heroVideo.play();
+    if(p !== undefined){
+      p.catch(() => { heroVideo.style.display = 'none'; });
+    }
+  }
+
   /* ── INTRO ── */
   const intro   = document.getElementById('intro');
   const skipIntro = sessionStorage.getItem('shisto-visited');

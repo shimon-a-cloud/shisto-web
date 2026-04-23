@@ -1191,9 +1191,15 @@
   /* ── HERO VIDEO ── */
   const heroVideo = document.getElementById('hero-video');
   if(heroVideo){
+    const tryPlay = () => {
+      heroVideo.play().catch(() => {});
+    };
     const p = heroVideo.play();
     if(p !== undefined){
-      p.catch(() => { heroVideo.style.display = 'none'; });
+      p.catch(() => {
+        document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+        document.addEventListener('scroll', tryPlay, { once: true, passive: true });
+      });
     }
   }
 

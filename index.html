@@ -109,13 +109,13 @@
       theme: {
         extend: {
           colors: {
-            ink: '#0A0A0A',
-            paper: '#F5F5F3',
-            snow: '#FAFAF8',
+            ink: '#0B1120',
+            paper: '#F2F5FB',
+            snow: '#EEF2FF',
             mid: '#888',
             rule: 'rgba(0,0,0,0.1)',
-            accent: '#4F46E5',
-            'accent-hover': '#4338CA',
+            accent: '#2563EB',
+            'accent-hover': '#1D4ED8',
           },
           fontFamily: { sans: ['Inter','Noto Sans JP','sans-serif'] },
         }
@@ -136,8 +136,8 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Shippori Mincho','Noto Sans JP',serif;
-      background: #F5F5F3;
-      color: #0A0A0A;
+      background: #F2F5FB;
+      color: #0B1120;
       font-size: 16px;
       font-weight: 400;
       letter-spacing: 0.06em;
@@ -148,7 +148,7 @@
     /* ─── INTRO ──────────────────────────────── */
     #intro {
       position: fixed; inset: 0; z-index: 9000;
-      background: #0A0A0A;
+      background: #0B1120;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       opacity: 1;
@@ -200,7 +200,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.65);
       opacity: 0;
       transition: opacity 0.8s ease;
     }
@@ -235,7 +235,7 @@
       border-bottom: 0.5px solid transparent;
     }
     #header.scrolled {
-      background: rgba(245,245,243,0.92);
+      background: rgba(242,245,251,0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-color: rgba(0,0,0,0.08);
@@ -252,7 +252,7 @@
       transition: color 0.4s ease;
       text-decoration: none;
     }
-    #header.scrolled #logo { color: #0A0A0A; }
+    #header.scrolled #logo { color: #0B1120; }
 
     nav a {
       font-size: 0.75rem; font-weight: 300;
@@ -262,44 +262,44 @@
       transition: color 0.3s ease;
     }
     nav a:hover { color: rgba(255,255,255,0.95); }
-    #header.scrolled nav a { color: rgba(10,10,10,0.6); }
-    #header.scrolled nav a:hover { color: #0A0A0A; }
+    #header.scrolled nav a { color: rgba(11,17,32,0.75); }
+    #header.scrolled nav a:hover { color: #0B1120; }
 
     #header-cta {
       font-size: 0.7rem; font-weight: 400;
       letter-spacing: 0.06em;
       padding: 0.65rem 1.5rem;
       border-radius: 99px;
-      border: 1px solid #4F46E5;
+      border: 1px solid #2563EB;
       color: white;
-      background: #4F46E5;
+      background: #2563EB;
       text-decoration: none;
       transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
-    #header-cta:hover { background: #4338CA; border-color: #4338CA; box-shadow: 0 4px 16px rgba(79,70,229,0.3); }
+    #header-cta:hover { background: #1D4ED8; border-color: #1D4ED8; box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
     #header.scrolled #header-cta {
-      background: #4F46E5; border-color: #4F46E5; color: white;
+      background: #2563EB; border-color: #2563EB; color: white;
     }
     #header.scrolled #header-cta:hover {
-      background: #4338CA; border-color: #4338CA; color: white;
+      background: #1D4ED8; border-color: #1D4ED8; color: white;
     }
 
     /* mobile menu */
     #mobile-menu {
       display: none; position: fixed; inset: 0;
-      z-index: 5000; background: #0A0A0A;
+      z-index: 5000; background: #0B1120;
       flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
     }
     #mobile-menu.open { display: flex; }
     #menu-btn { background: none; border: none; cursor: pointer; padding: 4px; color: white; transition: color 0.4s ease; }
-    #header.scrolled #menu-btn { color: #0A0A0A; }
+    #header.scrolled #menu-btn { color: #0B1120; }
 
     /* ─── HERO ──────────────────────────────── */
     .hero {
       position: relative; min-height: 100svh;
       display: flex; flex-direction: column;
       padding: 0 3rem 2.5rem;
-      overflow: hidden; background: #0A0A0A;
+      overflow: hidden; background: #0B1120;
     }
     @media(max-width:768px){ .hero{ padding: 0 1.25rem 2rem; } }
 
@@ -313,8 +313,8 @@
       .hero::before {
         content: '';
         position: absolute; inset: 0; z-index: 0;
-        background: radial-gradient(ellipse 120% 80% at 50% 60%, rgba(100,50,160,0.55) 0%, transparent 70%),
-                    radial-gradient(ellipse 80% 60% at 80% 30%, rgba(50,40,110,0.45) 0%, transparent 60%);
+        background: radial-gradient(ellipse 120% 80% at 50% 60%, rgba(10,40,120,0.55) 0%, transparent 70%),
+                    radial-gradient(ellipse 80% 60% at 80% 30%, rgba(8,25,80,0.45) 0%, transparent 60%);
         animation: hero-glow 8s ease-in-out infinite alternate;
       }
     }
@@ -325,7 +325,7 @@
 
     .hero-grad {
       position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(180deg, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.5) 70%, #0A0A0A 100%);
+      background: linear-gradient(180deg, rgba(11,17,32,0.1) 0%, rgba(11,17,32,0.5) 70%, #0B1120 100%);
     }
 
     .hero-content {
@@ -427,7 +427,7 @@
     }
 
     /* ─── MARQUEE ─────────────────────────── */
-    .marquee-wrap { overflow: hidden; background: #0A0A0A; }
+    .marquee-wrap { overflow: hidden; background: #0B1120; }
     .marquee-track {
       display: flex; gap: 4rem;
       animation: scroll-x 28s linear infinite;
@@ -467,7 +467,7 @@
       font-weight: 300;
       letter-spacing: 0.06em;
       line-height: 1.3;
-      color: #0A0A0A;
+      color: #0B1120;
     }
 
     /* ─── PHOTO SECTIONS ──────────────────── */
@@ -483,7 +483,7 @@
     .photo-block.in img { transform: scale(1); }
     .photo-block-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(11,17,32,0.6) 0%, transparent 60%);
       display: flex; align-items: flex-end;
       padding: 2.5rem 3rem;
     }
@@ -514,7 +514,7 @@
       .svc-row { grid-template-columns: 3rem 1fr auto 1.5rem; gap: 1.5rem; }
     }
     .svc-row:hover {
-      background: #0A0A0A; color: #F5F5F3;
+      background: #0B1120; color: #F2F5FB;
       padding-inline: 1.25rem;
     }
     .svc-row:hover .svc-num,
@@ -539,11 +539,11 @@
     @media(min-width:768px){ .svc-detail-inner { grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; } }
     .svc-item {
       display: flex; align-items: baseline; gap: 0.5rem;
-      font-size: 0.8rem; font-weight: 300; color: rgba(10,10,10,0.7);
+      font-size: 0.8rem; font-weight: 300; color: rgba(11,17,32,0.7);
       line-height: 1.7;
     }
     .svc-item::before {
-      content: '—'; color: rgba(10,10,10,0.25); flex-shrink: 0;
+      content: '—'; color: rgba(11,17,32,0.25); flex-shrink: 0;
     }
 
     /* ─── GLOBAL BODY TEXT BOOST ────────── */
@@ -561,7 +561,7 @@
     details[open] .faq-icon { transform: rotate(45deg); }
 
     /* ─── PHOTO MARQUEE ────────────────── */
-    .photo-marquee { overflow: hidden; background: #0A0A0A; padding: 1.5rem 0; }
+    .photo-marquee { overflow: hidden; background: #0B1120; padding: 1.5rem 0; }
     .photo-marquee + .photo-marquee { padding-top: 0; }
     .photo-marquee-track {
       display: flex; gap: 1.5rem;
@@ -630,20 +630,20 @@
       display: inline-block; text-align: center;
       padding: 1rem 2.25rem; border-radius: 99px;
       font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em;
-      background: white; color: #0A0A0A;
+      background: white; color: #0B1120;
       border: 0.5px solid rgba(255,255,255,0.6);
       text-decoration: none;
       transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
     }
     .btn-primary:hover { background: rgba(255,255,255,0.85); transform: translateY(-1px); }
     .btn-accent {
-      background: #4F46E5; color: white;
-      border-color: #4F46E5;
+      background: #2563EB; color: white;
+      border-color: #2563EB;
     }
     .btn-accent:hover {
-      background: #4338CA; border-color: #4338CA;
+      background: #1D4ED8; border-color: #1D4ED8;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(79,70,229,0.3);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.3);
     }
     .btn-ghost {
       background: transparent; color: white;
@@ -656,7 +656,7 @@
       font-size: 0.65rem; font-weight: 400; letter-spacing: 0.06em;
       padding: 0.45rem 1rem; border-radius: 99px;
       border: 0.5px solid rgba(0,0,0,0.15);
-      color: rgba(10,10,10,0.6);
+      color: rgba(11,17,32,0.75);
     }
   </style>
 </head>
@@ -742,7 +742,7 @@
           <a href="#contact" class="btn-primary btn-accent w-full sm:w-auto text-center">無料で相談する</a>
           <a href="#services" class="btn-primary btn-ghost w-full sm:w-auto text-center">サービスを見る</a>
         </div>
-        <p style="font-size:0.65rem;font-weight:300;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-align:center;">30分のオンライン相談 · 費用は一切かかりません</p>
+        <p style="font-size:0.65rem;font-weight:300;color:rgba(255,255,255,0.65);letter-spacing:0.06em;text-align:center;">30分のオンライン相談 · 費用は一切かかりません</p>
       </div>
     </div>
   </div>
@@ -912,22 +912,22 @@
     <p class="sec-label mb-20" data-reveal>Flow</p>
     <div class="grid md:grid-cols-4" style="border-top:0.5px solid rgba(0,0,0,0.1);">
       <div class="py-12 pr-8" style="border-right:0.5px solid rgba(0,0,0,0.1);" data-reveal data-d="1">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(10,10,10,0.04);">01</p>
+        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">01</p>
         <h3 class="font-bold text-ink mb-3 tracking-tight">ヒアリング</h3>
         <p class="text-sm font-light leading-[1.9] text-ink/80">現状の課題、目標、必要な施策を整理します。</p>
       </div>
       <div class="py-12 px-8" style="border-right:0.5px solid rgba(0,0,0,0.1);" data-reveal data-d="2">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(10,10,10,0.04);">02</p>
+        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">02</p>
         <h3 class="font-bold text-ink mb-3 tracking-tight">ご提案</h3>
         <p class="text-sm font-light leading-[1.9] text-ink/80">実施内容・進め方・優先順位をご提案します。</p>
       </div>
       <div class="py-12 px-8" style="border-right:0.5px solid rgba(0,0,0,0.1);" data-reveal data-d="3">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(10,10,10,0.04);">03</p>
+        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">03</p>
         <h3 class="font-bold text-ink mb-3 tracking-tight">設計・制作・導入</h3>
         <p class="text-sm font-light leading-[1.9] text-ink/80">Web制作、AI導入、運用設計を進めます。</p>
       </div>
       <div class="py-12 pl-8" data-reveal data-d="4">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(10,10,10,0.04);">04</p>
+        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">04</p>
         <h3 class="font-bold text-ink mb-3 tracking-tight">改善・継続支援</h3>
         <p class="text-sm font-light leading-[1.9] text-ink/80">振り返りを行い、成果につながるよう改善します。</p>
       </div>
@@ -959,7 +959,7 @@
 </div>
 
 <!-- ═══════════ WHY ═══════════ -->
-<section style="background:#0A0A0A; position:relative;" class="grain px-6 md:px-16 py-14 md:py-44">
+<section style="background:#0B1120; position:relative;" class="grain px-6 md:px-16 py-14 md:py-44">
   <div class="max-w-7xl mx-auto">
     <p class="sec-label mb-4 md:mb-8" style="color:rgba(255,255,255,0.4);" data-reveal>Why Shisto</p>
     <h2 class="sec-title mb-10 md:mb-20" style="color:white;" data-reveal>選ばれる理由</h2>
@@ -1004,7 +1004,7 @@
         <span class="tag">AI起業家</span>
         <span class="tag">Web / Operations</span>
       </div>
-      <a href="#contact" class="arrow-link" style="color:#4F46E5;border-bottom:0.5px solid rgba(79,70,229,0.3);padding-bottom:3px;">
+      <a href="#contact" class="arrow-link" style="color:#2563EB;border-bottom:0.5px solid rgba(37,99,235,0.3);padding-bottom:3px;">
         無料で相談する
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
@@ -1084,7 +1084,7 @@
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section id="contact" style="background:#0A0A0A;position:relative;" class="grain px-6 md:px-16 py-14 md:py-44">
+<section id="contact" style="background:#0B1120;position:relative;" class="grain px-6 md:px-16 py-14 md:py-44">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-20 items-start">
     <div data-reveal="from-left">
       <p class="sec-label mb-6 md:mb-10" style="color:rgba(255,255,255,0.2);">Contact</p>
@@ -1127,13 +1127,13 @@
           style="width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.9rem 1.1rem;font-size:0.85rem;color:rgba(255,255,255,0.8);font-weight:300;outline:none;transition:border-color 0.25s;"
           onfocus="this.style.borderColor='rgba(255,255,255,0.3)'"
           onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-          <option value="" style="background:#0A0A0A;">選択してください</option>
-          <option style="background:#0A0A0A;">AI業務効率化支援</option>
-          <option style="background:#0A0A0A;">Webサイト・LP制作</option>
-          <option style="background:#0A0A0A;">Web運用・改善支援</option>
-          <option style="background:#0A0A0A;">SNS運用支援</option>
-          <option style="background:#0A0A0A;">AI研修・ハンズオン</option>
-          <option style="background:#0A0A0A;">その他・まだ決まっていない</option>
+          <option value="" style="background:#0B1120;">選択してください</option>
+          <option style="background:#0B1120;">AI業務効率化支援</option>
+          <option style="background:#0B1120;">Webサイト・LP制作</option>
+          <option style="background:#0B1120;">Web運用・改善支援</option>
+          <option style="background:#0B1120;">SNS運用支援</option>
+          <option style="background:#0B1120;">AI研修・ハンズオン</option>
+          <option style="background:#0B1120;">その他・まだ決まっていない</option>
         </select>
       </div>
       <div>
@@ -1162,7 +1162,7 @@
 </section>
 
 <!-- ═══════════ FOOTER ═══════════ -->
-<footer style="background:#0A0A0A;border-top:0.5px solid rgba(255,255,255,0.06);padding:1.75rem 1.5rem;" class="md:!px-16">
+<footer style="background:#0B1120;border-top:0.5px solid rgba(255,255,255,0.06);padding:1.75rem 1.5rem;" class="md:!px-16">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <p style="font-size:0.8rem;color:rgba(255,255,255,0.7);letter-spacing:0.06em;">© 2026 合同会社Shisto. All rights reserved.</p>
     <div style="display:flex;align-items:center;gap:2rem;">

@@ -516,8 +516,8 @@
   <div class="section-inner">
     <div style="margin-bottom:2.5rem;" data-reveal>
       <p class="sec-label" style="margin-bottom:0.75rem;">Comparison</p>
-      <h2 class="sec-title">汎用AIとの違い</h2>
-      <p style="font-size:0.85rem;font-weight:400;color:rgba(10,10,10,0.8);line-height:1.9;margin-top:1.25rem;max-width:36rem;">出力はすべて、別のAIが自動チェック。学習指導要領への準拠・時間配分の整合性・学年別の表現レベルを検証し、基準を満たさなければ即再生成します。</p>
+      <h2 class="sec-title">指導案の質が、違う。</h2>
+      <p style="font-size:0.85rem;font-weight:400;color:rgba(10,10,10,0.8);line-height:1.9;margin-top:1.25rem;max-width:36rem;">汎用AIは「授業の流れらしきもの」は出せます。でも教室で使える指導案には、発問・反応・応答・ミスまで書いてある必要がある。出力はすべて別のAIが自動検証し、基準を満たさなければ即再生成します。</p>
     </div>
     <div style="border:0.5px solid rgba(0,0,0,0.1);overflow:hidden;" data-reveal data-d="1">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;background:#0A0A0A;">
@@ -526,29 +526,34 @@
         <div style="padding:0.9rem 1.25rem;text-align:center;border-left:0.5px solid rgba(255,255,255,0.08);background:rgba(79,70,229,0.15);"><p style="font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.85);">AI授業メーカー</p></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
+        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">発問例の具体性</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">△ 抽象的・汎用的</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 場面ごとに具体的</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
+        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">児童の予想反応</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">✕ 記載なし</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 反応パターンを記載</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
+        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">教員の応答・声かけ例</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">✕ 記載なし</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 各場面で記載</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
+        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">陥りやすいミスと対処</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">✕ 記載なし</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 単元ごとに生成</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
         <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">学習指導要領準拠の評価規準</p></div>
         <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">△ 要プロンプト工夫</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 自動</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 自動・検証済み</p></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
-        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">低学年向け振り返りプリント</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">✕ 非対応</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 自動切り替え</p></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
-        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">単元末 総括フォームも生成</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">△ 別途依頼が必要</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 同時生成</p></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
-        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">操作・入力の手間</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">△ 毎回プロンプト設計</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 3項目入力のみ</p></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0.5px solid rgba(0,0,0,0.08);">
-        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">出力をそのまま使える</p></div>
+        <div style="padding:1rem 1.25rem;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.8rem;font-weight:300;">出力をそのまま授業で使える</p></div>
         <div style="padding:1rem 1.25rem;text-align:center;border-right:0.5px solid rgba(0,0,0,0.08);"><p style="font-size:0.85rem;color:rgba(10,10,10,0.3);">△ 大幅な手直しが必要</p></div>
-        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 即活用可能</p></div>
+        <div style="padding:1rem 1.25rem;text-align:center;background:rgba(79,70,229,0.04);"><p style="font-size:0.85rem;color:#4F46E5;font-weight:500;">✓ 教室でそのまま開ける</p></div>
       </div>
     </div>
   </div>

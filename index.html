@@ -296,9 +296,18 @@
     #mobile-menu {
       display: none; position: fixed; inset: 0;
       z-index: 5000; background: #0B1120;
-      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+      flex-direction: column; align-items: flex-start; justify-content: center;
+      padding: 0 2rem;
     }
     #mobile-menu.open { display: flex; }
+    #mobile-menu .mob-logo { position: absolute; top: 1.5rem; left: 1.75rem; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.18em; color: rgba(255,255,255,0.9); }
+    #mobile-menu .mob-nav { width: 100%; border-top: 0.5px solid rgba(255,255,255,0.08); }
+    #mobile-menu .mob-nav a { display: flex; align-items: center; justify-content: space-between; padding: 1.3rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.08); text-decoration: none; }
+    #mobile-menu .mob-nav a .mob-label { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; letter-spacing: 0.08em; color: white; }
+    #mobile-menu .mob-nav a .mob-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: rgba(255,255,255,0.25); letter-spacing: 0.15em; }
+    #mobile-menu .mob-footer { position: absolute; bottom: 2rem; left: 1.75rem; right: 1.75rem; display: flex; align-items: center; justify-content: space-between; }
+    #mobile-menu .mob-cta { font-size: 0.8rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); text-decoration: none; border-bottom: 0.5px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
+    #mobile-menu .mob-tagline { font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 0.12em; }
     #menu-btn { background: none; border: none; cursor: pointer; padding: 10px; color: white; transition: color 0.4s ease; }
     #header.scrolled #menu-btn { color: #0B1120; }
 
@@ -785,16 +794,30 @@
 
 <!-- Mobile Menu -->
 <div id="mobile-menu">
-  <button onclick="closeMenu()" aria-label="閉じる" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;padding:8px;">
+  <span class="mob-logo">Shisto</span>
+  <button onclick="closeMenu()" aria-label="閉じる" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;padding:10px;">
     <svg class="w-7 h-7" stroke="white" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
     </svg>
   </button>
-  <a href="#services" onclick="closeMenu()" class="text-white text-3xl font-light tracking-widest">Services</a>
-  <a href="#about"    onclick="closeMenu()" class="text-white text-3xl font-light tracking-widest">About</a>
-  <a href="#contact"  onclick="closeMenu()" class="text-white text-3xl font-light tracking-widest">Contact</a>
-  <a href="/ai-jugyo-maker/" onclick="closeMenu()" class="text-white text-3xl font-light tracking-widest">AI授業メーカー</a>
-  <a href="#contact"  onclick="closeMenu()" class="btn-primary btn-accent mt-6">無料で相談する</a>
+  <nav class="mob-nav">
+    <a href="#services" onclick="closeMenu()">
+      <span class="mob-label">Services</span>
+      <span class="mob-num">01</span>
+    </a>
+    <a href="#about" onclick="closeMenu()">
+      <span class="mob-label">About</span>
+      <span class="mob-num">02</span>
+    </a>
+    <a href="#contact" onclick="closeMenu()">
+      <span class="mob-label">Contact</span>
+      <span class="mob-num">03</span>
+    </a>
+  </nav>
+  <div class="mob-footer">
+    <a href="#contact" onclick="closeMenu()" class="mob-cta">無料で相談する →</a>
+    <span class="mob-tagline">AI · Web · Operations</span>
+  </div>
 </div>
 
 <!-- ═══════════ HERO ═══════════ -->

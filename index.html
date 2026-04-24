@@ -667,6 +667,31 @@
       border: 0.5px solid rgba(0,0,0,0.15);
       color: rgba(11,17,32,0.75);
     }
+
+  /* ===== Why Shisto — value block ===== */
+  .why-value-section { padding: 80px 24px 100px; background: #fff; border-top: 0.5px solid rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+  .why-value-header { max-width: 1180px; margin: 0 auto 72px; }
+  .why-value-header h2 { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: clamp(2rem, 4.5vw, 3.8rem); font-weight: 300; color: #0B1120; margin-top: 14px; line-height: 1.3; letter-spacing: 0.06em; }
+  .vb { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1180px; margin: 0 auto 100px; position: relative; }
+  .vb:last-child { margin-bottom: 0; }
+  .vb.reverse { direction: rtl; }
+  .vb.reverse > * { direction: ltr; }
+  .vb-num { display: inline-block; font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: #0B1120; opacity: 0.08; line-height: 1; margin-bottom: 16px; }
+  .vb-title { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: clamp(22px, 2.5vw, 32px); font-weight: 300; line-height: 1.6; margin-bottom: 24px; color: #0B1120; letter-spacing: 0.06em; }
+  .vb-desc { font-size: 14px; line-height: 2; color: rgba(11,17,32,0.7); margin-bottom: 28px; font-weight: 300; }
+  .vb-points { list-style: none; }
+  .vb-points li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 0.5px solid rgba(0,0,0,0.1); font-size: 13px; color: rgba(11,17,32,0.8); font-weight: 300; }
+  .vb-points li:last-child { border-bottom: none; }
+  .vb-points li::before { content: ""; flex-shrink: 0; width: 6px; height: 6px; border: 1px solid #2563EB; border-radius: 50%; margin-top: 8px; }
+  .vb-caption { font-size: 12px; color: #555; margin-top: 10px; letter-spacing: 0.06em; font-weight: 300; }
+  .bi-collage { position: relative; aspect-ratio: 1/1; background: #0B1120; border-radius: 2px; box-shadow: 0 12px 40px rgba(11,17,32,0.1); overflow: hidden; }
+  .bi-collage img { position: absolute; border-radius: 2px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); object-fit: cover; object-position: top left; }
+  .bi-collage .bi-img-1 { width: 92%; height: 65%; top: 4%; left: 4%; z-index: 1; }
+  .bi-collage .bi-img-2 { width: 65%; height: 44%; bottom: 4%; right: 4%; z-index: 2; border: 1px solid rgba(232,160,32,0.2); }
+  .bi-collage::after { content: "AI NEWS BI"; position: absolute; top: 10px; right: 12px; font-size: 8px; letter-spacing: 0.2em; color: rgba(232,160,32,0.5); font-weight: 300; z-index: 10; }
+  @media (max-width: 900px) {
+    .vb, .vb.reverse { grid-template-columns: 1fr; gap: 36px; margin-bottom: 72px; direction: ltr; }
+  }
   </style>
 </head>
 <body>
@@ -969,31 +994,56 @@
 </div>
 
 <!-- ═══════════ WHY ═══════════ -->
-<section style="background:#0B1120; position:relative;" class="grain px-6 md:px-16 py-14 md:py-44">
-  <div class="max-w-7xl mx-auto">
-    <p class="sec-label mb-4 md:mb-8" style="color:rgba(255,255,255,0.4);" data-reveal>Why Shisto</p>
-    <h2 class="sec-title mb-10 md:mb-20" style="color:white;" data-reveal>選ばれる理由</h2>
-    <div class="grid md:grid-cols-2" style="border-top:1px solid rgba(255,255,255,0.12);">
-      <div class="py-8 md:py-14 pr-0 md:pr-16 why-card-br" style="border-bottom:1px solid rgba(255,255,255,0.12);" data-reveal data-d="1">
-        <p class="text-xs font-mono mb-4 md:mb-8" style="color:rgba(255,255,255,0.3);">01</p>
-        <h3 class="text-xl font-bold text-white mb-4 tracking-tight">相談相手が、そのまま作る人</h3>
-        <p class="text-sm font-light leading-[1.9]" style="color:rgba(255,255,255,0.85);">大手のような営業→ディレクター→外注の伝言ゲームがありません。ヒアリングから設計・実装まで代表が直接担当するため、意図のズレが起きにくく、やりとりもスピーディーです。</p>
+<section class="why-value-section">
+  <div class="why-value-header">
+    <p class="sec-label">Why Shisto</p>
+    <h2>選ばれる理由</h2>
+  </div>
+
+  <!-- 01 -->
+  <div class="vb" data-reveal>
+    <div class="vb-content">
+      <div class="vb-num">01</div>
+      <h2 class="vb-title">相談した相手が、<br>そのまま作る人。</h2>
+      <p class="vb-desc">大手のような営業→ディレクター→外注の伝言ゲームがありません。<br>ヒアリングから設計・実装まで代表が直接担当するため、<br>意図のズレが起きにくく、やりとりもスピーディーです。</p>
+      <ul class="vb-points">
+        <li>窓口・設計・実装がすべて同一人物</li>
+        <li>修正依頼が即日〜翌日に反映</li>
+        <li>「なんとなく違う」も言葉にしながら整理</li>
+        <li>無駄な中間コストがかからない</li>
+        <li>「1ページだけ」「発信設計だけ」など部分依頼も歓迎</li>
+        <li>縛りなし・合わなければいつでも止められる</li>
+      </ul>
+    </div>
+    <div>
+      <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:4px; overflow:hidden; box-shadow:0 12px 40px rgba(11,17,32,0.18);">
+        <img src="images/screenshot-shisto.png" alt="Shisto Webサイト" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; display:block;">
       </div>
-      <div class="py-8 md:py-14 pl-0 md:pl-16" style="border-bottom:1px solid rgba(255,255,255,0.12);" data-reveal data-d="2">
-        <p class="text-xs font-mono mb-4 md:mb-8" style="color:rgba(255,255,255,0.3);">02</p>
-        <h3 class="text-xl font-bold text-white mb-4 tracking-tight">AIを「提案する側」が、<br class="hidden md:inline">自分で使い倒している</h3>
-        <p class="text-sm font-light leading-[1.9]" style="color:rgba(255,255,255,0.85);">Shistoの業務そのものがAIで動いています。SNS投稿案の自動生成、情報収集の自動化、経費管理まで——日々自分で使い込んでいるからこそ、現場で本当に効く提案ができます。</p>
+      <p class="vb-caption">Shisto公式サイト — 自社で制作・運用中</p>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="vb reverse" data-reveal>
+    <div class="vb-content">
+      <div class="vb-num">02</div>
+      <h2 class="vb-title">AIを「提案する側」が、<br>毎日自分で使い倒している。</h2>
+      <p class="vb-desc">Shistoの業務そのものがAIで動いています。<br>SNS投稿案の自動生成、情報収集の自動化、経費管理まで——<br>日々自分で使い込んでいるからこそ、現場で本当に効く提案ができます。</p>
+      <ul class="vb-points">
+        <li>複数の自動化システムを現在進行形で稼働中</li>
+        <li>実務経験から「使えるもの・使えないもの」を把握</li>
+        <li>導入後の運用まで含めた設計</li>
+        <li>デモをそのまま見せられる</li>
+        <li>公開後もデータを見ながら改善を継続</li>
+        <li>担当が変わらないから文脈が途切れない</li>
+      </ul>
+    </div>
+    <div>
+      <div class="bi-collage">
+        <img class="bi-img-1" src="images/bi-chart.png" alt="AIニュースBI チャート">
+        <img class="bi-img-2" src="images/bi-prediction.png" alt="AIニュースBI 予測">
       </div>
-      <div class="py-8 md:py-14 pr-0 md:pr-16 why-card-br" data-reveal data-d="3">
-        <p class="text-xs font-mono mb-4 md:mb-8" style="color:rgba(255,255,255,0.3);">03</p>
-        <h3 class="text-xl font-bold text-white mb-4 tracking-tight">大きな契約の前に、<br class="hidden md:inline">小さく試せる</h3>
-        <p class="text-sm font-light leading-[1.9]" style="color:rgba(255,255,255,0.85);">大きな初期投資を前提としていません。「まずこの1ページだけ」「SNSの発信設計だけ」など、必要な範囲から始められます。合わないと感じたらいつでも止められます。縛りはありません。</p>
-      </div>
-      <div class="py-8 md:py-14 pl-0 md:pl-16" data-reveal data-d="4">
-        <p class="text-xs font-mono mb-4 md:mb-8" style="color:rgba(255,255,255,0.3);">04</p>
-        <h3 class="text-xl font-bold text-white mb-4 tracking-tight">納品で終わらず、<br class="hidden md:inline">一緒に改善し続ける</h3>
-        <p class="text-sm font-light leading-[1.9]" style="color:rgba(255,255,255,0.85);">サイトもAIツールも、公開・導入してからが本番です。数字を見ながら改善を繰り返す伴走型の支援で、「作ったけど放置」にはさせません。</p>
-      </div>
+      <p class="vb-caption">AIニュースBI — AI業界ニュースの自動収集・分析・提案生成システム</p>
     </div>
   </div>
 </section>

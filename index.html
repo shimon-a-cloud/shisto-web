@@ -528,9 +528,11 @@
         padding-inline: 1.25rem;
       }
     }
-    .svc-row:hover .svc-num,
-    .svc-row:hover .svc-desc,
-    .svc-row:hover .svc-arr,
+    @media(hover: hover) {
+      .svc-row:hover .svc-num,
+      .svc-row:hover .svc-desc,
+      .svc-row:hover .svc-arr { color: rgba(255,255,255,0.5); }
+    }
 
     /* ─── SERVICE ACCORDION ────────────────── */
     .svc-detail {
@@ -736,6 +738,9 @@
   /* iOSの自動ズーム防止：フォーム入力を16px以上に */
   @media (max-width: 768px) {
     #contact input, #contact select, #contact textarea { font-size: 16px !important; }
+    /* スクロールジター防止：スマホでは遅延アニメーションを無効化 */
+    [data-d] { transition-delay: 0s !important; }
+    [data-reveal] { transition-duration: 0.5s; }
   }
   </style>
 </head>

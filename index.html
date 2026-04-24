@@ -241,6 +241,8 @@
       display: flex; align-items: center; justify-content: space-between;
       transition: background 0.5s ease, border-color 0.5s ease, padding 0.4s ease;
       border-bottom: 0.5px solid transparent;
+      will-change: background-color;
+      transform: translateZ(0);
     }
     #header.scrolled {
       background: rgba(242,245,251,0.92);
@@ -748,9 +750,11 @@
   /* iOSの自動ズーム防止：フォーム入力を16px以上に */
   @media (max-width: 768px) {
     #contact input, #contact select, #contact textarea { font-size: 16px !important; }
-    /* スクロールジター防止：スマホでは遅延アニメーションを無効化 */
+    /* スマホはrevealアニメーション無効化（スクロール性能優先） */
+    [data-reveal], [data-reveal="from-left"], [data-reveal="from-right"] {
+      opacity: 1 !important; transform: none !important; transition: none !important;
+    }
     [data-d] { transition-delay: 0s !important; }
-    [data-reveal] { transition-duration: 0.5s; }
   }
   </style>
 </head>

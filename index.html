@@ -671,10 +671,13 @@
     }
 
   /* ===== Flow ===== */
-  .flow-section { padding: 80px 24px 100px; background: #F2F5FB; border-top: 0.5px solid rgba(0,0,0,0.1); }
+  .flow-section { padding: 60px 24px 80px; background: #F2F5FB; border-top: 0.5px solid rgba(0,0,0,0.1); }
+  @media(min-width:769px){ .flow-section { padding: 80px 24px 100px; } }
   .flow-inner { max-width: 1180px; margin: 0 auto; }
-  .flow-header { margin-bottom: 72px; }
+  .flow-header { margin-bottom: 48px; }
+  @media(min-width:769px){ .flow-header { margin-bottom: 72px; } }
   .flow-header h2 { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; color: #0B1120; margin-top: 14px; letter-spacing: 0.06em; line-height: 1.4; }
+  /* desktop: 4-column horizontal */
   .flow-grid { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
   .flow-grid::before { content: ''; position: absolute; top: 19px; left: 12.5%; right: 12.5%; height: 1px; background: linear-gradient(to right, #2563EB 0%, rgba(37,99,235,0.15) 100%); z-index: 0; }
   .flow-step { padding: 0 32px 0 0; position: relative; z-index: 1; }
@@ -690,6 +693,17 @@
   .flow-meta { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 300; letter-spacing: 0.06em; color: #2563EB; border-top: 0.5px solid rgba(37,99,235,0.3); padding-top: 14px; width: 100%; }
   .flow-meta::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: #2563EB; flex-shrink: 0; }
   .flow-note { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid rgba(0,0,0,0.1); font-size: 12px; font-weight: 300; color: rgba(11,17,32,0.55); letter-spacing: 0.06em; line-height: 1.8; }
+  /* mobile: vertical timeline */
+  @media(max-width:768px){
+    .flow-grid { grid-template-columns: 1fr; }
+    .flow-grid::before { top: 20px; left: 19px; right: auto; width: 1px; height: calc(100% - 56px); background: linear-gradient(to bottom, #2563EB 0%, rgba(37,99,235,0.15) 100%); }
+    .flow-step { display: grid; grid-template-columns: 40px 1fr; grid-template-rows: auto auto auto; column-gap: 20px; padding: 0 0 36px 0; }
+    .flow-step:last-child { padding-bottom: 0; }
+    .flow-node { grid-column: 1; grid-row: 1 / 4; margin-bottom: 0; align-self: start; }
+    .flow-title { grid-column: 2; grid-row: 1; padding-top: 10px; }
+    .flow-desc { grid-column: 2; grid-row: 2; margin-bottom: 12px; }
+    .flow-meta { grid-column: 2; grid-row: 3; }
+  }
 
   /* ===== Why Shisto — value block ===== */
   .why-value-section { padding: 80px 24px 100px; background: #F2F5FB; border-top: 0.5px solid rgba(0,0,0,0.1); position: relative; overflow: hidden; }
@@ -933,7 +947,7 @@
 </section>
 
 <!-- ═══════════ FLOW ═══════════ -->
-<section class="flow-section mobile-hide">
+<section class="flow-section">
   <div class="flow-inner">
     <div class="flow-header">
       <p class="sec-label" data-reveal>Flow</p>

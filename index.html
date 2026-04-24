@@ -522,9 +522,11 @@
     @media(min-width:768px){
       .svc-row { grid-template-columns: 3rem 1fr auto 1.5rem; gap: 1.5rem; }
     }
-    .svc-row:hover {
-      background: #0B1120; color: #F2F5FB;
-      padding-inline: 1.25rem;
+    @media(hover: hover) {
+      .svc-row:hover {
+        background: #0B1120; color: #F2F5FB;
+        padding-inline: 1.25rem;
+      }
     }
     .svc-row:hover .svc-num,
     .svc-row:hover .svc-desc,
@@ -918,7 +920,6 @@
               <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">AI研修・ハンズオン</span>
             </div>
           </div>
-          <span></span>
           <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
         </div>
         <div class="svc-detail">

@@ -668,6 +668,27 @@
       color: rgba(11,17,32,0.75);
     }
 
+  /* ===== Flow ===== */
+  .flow-section { padding: 80px 24px 100px; background: #F2F5FB; border-top: 0.5px solid rgba(0,0,0,0.1); }
+  .flow-inner { max-width: 1180px; margin: 0 auto; }
+  .flow-header { margin-bottom: 72px; }
+  .flow-header h2 { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; color: #0B1120; margin-top: 14px; letter-spacing: 0.06em; line-height: 1.4; }
+  .flow-grid { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+  .flow-grid::before { content: ''; position: absolute; top: 19px; left: 12.5%; right: 12.5%; height: 1px; background: linear-gradient(to right, #2563EB 0%, rgba(37,99,235,0.15) 100%); z-index: 0; }
+  .flow-step { padding: 0 32px 0 0; position: relative; z-index: 1; }
+  .flow-step:last-child { padding-right: 0; }
+  .flow-node { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; flex-shrink: 0; }
+  .flow-step:first-child .flow-node { background: #2563EB; }
+  .flow-step:not(:first-child) .flow-node { background: #fff; border: 1.5px solid #2563EB; }
+  .flow-node span { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400; letter-spacing: 0.05em; line-height: 1; }
+  .flow-step:first-child .flow-node span { color: #fff; }
+  .flow-step:not(:first-child) .flow-node span { color: #2563EB; }
+  .flow-title { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; font-weight: 700; color: #0B1120; letter-spacing: 0.04em; margin-bottom: 12px; line-height: 1.5; }
+  .flow-desc { font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(11,17,32,0.75); margin-bottom: 20px; }
+  .flow-meta { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 300; letter-spacing: 0.06em; color: #2563EB; border-top: 0.5px solid rgba(37,99,235,0.3); padding-top: 14px; width: 100%; }
+  .flow-meta::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: #2563EB; flex-shrink: 0; }
+  .flow-note { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid rgba(0,0,0,0.1); font-size: 12px; font-weight: 300; color: rgba(11,17,32,0.55); letter-spacing: 0.06em; line-height: 1.8; }
+
   /* ===== Why Shisto — value block ===== */
   .why-value-section { padding: 80px 24px 100px; background: #F2F5FB; border-top: 0.5px solid rgba(0,0,0,0.1); position: relative; overflow: hidden; }
   .why-value-header { max-width: 1180px; margin: 0 auto 72px; }
@@ -942,32 +963,39 @@
 </section>
 
 <!-- ═══════════ FLOW ═══════════ -->
-<section class="mobile-hide px-6 md:px-16 py-20 md:py-32" style="border-top:0.5px solid rgba(0,0,0,0.1);">
-  <div class="max-w-7xl mx-auto">
-    <p class="sec-label mb-20" data-reveal>Flow</p>
-    <div class="grid md:grid-cols-4" style="border-top:0.5px solid rgba(0,0,0,0.1);">
-      <div class="py-12 pr-8" style="border-right:0.5px solid rgba(0,0,0,0.1);" data-reveal data-d="1">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">01</p>
-        <h3 class="font-bold text-ink mb-3 tracking-tight">ヒアリング</h3>
-        <p class="text-sm font-light leading-[1.9] text-ink/80">現状の課題、目標、必要な施策を整理します。</p>
+<section class="flow-section mobile-hide">
+  <div class="flow-inner">
+    <div class="flow-header">
+      <p class="sec-label" data-reveal>Flow</p>
+      <h2 data-reveal>ご依頼の流れ</h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-step" data-reveal data-d="1">
+        <div class="flow-node"><span>01</span></div>
+        <h3 class="flow-title">ヒアリング</h3>
+        <p class="flow-desc">現状の課題・目標・優先したい施策を一緒に整理します。「何を頼めばいいかわからない」という段階でも構いません。</p>
+        <span class="flow-meta">初回30分 / オンライン可</span>
       </div>
-      <div class="py-12 px-8" style="border-right:0.5px solid rgba(0,0,0,0.1);" data-reveal data-d="2">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">02</p>
-        <h3 class="font-bold text-ink mb-3 tracking-tight">ご提案</h3>
-        <p class="text-sm font-light leading-[1.9] text-ink/80">実施内容・進め方・優先順位をご提案します。</p>
+      <div class="flow-step" data-reveal data-d="2">
+        <div class="flow-node"><span>02</span></div>
+        <h3 class="flow-title">ご提案</h3>
+        <p class="flow-desc">実施内容・進め方・優先順位・費用感をまとめてご提案します。提案だけで終わっても費用は一切かかりません。</p>
+        <span class="flow-meta">ヒアリング後3〜5日</span>
       </div>
-      <div class="py-12 px-8" style="border-right:0.5px solid rgba(0,0,0,0.1);" data-reveal data-d="3">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">03</p>
-        <h3 class="font-bold text-ink mb-3 tracking-tight">設計・制作・導入</h3>
-        <p class="text-sm font-light leading-[1.9] text-ink/80">Web制作、AI導入、運用設計を進めます。</p>
+      <div class="flow-step" data-reveal data-d="3">
+        <div class="flow-node"><span>03</span></div>
+        <h3 class="flow-title">設計・制作・導入</h3>
+        <p class="flow-desc">Web制作・AI導入・運用設計を代表が直接担当します。進捗は随時共有し、途中の修正・方向転換にも柔軟に対応します。</p>
+        <span class="flow-meta">規模・内容により相談</span>
       </div>
-      <div class="py-12 pl-8" data-reveal data-d="4">
-        <p class="font-black mb-10 leading-none" style="font-size:4.5rem;color:rgba(11,17,32,0.04);">04</p>
-        <h3 class="font-bold text-ink mb-3 tracking-tight">改善・継続支援</h3>
-        <p class="text-sm font-light leading-[1.9] text-ink/80">振り返りを行い、成果につながるよう改善します。</p>
+      <div class="flow-step" data-reveal data-d="4">
+        <div class="flow-node"><span>04</span></div>
+        <h3 class="flow-title">改善・継続支援</h3>
+        <p class="flow-desc">成果を確認しながら改善を続けます。「作って終わり」にしない継続的なサポートが強みです。いつでも止められます。</p>
+        <span class="flow-meta">月1回の振り返りから</span>
       </div>
     </div>
-    <p class="text-xs font-light text-ink/75 mt-8 tracking-wide" data-reveal>「何を頼めばいいかわからない」段階からでもご相談いただけます。</p>
+    <p class="flow-note" data-reveal>相談は無料です。まずは現状をお聞かせください。</p>
   </div>
 </section>
 

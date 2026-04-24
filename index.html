@@ -546,6 +546,8 @@
       display: grid; grid-template-columns: 1fr; gap: 0.75rem;
     }
     @media(min-width:768px){ .svc-detail-inner { grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; } }
+    .svc-other-grid { padding-top:1rem; display:grid; grid-template-columns:1fr; gap:1.5rem 2rem; }
+    @media(min-width:768px){ .svc-other-grid { grid-template-columns: 1fr 1fr 1fr; } }
     .svc-item {
       display: flex; align-items: baseline; gap: 0.5rem;
       font-size: 0.8rem; font-weight: 300; color: rgba(11,17,32,0.7);
@@ -884,76 +886,44 @@
         </div>
       </div>
 
-      <!-- 03 Web運用・改善支援 -->
+      <!-- 03-05 まとめ -->
       <div data-reveal data-d="3">
         <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:#555;">03</span>
+          <span class="svc-num text-xs font-mono" style="color:rgba(11,17,32,0.2);">+</span>
           <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-lg md:text-xl font-light tracking-wide">Web運用・改善支援</h3>
+            <p class="text-xs font-light mb-2" style="color:#888;letter-spacing:0.08em;">その他のご支援</p>
+            <div class="flex flex-wrap gap-2">
+              <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">Web運用・改善支援</span>
+              <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">SNS運用支援</span>
+              <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">AI研修・ハンズオン</span>
             </div>
-            <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">公開して終わりではなく、成果につながる状態まで改善します。</p>
           </div>
-          <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">文言改善・CV導線強化・SEO基礎改善</p>
+          <span></span>
           <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
         </div>
         <div class="svc-detail">
-          <div class="svc-detail-inner">
-            <span class="svc-item">既存サイトの課題診断・改善提案</span>
-            <span class="svc-item">キャッチコピー・文言のリライト</span>
-            <span class="svc-item">CV導線（問い合わせ・申込み）の強化</span>
-            <span class="svc-item">SEO基礎対策（タイトル・メタ・構造化）</span>
-            <span class="svc-item">ページ表示速度・UX改善</span>
-            <span class="svc-item">月次レポート・継続改善サイクルの構築</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 04 SNS運用支援 -->
-      <div data-reveal data-d="4">
-        <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:#555;">04</span>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-lg md:text-xl font-light tracking-wide">SNS運用支援</h3>
+          <div class="svc-other-grid">
+            <div>
+              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#888;text-transform:uppercase;margin-bottom:0.75rem;">Web運用・改善支援</p>
+              <span class="svc-item">既存サイトの課題診断・改善提案</span>
+              <span class="svc-item">キャッチコピー・文言のリライト</span>
+              <span class="svc-item">CV導線・SEO基礎対策</span>
+              <span class="svc-item">月次レポート・継続改善サイクル</span>
             </div>
-            <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">発信の方向性設計から運用改善まで、継続しやすい形でサポートします。</p>
-          </div>
-          <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">LinkedIn・X・発信設計・継続サポート</p>
-          <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
-        </div>
-        <div class="svc-detail">
-          <div class="svc-detail-inner">
-            <span class="svc-item">発信コンセプト・ターゲット設計</span>
-            <span class="svc-item">投稿案の企画・ライティング</span>
-            <span class="svc-item">LinkedIn・X等のアカウント運用設計</span>
-            <span class="svc-item">投稿スケジュール・運用フローの構築</span>
-            <span class="svc-item">AI活用による投稿案の自動生成</span>
-            <span class="svc-item">反応分析・改善提案</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05 AI研修・ハンズオン -->
-      <div data-reveal data-d="5">
-        <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:#555;">05</span>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-lg md:text-xl font-light tracking-wide">AI研修・ハンズオン</h3>
+            <div>
+              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#888;text-transform:uppercase;margin-bottom:0.75rem;">SNS運用支援</p>
+              <span class="svc-item">発信コンセプト・ターゲット設計</span>
+              <span class="svc-item">投稿案の企画・ライティング</span>
+              <span class="svc-item">LinkedIn・X等のアカウント運用設計</span>
+              <span class="svc-item">AI活用による投稿案の自動生成</span>
             </div>
-            <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">「AIを使ってみたい」を、実務で使える状態に変えます。</p>
-          </div>
-          <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">個人・社内研修・オンライン対応</p>
-          <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
-        </div>
-        <div class="svc-detail">
-          <div class="svc-detail-inner">
-            <span class="svc-item">ChatGPT・Claude等の基礎から実務活用まで</span>
-            <span class="svc-item">業務に合わせたプロンプト設計・実践ワーク</span>
-            <span class="svc-item">個人・少人数・社内研修いずれも対応</span>
-            <span class="svc-item">オンライン・対面どちらも可</span>
-            <span class="svc-item">研修後のフォローアップ相談</span>
+            <div>
+              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#888;text-transform:uppercase;margin-bottom:0.75rem;">AI研修・ハンズオン</p>
+              <span class="svc-item">ChatGPT・Claude等の基礎〜実務活用</span>
+              <span class="svc-item">業務に合わせたプロンプト設計・実践</span>
+              <span class="svc-item">個人・少人数・社内研修いずれも対応</span>
+              <span class="svc-item">オンライン・対面どちらも可</span>
+            </div>
           </div>
         </div>
       </div>

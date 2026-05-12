@@ -722,7 +722,7 @@
   .vb.reverse > * { direction: ltr; }
   .vb-num { display: inline-block; font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: #0B1120; opacity: 0.08; line-height: 1; margin-bottom: 16px; }
   .vb-title { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: clamp(22px, 2.5vw, 32px); font-weight: 300; line-height: 1.6; margin-bottom: 24px; color: #0B1120; letter-spacing: 0.06em; }
-  .vb-desc { font-size: 14px; line-height: 2; color: rgba(11,17,32,0.7); margin-bottom: 28px; font-weight: 300; }
+  .vb-desc { font-size: 14px; line-height: 2; color: rgba(11,17,32,0.7); margin-bottom: 24px; font-weight: 300; }
   .vb-points { list-style: none; }
   .vb-points li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 0.5px solid rgba(0,0,0,0.1); font-size: 14px; color: rgba(11,17,32,0.8); font-weight: 300; }
   .vb-points li:last-child { border-bottom: none; }
@@ -738,6 +738,7 @@
   @media (max-width: 900px) {
     .vb, .vb.reverse { grid-template-columns: 1fr; gap: 36px; margin-bottom: 72px; direction: ltr; }
   }
+
   /* iOSの自動ズーム防止：フォーム入力を16px以上に */
   @media (max-width: 768px) {
     #contact input, #contact select, #contact textarea { font-size: 16px !important; }
@@ -993,14 +994,12 @@
     <div class="vb-content">
       <div class="vb-num">01</div>
       <h2 class="vb-title">相談した相手が、<br>そのまま作る人。</h2>
-      <p class="vb-desc">大手のような営業→ディレクター→外注の伝言ゲームがありません。<br>ヒアリングから設計・実装まで代表が直接担当するため、<br>意図のズレが起きにくく、やりとりもスピーディーです。</p>
+      <p class="vb-desc">大手のような営業→ディレクター→外注の伝言ゲームがありません。</p>
       <ul class="vb-points">
-        <li>窓口・設計・実装がすべて同一人物</li>
-        <li>修正依頼が即日〜翌日に反映</li>
-        <li>「なんとなく違う」も言葉にしながら整理</li>
-        <li>無駄な中間コストがかからない</li>
-        <li>「1ページだけ」「発信設計だけ」など部分依頼も歓迎</li>
-        <li>縛りなし・合わなければいつでも止められる</li>
+        <li>窓口・設計・実装まで、代表がひとりで担当</li>
+        <li>修正は即日〜翌日に反映、中間コストなし</li>
+        <li>「1ページだけ」「発信設計だけ」も歓迎</li>
+        <li>縛りなし、合わなければいつでも止められる</li>
       </ul>
     </div>
     <div>
@@ -1016,14 +1015,12 @@
     <div class="vb-content">
       <div class="vb-num">02</div>
       <h2 class="vb-title">AIを「提案する側」が、<br>毎日自分で使い倒している。</h2>
-      <p class="vb-desc">Shistoの業務そのものがAIで動いています。<br>SNS投稿案の自動生成、情報収集の自動化、経費管理まで——<br>日々自分で使い込んでいるからこそ、現場で本当に効く提案ができます。</p>
+      <p class="vb-desc">Shistoの業務そのものがAIで動いています。</p>
       <ul class="vb-points">
-        <li>複数の自動化システムを現在進行形で稼働中</li>
-        <li>実務経験から「使えるもの・使えないもの」を把握</li>
-        <li>導入後の運用まで含めた設計</li>
-        <li>デモをそのまま見せられる</li>
-        <li>公開後もデータを見ながら改善を継続</li>
-        <li>担当が変わらないから文脈が途切れない</li>
+        <li>複数の自動化システムを、毎日自分で稼働中</li>
+        <li>「使えるもの・使えないもの」を実務で把握</li>
+        <li>導入後の運用設計まで含めて伴走</li>
+        <li>デモはそのままお見せできます</li>
       </ul>
     </div>
     <div>

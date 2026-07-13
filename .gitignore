@@ -1,2 +1,18 @@
 .DS_Store
 DESIGN.md
+
+# 内部ドキュメント・作業用ファイル（このリポジトリは GitHub Pages 用の公開リポジトリ。
+# CLAUDE.md にはクライアント名・金額など公開できない情報が含まれるため、絶対にコミットしない）
+CLAUDE.md
+preview-*.html
+index-preview.html
+*.bak
+
+# secrets (auto-added 2026-06-23)
+.env
+.env.*
+.dev.vars
+secrets.toml
+credentials.toml
+*credential*
+service_account*.json

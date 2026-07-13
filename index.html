@@ -164,28 +164,12 @@
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#0B1120',
-            paper: '#F2F5FB',
-            snow: '#EEF2FF',
-            mid: '#888',
-            rule: 'rgba(0,0,0,0.1)',
-            accent: '#2563EB',
-            'accent-hover': '#1D4ED8',
-          },
-          fontFamily: { sans: ['Inter','Noto Sans JP','sans-serif'] },
-        }
-      }
-    }
-  </script>
+  <!-- Tailwind: ビルド済み静的CSS（旧: cdn.tailwindcss.com のPlay CDN。JS 124KB＋実行時CSS生成をやめ、11.6KBの静的CSSに置換）
+       再ビルド手順は shisto-web/CLAUDE.md の「Tailwindの再ビルド」を参照 -->
+  <link rel="stylesheet" href="styles/tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300;500&family=Shippori+Mincho:wght@400&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -196,7 +180,7 @@
     }
     html { scroll-behavior: smooth; overflow-x: clip; }
     body {
-      font-family: 'Shippori Mincho','Noto Sans JP',serif;
+      font-family: 'Shippori Mincho', serif;
       background: #F2F5FB;
       color: #0B1120;
       font-size: 16px;
@@ -856,10 +840,10 @@
   <a href="#contact" id="header-cta" class="hidden md:inline-block">無料で相談する</a>
 
   <button id="menu-btn" class="md:hidden" aria-label="menu">
-    <svg id="icon-open" class="w-6 h-6 menu-icon" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+    <svg id="icon-open" class="w-6 h-6 menu-icon" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/>
     </svg>
-    <svg id="icon-close" class="w-6 h-6 hidden" stroke="white" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+    <svg id="icon-close" class="w-6 h-6 hidden" stroke="white" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
     </svg>
   </button>
@@ -869,7 +853,7 @@
 <div id="mobile-menu">
   <span class="mob-logo"><img src="images/logo-mark-light.png" alt="" width="24" height="24">Shisto</span>
   <button onclick="closeMenu()" aria-label="閉じる" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;padding:10px;">
-    <svg class="w-7 h-7" stroke="white" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+    <svg class="w-7 h-7" stroke="white" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
     </svg>
   </button>
@@ -989,7 +973,7 @@
       </div>
 
       <!-- ── 単発で頼む ── -->
-      <p data-reveal style="font-size:0.62rem;font-weight:500;letter-spacing:0.18em;color:#888;text-transform:uppercase;padding-top:2rem;">単発で頼む</p>
+      <p data-reveal style="font-size:0.62rem;font-weight:500;letter-spacing:0.18em;color:#666;text-transform:uppercase;padding-top:2rem;">単発で頼む</p>
 
       <!-- 01 AI業務効率化支援 -->
       <div data-reveal data-d="1">
@@ -1046,7 +1030,7 @@
         <div class="svc-row" onclick="toggleSvc(this)">
           <span class="svc-num text-xs font-mono" style="color:rgba(11,17,32,0.2);">+</span>
           <div>
-            <p class="text-xs font-light mb-2" style="color:#888;letter-spacing:0.08em;">その他のご支援</p>
+            <p class="text-xs font-light mb-2" style="color:#666;letter-spacing:0.08em;">その他のご支援</p>
             <div class="flex flex-wrap gap-2">
               <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">Web運用・改善支援</span>
               <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">SNS運用支援</span>
@@ -1058,21 +1042,21 @@
         <div class="svc-detail">
           <div class="svc-other-grid">
             <div>
-              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#888;text-transform:uppercase;margin-bottom:0.75rem;">Web運用・改善支援</p>
+              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#666;text-transform:uppercase;margin-bottom:0.75rem;">Web運用・改善支援</p>
               <span class="svc-item">既存サイトの課題診断・改善提案</span>
               <span class="svc-item">キャッチコピー・文言のリライト</span>
               <span class="svc-item">CV導線・SEO基礎対策</span>
               <span class="svc-item">月次レポート・継続改善サイクル</span>
             </div>
             <div>
-              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#888;text-transform:uppercase;margin-bottom:0.75rem;">SNS運用支援</p>
+              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#666;text-transform:uppercase;margin-bottom:0.75rem;">SNS運用支援</p>
               <span class="svc-item">発信コンセプト・ターゲット設計</span>
               <span class="svc-item">投稿案の企画・ライティング</span>
               <span class="svc-item">LinkedIn・X等のアカウント運用設計</span>
               <span class="svc-item">AI活用による投稿案の自動生成</span>
             </div>
             <div>
-              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#888;text-transform:uppercase;margin-bottom:0.75rem;">AI研修・ハンズオン</p>
+              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#666;text-transform:uppercase;margin-bottom:0.75rem;">AI研修・ハンズオン</p>
               <span class="svc-item">ChatGPT・Claude等の基礎〜実務活用</span>
               <span class="svc-item">業務に合わせたプロンプト設計・実践</span>
               <span class="svc-item">個人・少人数・社内研修いずれも対応</span>
@@ -1080,6 +1064,15 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="mt-10" data-reveal>
+        <a href="#sports" class="arrow-link" style="color:#2563EB;border-bottom:0.5px solid rgba(37,99,235,0.3);padding-bottom:3px;">
+          スポーツスクール・クラブを運営されている方へ
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </a>
       </div>
 
     </div>
@@ -1168,7 +1161,7 @@
     <div class="mt-10" data-reveal>
       <a href="#contact" class="arrow-link" style="color:#2563EB;border-bottom:0.5px solid rgba(37,99,235,0.3);padding-bottom:3px;">
         無料で相談する
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
         </svg>
       </a>
@@ -1187,7 +1180,7 @@
   <div class="vb" data-reveal>
     <div class="vb-content">
       <div class="vb-num">01</div>
-      <h2 class="vb-title">相談した相手が、<br>そのまま作る人。</h2>
+      <h3 class="vb-title">相談した相手が、<br>そのまま作る人。</h3>
       <p class="vb-desc">大手のような営業→ディレクター→外注の伝言ゲームがありません。</p>
       <ul class="vb-points">
         <li>窓口・設計・実装まで、代表がひとりで担当</li>
@@ -1199,9 +1192,9 @@
     </div>
     <div>
       <div class="bi-collage">
-        <img class="bi-img-1" src="images/bi-chart.png" alt="AIニュースBI チャート">
+        <img class="bi-img-1" src="images/bi-chart.webp" alt="AIニュースBI チャート" width="1095" height="1307" loading="lazy" decoding="async">
         <div class="bi-img-2-wrap">
-          <img src="images/bi-prediction.png" alt="AIニュースBI 業界動向">
+          <img src="images/bi-prediction.webp" alt="AIニュースBI 業界動向" width="1400" height="828" loading="lazy" decoding="async">
         </div>
       </div>
       <p class="vb-caption">AIニュースBI — AI業界ニュースを自動収集・分析するシステム。設計から実装まで代表が担当し、毎日稼働中。</p>
@@ -1212,7 +1205,7 @@
   <div class="vb" data-reveal style="grid-template-columns:1fr;text-align:left;">
     <div class="vb-content" style="max-width:780px;margin:0 auto;width:100%;">
       <div class="vb-num">02</div>
-      <h2 class="vb-title">速くするだけで、終わらない。</h2>
+      <h3 class="vb-title">速くするだけで、終わらない。</h3>
       <p class="vb-desc">ツールを渡して終わりにはしません。一番めんどうな事務を1つ自動化するところから始め、効果を確かめながら一段ずつ。最終的には、社内の人がAIを当たり前に使い、「前はできなかった挑戦」ができる状態まで伴走します。</p>
       <ul class="vb-points">
         <li>まず一番めんどうな業務を1つ自動化（小さく確実に）</li>
@@ -1268,18 +1261,18 @@
 </div>
 <div class="photo-marquee mobile-hide">
   <div class="photo-marquee-track scroll-left">
-    <div class="photo-marquee-item"><img src="images/marquee-bball2.webp" alt="Bリーグ コート 後ろ姿"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball3.webp" alt="Bリーグ 試合"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-work1.webp" alt="PC作業"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball4.webp" alt="チームメイトとハイタッチ"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-face1.webp" alt="田中志門"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball5.webp" alt="ドリブル"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball2.webp" alt="Bリーグ コート 後ろ姿"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball3.webp" alt="Bリーグ 試合"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-work1.webp" alt="PC作業"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball4.webp" alt="チームメイトとハイタッチ"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-face1.webp" alt="田中志門"></div>
-    <div class="photo-marquee-item"><img src="images/marquee-bball5.webp" alt="ドリブル"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball2.webp" alt="Bリーグ コート 後ろ姿"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball3.webp" alt="Bリーグ 試合"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-work1.webp" alt="PC作業"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball4.webp" alt="チームメイトとハイタッチ"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-face1.webp" alt="田中志門"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball5.webp" alt="ドリブル"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball2.webp" alt="Bリーグ コート 後ろ姿"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball3.webp" alt="Bリーグ 試合"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-work1.webp" alt="PC作業"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball4.webp" alt="チームメイトとハイタッチ"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-face1.webp" alt="田中志門"></div>
+    <div class="photo-marquee-item"><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/marquee-bball5.webp" alt="ドリブル"></div>
   </div>
 </div>
 
@@ -1289,7 +1282,7 @@
   <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-16 items-start">
     <div class="md:col-span-5" data-reveal="from-left">
       <div class="mb-6 md:mb-10 overflow-hidden rounded-lg" style="aspect-ratio:4/5;">
-        <img src="images/founder.webp" alt="田中志門" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <img src="images/founder.webp" alt="田中志門" width="1086" height="724" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
       <p class="sec-label mb-4 md:mb-8">Founder</p>
       <h2 class="sec-title mb-3" style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:300;letter-spacing:0.1em;">田中 志門</h2>
@@ -1301,7 +1294,7 @@
       </div>
       <a href="#contact" class="arrow-link" style="color:#2563EB;border-bottom:0.5px solid rgba(37,99,235,0.3);padding-bottom:3px;">
         無料で相談する
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
         </svg>
       </a>
@@ -1342,7 +1335,8 @@
 <!-- ═══════════ FAQ ═══════════ -->
 <section class="px-6 md:px-16 pt-8 pb-12 md:pt-12 md:pb-20" style="border-top:0.5px solid rgba(0,0,0,0.1);">
   <div class="max-w-7xl mx-auto">
-    <p class="sec-label mb-12" data-reveal>FAQ</p>
+    <p class="sec-label mb-4 md:mb-8" data-reveal>FAQ</p>
+    <h2 class="sec-title mb-8 md:mb-10" data-reveal>よくあるご質問</h2>
   </div>
   <div class="max-w-3xl mx-auto">
     <div style="border-top:0.5px solid rgba(0,0,0,0.1);">
@@ -1399,7 +1393,7 @@
     <div class="max-w-3xl mx-auto mt-10 text-center" data-reveal>
       <a href="#contact" class="arrow-link" style="color:#2563EB;border-bottom:0.5px solid rgba(37,99,235,0.3);padding-bottom:3px;font-size:0.9rem;font-weight:300;letter-spacing:0.04em;">
         まずは気軽に相談してみる
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
         </svg>
       </a>
@@ -1422,32 +1416,32 @@
 
     <form action="https://formspree.io/f/xykbvokn" method="POST" class="space-y-5" data-reveal="from-right">
       <div>
-        <label class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">お名前 *</label>
-        <input type="text" name="name" required placeholder="田中 太郎"
+        <label for="f-name" class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">お名前 *</label>
+        <input type="text" id="f-name" name="name" required placeholder="田中 太郎"
           style="width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.9rem 1.1rem;font-size:0.85rem;color:white;font-weight:300;outline:none;transition:border-color 0.25s;"
           onfocus="this.style.borderColor='rgba(255,255,255,0.3)'"
           onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
           class="placeholder-white/15">
       </div>
       <div>
-        <label class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">メールアドレス *</label>
-        <input type="email" name="email" required placeholder="your@email.com"
+        <label for="f-email" class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">メールアドレス *</label>
+        <input type="email" id="f-email" name="email" required placeholder="your@email.com"
           style="width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.9rem 1.1rem;font-size:0.85rem;color:white;font-weight:300;outline:none;transition:border-color 0.25s;"
           onfocus="this.style.borderColor='rgba(255,255,255,0.3)'"
           onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
           class="placeholder-white/15">
       </div>
       <div>
-        <label class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">会社名・屋号</label>
-        <input type="text" name="company" placeholder="合同会社〇〇"
+        <label for="f-company" class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">会社名・屋号</label>
+        <input type="text" id="f-company" name="company" placeholder="合同会社〇〇"
           style="width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.9rem 1.1rem;font-size:0.85rem;color:white;font-weight:300;outline:none;transition:border-color 0.25s;"
           onfocus="this.style.borderColor='rgba(255,255,255,0.3)'"
           onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
           class="placeholder-white/15">
       </div>
       <div>
-        <label class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">ご相談内容 *</label>
-        <select name="category" required
+        <label for="f-category" class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">ご相談内容 *</label>
+        <select id="f-category" name="category" required
           style="width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.9rem 1.1rem;font-size:0.85rem;color:rgba(255,255,255,0.8);font-weight:300;outline:none;transition:border-color 0.25s;"
           onfocus="this.style.borderColor='rgba(255,255,255,0.3)'"
           onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
@@ -1462,13 +1456,14 @@
         </select>
       </div>
       <div>
-        <label class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">詳細・背景</label>
-        <textarea name="message" rows="4" placeholder="現状の課題や状況を自由にご記入ください。"
+        <label for="f-message" class="block text-xs tracking-widest mb-2" style="color:rgba(255,255,255,0.6);letter-spacing:0.18em;">詳細・背景</label>
+        <textarea id="f-message" name="message" rows="4" placeholder="現状の課題や状況を自由にご記入ください。"
           style="width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.9rem 1.1rem;font-size:0.85rem;color:white;font-weight:300;outline:none;resize:none;transition:border-color 0.25s;font-family:inherit;"
           onfocus="this.style.borderColor='rgba(255,255,255,0.3)'"
           onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
           class="placeholder-white/15"></textarea>
       </div>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none !important;">
       <button type="submit" id="submit-btn" class="btn-primary btn-accent" style="width:100%;padding:1.1rem;">
         無料で相談する
       </button>
@@ -1491,7 +1486,7 @@
 <footer style="background:#0B1120;border-top:0.5px solid rgba(255,255,255,0.06);padding:1.75rem 1.5rem;" class="md:!px-16">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <div style="display:flex;align-items:center;gap:0.6rem;">
-      <img src="images/logo-mark-light.png" alt="合同会社Shisto" width="26" height="26" style="display:block;opacity:0.85;">
+      <img src="images/logo-mark-light.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="display:block;opacity:0.85;">
       <p style="font-size:0.8rem;color:rgba(255,255,255,0.7);letter-spacing:0.06em;">© 2026 合同会社Shisto. All rights reserved.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.25rem 1.5rem;">
@@ -1696,6 +1691,21 @@
       }
     });
   }
+})();
+
+/* 写真マーキーの画像は 769px 未満（スマホ）では CSS で display:none にしているが、
+   loading="lazy" では非表示要素でもダウンロードされてしまい 332KB が完全な無駄になっていた。
+   src には 1x1 透明GIFを置き、PC幅のときだけ data-src から実画像を差し込む。 */
+(function () {
+  var load = function () {
+    document.querySelectorAll('img[data-src]').forEach(function (img) {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+    });
+  };
+  var mq = window.matchMedia('(min-width: 769px)');
+  if (mq.matches) load();
+  else if (mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) load(); });
 })();
 
 </script>

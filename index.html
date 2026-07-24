@@ -169,7 +169,20 @@
   <link rel="stylesheet" href="styles/tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300;500&family=Shippori+Mincho:wght@400&display=swap" rel="stylesheet">
+  <!-- 日本語フォントはサブセット化して自前配信（834KB→268KB・2026-07-24）。
+       サイトで使う652文字だけを収録。文言に新しい漢字を足したら fonts/subset_tool.py --check で
+       収録漏れを確認し、漏れがあれば --build で再生成する（手順はCLAUDE.md）。英字のCormorantのみGoogle配信 -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family:'Shippori Mincho'; font-weight:400; font-display:swap; src:url('fonts/shippori-400.woff2') format('woff2'); }
+    @font-face { font-family:'Zen Kaku Gothic New'; font-weight:300; font-display:swap; src:url('fonts/zenkaku-300.woff2') format('woff2'); }
+    @font-face { font-family:'Zen Kaku Gothic New'; font-weight:500; font-display:swap; src:url('fonts/zenkaku-500.woff2') format('woff2'); }
+    /* フォーム入力欄はOS標準フォントで表示する（お客様が入力する文字はサブセット652字の
+       外になることが多く、そのままだと1文字ごとに書体が混ざるため） */
+    #contact input, #contact select, #contact textarea {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+    }
+  </style>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

@@ -7,6 +7,8 @@ CLAUDE.md
 preview-*.html
 index-preview.html
 *.bak
+fonts/.venv/
+fonts/.chars.tmp
 
 # secrets (auto-added 2026-06-23)
 .env

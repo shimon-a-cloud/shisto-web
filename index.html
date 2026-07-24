@@ -523,6 +523,36 @@
     [data-d="5"] { transition-delay: 0.40s; }
     [data-d="6"] { transition-delay: 0.48s; }
 
+    /* ─── WORK CARD（代表的な事例 CASE 01/02） ─────────────────
+       ホバーで少し持ち上がる。DESIGN.mdのDon't「ドロップシャドウの多用
+       （CTA hoverのbox-shadowのみ）」に従い、影ではなく持ち上げ＋明度で表現する。
+       ・移動は transform ではなく translate を使う
+         （transform は [data-reveal] のスクロール登場が使っており、奪うと登場が壊れる）
+       ・transition に opacity/transform も書き戻している
+         （書かないと [data-reveal] の transition を上書きして登場アニメが消える）
+       ・タッチ端末は (hover:hover) で除外（タップ後に浮いたまま固着するため）  */
+    .work-card {
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 22px;
+      transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo),
+                  translate 0.4s var(--ease-expo),
+                  background-color 0.4s var(--ease-expo),
+                  border-color 0.4s var(--ease-expo);
+    }
+    @media (hover: hover) {
+      .work-card:hover {
+        translate: 0 -5px;
+        background-color: rgba(255,255,255,0.075);
+        border-color: rgba(255,255,255,0.28);
+        transition-delay: 0s;   /* data-d の 0.08s/0.16s を打ち消す（無いとホバーが遅れて反応する） */
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .work-card:hover { translate: none; }
+    }
+
     /* ─── SECTION HEADING ─────────────────── */
     .sec-label {
       font-size: 0.6rem; font-weight: 500;
@@ -1103,7 +1133,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
       <!-- CASE 01 企業グループ -->
-      <div data-reveal data-d="1" style="background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:22px;">
+      <div data-reveal data-d="1" class="work-card">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;">
           <span style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:1rem;font-weight:500;color:#fff;letter-spacing:0.04em;">企業グループ（複数事業）</span>
           <span style="font-family:'Cormorant Garamond',serif;font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:0.12em;">CASE 01</span>
@@ -1120,7 +1150,7 @@
       </div>
 
       <!-- CASE 02 スポーツ事業 -->
-      <div data-reveal data-d="2" style="background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:22px;">
+      <div data-reveal data-d="2" class="work-card">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;">
           <span style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:1rem;font-weight:500;color:#fff;letter-spacing:0.04em;">スポーツ事業 ・ スクール運営</span>
           <span style="font-family:'Cormorant Garamond',serif;font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:0.12em;">CASE 02</span>

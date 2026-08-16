@@ -206,16 +206,17 @@
   <!-- Tailwind: ビルド済み静的CSS（旧: cdn.tailwindcss.com のPlay CDN。JS 124KB＋実行時CSS生成をやめ、11.6KBの静的CSSに置換）
        再ビルド手順は shisto-web/CLAUDE.md の「Tailwindの再ビルド」を参照 -->
   <link rel="stylesheet" href="styles/tailwind.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- 日本語フォントはサブセット化して自前配信（834KB→268KB・2026-07-24）。
-       サイトで使う652文字だけを収録。文言に新しい漢字を足したら fonts/subset_tool.py --check で
-       収録漏れを確認し、漏れがあれば --build で再生成する（手順はCLAUDE.md）。英字のCormorantのみGoogle配信 -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+  <!-- フォントは日本語・英字とも サブセット化して自前配信（外部CDNへの読み込みは無し）。
+       サイトで使う文字だけを収録。文言に新しい漢字を足したら fonts/subset_tool.py --check で
+       収録漏れを確認し、漏れがあれば --build で再生成する（手順はCLAUDE.md）。
+       2026-08-16: 英字のCormorantもGoogle Fonts配信をやめた（そのCSSが描画を887ms止めており、
+       スマホLCP 5.67秒の主因だったため。参照＝projects/shisto-web.md） -->
   <style>
     @font-face { font-family:'Shippori Mincho'; font-weight:400; font-display:swap; src:url('fonts/shippori-400.woff2') format('woff2'); }
     @font-face { font-family:'Zen Kaku Gothic New'; font-weight:300; font-display:swap; src:url('fonts/zenkaku-300.woff2') format('woff2'); }
     @font-face { font-family:'Zen Kaku Gothic New'; font-weight:500; font-display:swap; src:url('fonts/zenkaku-500.woff2') format('woff2'); }
+    @font-face { font-family:'Cormorant Garamond'; font-weight:300; font-display:swap; src:url('fonts/cormorant-300.woff2') format('woff2'); }
+    @font-face { font-family:'Cormorant Garamond'; font-weight:400; font-display:swap; src:url('fonts/cormorant-400.woff2') format('woff2'); }
     /* フォーム入力欄はOS標準フォントで表示する（お客様が入力する文字はサブセット652字の
        外になることが多く、そのままだと1文字ごとに書体が混ざるため） */
     #contact input, #contact select, #contact textarea {

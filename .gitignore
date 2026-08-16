@@ -9,6 +9,7 @@ index-preview.html
 *.bak
 fonts/.venv/
 fonts/.chars.tmp
+fonts/__pycache__/
 # 検証用スクリーンショット（公開リポジトリなのでコミットしない）
 screenshots/
 

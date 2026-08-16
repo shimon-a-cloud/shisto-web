@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""日本語フォントのサブセット管理ツール（shisto.jp）
+"""Webフォントのサブセット管理ツール（shisto.jp）
 
 このサイトの日本語フォント（Shippori Mincho 400 / Zen Kaku Gothic New 300・500）は、
 PAGES に挙げたページで実際に使っている文字だけを収録して自前配信している（834KB→268KB・2026-07-24）。
+英字の Cormorant Garamond 300・400 も 2026-08-16 に自前配信へ移した
+（Google Fonts の CSS が描画を887ms止めており、スマホLCPの主因だったため）。
 
 ⚠️ 文言に「新しい漢字」を足すと、その文字だけOS標準フォントで表示される
 （目視では気づきにくい）。文言を変えたら必ず --check を実行すること。
@@ -29,10 +31,16 @@ PAGES = [os.path.join(ROOT, p) for p in ("index.html", "works.html")]
 VENV = os.path.join(HERE, ".venv")
 
 FONTS = [
-    # (原本TTF: google/fonts リポジトリのパス, 出力woff2, weight)
-    ("ofl/shipporimincho/ShipporiMincho-Regular.ttf", "shippori-400.woff2", 400),
-    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Light.ttf", "zenkaku-300.woff2", 300),
-    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Medium.ttf", "zenkaku-500.woff2", 500),
+    # (原本TTF: google/fonts リポジトリのパス, 出力woff2, weight, 収録範囲, 原本の最低収録字数)
+    #   収録範囲 "jp"    = PAGESの全文字（日本語書体）
+    #   収録範囲 "latin" = LATIN_CHARS のみ（英字書体。日本語の字は元から入っていない）
+    # 末尾の数字は「途中で切れた原本」を弾くための閾値（原本の実収録字数を下回る値）。
+    ("ofl/shipporimincho/ShipporiMincho-Regular.ttf", "shippori-400.woff2", 400, "jp", 3000),
+    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Light.ttf", "zenkaku-300.woff2", 300, "jp", 3000),
+    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Medium.ttf", "zenkaku-500.woff2", 500, "jp", 3000),
+    # Cormorant Garamond は可変フォント1本しか配布されていないため、wght=300/400 に切り出してから使う
+    ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-300.woff2", 300, "latin", 400),
+    ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-400.woff2", 400, "latin", 400),
 ]
 
 # 原本フォント自体に存在しない文字（検証済み 2026-07-24）。
@@ -40,6 +48,19 @@ FONTS = [
 # Google Fonts配信時代から代替表示だった＝サブセット化による悪化ではない。
 # ここに無い文字が「未収録」と出たら本物の漏れ＝必ず --build で再生成すること。
 KNOWN_MISSING = set("─═｜―")
+
+# 英字書体（Cormorant Garamond）に収録する文字。
+# 画面に出る英字・数字・記号は限られるが、あとから文言を足したときに1字だけ書体が変わる事故を
+# 避けるため、ASCII可視文字＋欧文でよく使う約物＋Latin-1の文字までまとめて入れる（それでも軽い）。
+# 🚨 U+00A0(NBSP) と U+00B7(・中黒の欧文版) は必須＝イントロの「AI · Web · Operations」で使っている。
+LATIN_CHARS = (
+    set(chr(c) for c in range(0x20, 0x7F))
+    | set(chr(c) for c in range(0xA0, 0x100))
+    | set("‐‑‒–—―‘’‚“”„†‡•…‰′″‹›⁄€™−")
+)
+# Cormorant Garamond の原本自体に無い文字（2026-08-16 に原本974字のcmapを直接見て確認）。
+# µ(U+00B5 マイクロ記号)は原本に無い。ギリシャ文字のμ(U+03BC)は有る。どちらも画面では使っていない。
+LATIN_KNOWN_MISSING = set("µ")
 
 
 def ensure_venv():
@@ -68,32 +89,38 @@ def site_chars():
 
 def check():
     py = ensure_venv()
-    chars = site_chars()
     code = r"""
 import sys, json
 from fontTools.ttLib import TTFont
-path, chars_file, known = sys.argv[1], sys.argv[2], set(sys.argv[3])
+path, chars_file, known, min_ord = sys.argv[1], sys.argv[2], set(sys.argv[3]), int(sys.argv[4])
 chars = set(open(chars_file, encoding="utf-8").read())
 cmap = TTFont(path).getBestCmap()
-missing = sorted(c for c in chars if ord(c) > 0x7F and ord(c) not in cmap and c not in known)
+missing = sorted(c for c in chars if ord(c) >= min_ord and ord(c) not in cmap and c not in known)
 print(json.dumps(missing, ensure_ascii=False))
 """
     tmp = os.path.join(HERE, ".chars.tmp")
-    open(tmp, "w", encoding="utf-8").write("".join(sorted(chars)))
     ng = False
     try:
-        for _, out, _ in FONTS:
+        for _, out, _, kind, _ in FONTS:
+            if kind == "latin":
+                chars, known, min_ord, label = LATIN_CHARS, LATIN_KNOWN_MISSING, 0x20, "英字・数字・約物"
+            else:
+                chars, known, min_ord = site_chars(), KNOWN_MISSING, 0x80
+                label = "+".join(os.path.basename(p) for p in PAGES) + " の全文字"
+            open(tmp, "w", encoding="utf-8").write("".join(sorted(chars)))
             woff = os.path.join(HERE, out)
-            r = subprocess.run([py, "-c", code, woff, tmp, "".join(KNOWN_MISSING)], capture_output=True, text=True, check=True)
+            r = subprocess.run([py, "-c", code, woff, tmp, "".join(known), str(min_ord)],
+                               capture_output=True, text=True, check=True)
             import json as _json
             missing = _json.loads(r.stdout)
             if missing:
                 ng = True
                 print(f"❌ {out}: 未収録 {len(missing)}文字 → {''.join(missing[:30])}")
             else:
-                print(f"✅ {out}: {'+'.join(os.path.basename(p) for p in PAGES)} の全文字を収録済み")
+                print(f"✅ {out}: {label}を収録済み")
     finally:
-        os.remove(tmp)
+        if os.path.exists(tmp):
+            os.remove(tmp)
     if ng:
         print("\n→ `python3 fonts/subset_tool.py --build` で再生成してからデプロイしてください")
         sys.exit(1)
@@ -102,31 +129,48 @@ print(json.dumps(missing, ensure_ascii=False))
 def build():
     py = ensure_venv()
     chars_file = os.path.join(HERE, ".chars.tmp")
-    open(chars_file, "w", encoding="utf-8").write("".join(sorted(site_chars())))
     try:
-        for src, out, _ in FONTS:
+        for src, out, weight, kind, min_cmap in FONTS:
+            open(chars_file, "w", encoding="utf-8").write(
+                "".join(sorted(LATIN_CHARS if kind == "latin" else site_chars())))
             ttf = os.path.join(HERE, "." + os.path.basename(src))
             url = f"https://raw.githubusercontent.com/google/fonts/main/{src}"
             print(f"取得中: {url}")
             # curl を使う（Pythonのurllibはこの環境でHTTPS本文が途中で切れることがある）。
             # --fail で HTTP エラーを、下の cmap 判定で「途中で切れた原本」を弾く。
-            subprocess.run(["curl", "-fsSL", "-o", ttf, url], check=True)
+            # -g（--globoff）が無いと可変フォントのファイル名 CormorantGaramond[wght].ttf の [ ] を
+            # curl が範囲指定と解釈して落ちる
+            subprocess.run(["curl", "-fsSLg", "-o", ttf, url], check=True)
             # 途中で切れた原本で作ると「静かに字が減ったwoff2」ができるので、開けるか確かめる
             v = subprocess.run([py, "-c", "import sys;from fontTools.ttLib import TTFont;print(len(TTFont(sys.argv[1]).getBestCmap()))", ttf],
                                capture_output=True, text=True)
-            if v.returncode != 0 or int(v.stdout.strip() or 0) < 3000:
+            if v.returncode != 0 or int(v.stdout.strip() or 0) < min_cmap:
                 print(f"❌ 原本が壊れています（{os.path.getsize(ttf):,}バイト・収録字数 {v.stdout.strip() or '読めない'}）: {url}")
                 sys.exit(1)
+            src_ttf = ttf
+            if "[wght]" in src:
+                # 可変フォントは指定ウェイトに切り出す（切り出さないと全ウェイト分の太さ情報を抱えたまま重くなる）
+                inst = os.path.join(HERE, f".inst-{weight}.ttf")
+                subprocess.run([os.path.join(VENV, "bin", "fonttools"), "varLib.instancer",
+                                ttf, f"wght={weight}", "-o", inst], check=True, capture_output=True)
+                src_ttf = inst
+            # 英字書体は OpenType 機能を既定セット（カーニング・標準合字など）に絞る。
+            # `*` にすると小型大文字・スワッシュなど画面で使っていない字形まで抱えて2倍になる
+            # （実測 37KB→17KB。サイトのCSSに font-feature-settings / font-variant は無いことを確認済み）。
+            features = [] if kind == "latin" else ["--layout-features=*"]
             subprocess.run([
-                os.path.join(VENV, "bin", "pyftsubset"), ttf,
+                os.path.join(VENV, "bin", "pyftsubset"), src_ttf,
                 f"--text-file={chars_file}", "--flavor=woff2",
-                "--layout-features=*", f"--output-file={os.path.join(HERE, out)}",
+                *features, f"--output-file={os.path.join(HERE, out)}",
             ], check=True)
             os.remove(ttf)
+            if src_ttf != ttf:
+                os.remove(src_ttf)
             kb = os.path.getsize(os.path.join(HERE, out)) // 1024
             print(f"✅ {out}: {kb}KB")
     finally:
-        os.remove(chars_file)
+        if os.path.exists(chars_file):
+            os.remove(chars_file)
     check()
 
 

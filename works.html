@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>実績｜合同会社Shisto — 半年で作り、いま動いているもの28本</title>
+<meta name="description" content="合同会社Shistoが2026年3月から8月までの半年で作り、いま本番で動いているもの28本の一覧。企画から設計・開発・運用まで、すべて一人で行っています。">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZJ4CH0ZM8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5ZJ4CH0ZM8');
+</script>
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="実績｜合同会社Shisto — 半年で作り、いま動いているもの28本">
+<meta property="og:description" content="合同会社Shistoが2026年3月から8月までの半年で作り、いま本番で動いているもの28本の一覧。企画から設計・開発・運用まで、すべて一人で行っています。">
+<meta property="og:site_name" content="合同会社Shisto">
+<meta property="og:image" content="https://shisto.jp/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://shisto.jp/works.html">
+<link rel="canonical" href="https://shisto.jp/works.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="実績｜合同会社Shisto — 半年で作り、いま動いているもの28本">
+<meta name="twitter:description" content="合同会社Shistoが2026年3月から8月までの半年で作り、いま本番で動いているもの28本の一覧。企画から設計・開発・運用まで、すべて一人で行っています。">
+<meta name="twitter:image" content="https://shisto.jp/og-image.png">
+
+<!-- 構造化データ：トップページの会社情報（#organization）にぶら下げる -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "実績｜合同会社Shisto — 半年で作り、いま動いているもの28本",
+  "url": "https://shisto.jp/works.html",
+  "description": "合同会社Shistoが2026年3月から8月までの半年で作り、いま本番で動いているもの28本の一覧。企画から設計・開発・運用まで、すべて一人で行っています。",
+  "inLanguage": "ja",
+  "isPartOf": { "@type": "WebSite", "url": "https://shisto.jp/", "name": "合同会社Shisto" },
+  "about": { "@id": "https://shisto.jp/#organization" }
+}
+</script>
+
+<!--
+  ■ 書体は shisto.jp（本番）と同じ組み合わせです。
+       本文  : Shippori Mincho 400（明朝）／字間 0.06em
+       見出し: Zen Kaku Gothic New 300（大）・500（小）／字間 0.06em
+       社名  : Cormorant Garamond 300／字間 0.14em
+       数字  : IBM Plex Mono
+     shisto.jp の見出しは 300（細い）です。太いゴシックにすると別のサイトに見えます。
+
+  ■ 日本語2書体は自前サブセット配信（fonts/*.woff2）。このページの文字も収録済みです。
+     文言に新しい漢字を足したら `python3 fonts/subset_tool.py --check` を必ず実行すること
+     （works.html は fonts/subset_tool.py の PAGES に登録済み。漏れがあると、その1字だけ
+     OS標準フォントで表示され、目視では気づけません）。
+     Google Fonts から読むのは欧文の Cormorant Garamond と、数字の IBM Plex Mono だけです。
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family:'Shippori Mincho'; font-weight:400; font-display:swap; src:url('fonts/shippori-400.woff2') format('woff2'); }
+  @font-face { font-family:'Zen Kaku Gothic New'; font-weight:300; font-display:swap; src:url('fonts/zenkaku-300.woff2') format('woff2'); }
+  @font-face { font-family:'Zen Kaku Gothic New'; font-weight:500; font-display:swap; src:url('fonts/zenkaku-500.woff2') format('woff2'); }
+</style>
+
+<style>
+:root{
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* shisto.jp と同じ組み合わせ。本文は明朝、見出しは細いゴシック、社名だけ欧文セリフ。 */
+  --serif: 'Shippori Mincho', serif;
+  --disp: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  --brandface: 'Cormorant Garamond', serif;
+
+  --ink: #0A0A0A;
+  --paper: #F5F5F3;
+  --text: #1A1A1A;
+  --text-sub: #55524D;
+  --dim: #67635E;          /* 一覧の既定の文字色（読める濃さのグレー） */
+  --inkmax: #000000;       /* カーソルを当てた行の色 */
+  --brand: #2563EB;        /* shisto.jp の色。本番の細い罫線に使われているのと同じ値 */
+  --mark: #9A4520;         /* 青以外の差し色。概要パネルの番号に使う */
+  --rule: rgba(10,10,10,0.10);
+
+  --pad: clamp(20px, 5vw, 64px);
+  --gc: 3.6rem 12.5rem minmax(0, 18rem) 4.5rem;   /* NO. / 相手 / 作ったもの / 年 */
+  /* 一覧の右端＝列の合計（38.6rem）＋列と列のすき間3本（3rem）＋左の余白 */
+  --listend: calc(var(--pad) + 41.6rem);
+  --dw: min(36vw, 500px);                         /* 概要パネルの幅 */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body{
+  margin: 0;
+  font-family: var(--serif);
+  background: var(--paper);
+  color: var(--text);
+  font-size: 15.2px;
+  line-height: 1.85;
+  /* 字間 0.06em も shisto.jp と同じ。明朝は少し開けたほうが読める。 */
+  letter-spacing: 0.06em;
+  -webkit-font-smoothing: antialiased;
+}
+img, video { max-width: 100%; height: auto; display: block; }
+
+/* ══════ 上部の固定バー ══════ */
+.bar{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  /* 社名の幅は書体で変わるので、列は auto にして重ならないようにする（一覧の列に合わせると社名がはみ出す） */
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 2.4rem;
+  padding: 0.9rem var(--pad);
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+.bar > * { min-width: 0; }
+.bar-brand{ display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.bar-brand img { width: 18px; height: 18px; }
+.bar-brand span{
+  font-family: var(--brandface); font-weight: 300;
+  font-size: 1.05rem; letter-spacing: 0.14em; color: var(--ink);
+}
+.bar-cur{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink); }
+.bar-sub{ font-family: var(--disp); font-weight: 300; font-size: 12.5px; letter-spacing: 0.06em; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-yr{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-sub); text-align: right; }
+
+/* ══════ 導入 ══════ */
+.intro{ padding: 8.5rem var(--pad) 3.6rem; max-width: 46rem; }
+/* 見出しは英字。社名と同じ Cormorant Garamond 300・字間 0.14em で、shisto.jp と地続きにする。 */
+.intro h1{
+  font-family: var(--brandface); font-weight: 300;
+  font-size: 3rem; line-height: 1.15; letter-spacing: 0.14em;
+  color: var(--ink);
+  margin: 0 0 0.75rem;
+}
+/* 英字だけでは何のページか分からないので、直下に日本語の一行を必ず置く。 */
+.intro .lead{
+  font-family: var(--disp); font-weight: 300;
+  font-size: 1.06rem; line-height: 1.5; letter-spacing: 0.06em;
+  color: var(--ink);
+  margin: 0 0 1.4rem;
+}
+.intro p{ margin: 0; color: var(--text-sub); font-size: 14.2px; }
+.intro p + p{ margin-top: 0.95rem; }
+.intro .facts{
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1.8rem;
+  margin-top: 1.6rem;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-sub);
+}
+.intro .facts b{ font-weight: 500; color: var(--ink); }
+
+/* ══════ 一覧 ══════ */
+.list{ padding-bottom: 4rem; }
+
+.head, .r{
+  display: grid;
+  grid-template-columns: var(--gc);
+  align-items: baseline;
+  gap: 0 1rem;
+  padding: 0.36rem var(--pad);
+  line-height: 1.7;
+}
+.head{
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
+  color: var(--text-sub);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.7rem; margin-bottom: 0.7rem;
+}
+.head span:nth-child(2), .head span:nth-child(3){ font-family: var(--disp); font-weight: 500; font-size: 11px; }
+
+/* 一覧を「取引先／自社／自分用」の3つに区切る帯。
+   28本を素通しで並べると、後半が前半と同じ重さに見えてしまうため。 */
+.grp{
+  display: flex; align-items: baseline; gap: 0 0.9rem;
+  padding: 2.2rem var(--pad) 0.55rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.7rem;
+}
+.grp:first-of-type{ padding-top: 0.2rem; }
+.grp b{
+  font-family: var(--disp); font-weight: 500; font-size: 12.5px;
+  letter-spacing: 0.1em; color: var(--ink);
+}
+.grp i{
+  font-family: var(--mono); font-style: normal; font-size: 10.5px;
+  letter-spacing: 0.1em; color: var(--text-sub);
+}
+.grp em{
+  font-family: var(--disp); font-style: normal; font-weight: 300;
+  font-size: 11.5px; letter-spacing: 0.04em; color: var(--text-sub);
+  margin-left: auto; text-align: right;
+}
+
+.r{
+  position: relative;
+  cursor: default;
+  color: var(--dim);
+  /* 太さは行ごとに1か所で決める（子は継承した値を使う）。カーソルを当てた行だけ 500 に上げる */
+  --w: 300; --wm: 400;
+  transition: color .16s ease;
+}
+.r:focus{ outline: none; }
+.r > *{ min-width: 0; }
+
+.c-n{ font-family: var(--mono); font-weight: var(--wm); font-size: 11.5px; letter-spacing: 0.08em; }
+.c-c{ font-family: var(--disp); font-weight: var(--w); font-size: 13px; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-p{ font-family: var(--disp); font-weight: var(--w); font-size: 13.5px; letter-spacing: 0.04em; }
+.c-y{ font-family: var(--mono); font-weight: var(--wm); font-size: 11.5px; letter-spacing: 0.08em; }
+
+/* ホバー中の行：文字が黒くなり、上下に shisto.jp の色の細い線が画面幅で走る
+   （.r 自体が画面幅いっぱいなので left/right は 0。負の値にすると横スクロールが生まれる） */
+.r::before, .r::after{
+  content: ''; position: absolute; left: 0; right: 0; height: 1px;
+  background: var(--brand);
+  opacity: 0; transition: opacity .16s ease;
+}
+.r::before{ top: 0; }
+.r::after { bottom: 0; }
+
+.item:hover  > .r, .item:focus-within > .r, .item.open > .r{
+  color: var(--inkmax); --w: 500; --wm: 500;
+}
+.item:hover  > .r::before, .item:hover  > .r::after,
+.item:focus-within > .r::before, .item:focus-within > .r::after,
+.item.open   > .r::before, .item.open   > .r::after{ opacity: 1; }
+
+/* ══════ 概要（既定は隠す。PCはホバーで右に、スマホは行の下に開く） ══════ */
+.d{ display: none; }
+
+.d-no{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--mark); }
+.d h3{
+  font-family: var(--disp); font-weight: 500;
+  font-size: 1.28rem; line-height: 1.5; letter-spacing: 0.06em;
+  margin: 0.35rem 0 0.25rem; color: var(--ink);
+}
+.d-for{ font-family: var(--disp); font-weight: 300; font-size: 12.5px; letter-spacing: 0.06em; color: var(--text-sub); }
+.d figure{ margin: 1.1rem 0 0; }
+.d figure img, .d figure video{ border: 1px solid var(--rule); }
+/* ══════ 動画（成果物が動いているところ） ══════ */
+/* 動画は静止画とまったく同じ扱いにする。見た目の指定は増やさず、
+   写真用の既存3規則にそのまま video を足した（下の SELECTORS）。
+   poster に元の写真を入れてあるので、再生できない環境では今までどおり写真が出る。 */
+.d figcaption{ font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-sub); margin-top: 0.45rem; }
+.d dl{ margin: 1.1rem 0 0; }
+.d dt{
+  font-family: var(--disp); font-weight: 500; font-size: 10.5px; letter-spacing: 0.08em;
+  color: var(--text-sub); margin-top: 0.66rem;
+}
+.d dt:first-child{ margin-top: 0; }
+.d dd{ margin: 0.1rem 0 0; font-size: 13.6px; line-height: 1.74; color: var(--text); }
+.d dd strong{ font-family: var(--disp); font-weight: 500; color: var(--ink); }
+.d .stack{
+  font-family: var(--mono); font-size: 10.5px; line-height: 1.8; letter-spacing: 0.04em;
+  color: var(--text-sub); margin-top: 1.1rem;
+  padding-top: 0.7rem; border-top: 1px solid var(--rule);
+}
+
+/* PC（ホバーできて幅が足りるとき）＝画面の中央に固定して出す */
+@media (hover: hover) and (min-width: 1100px){
+  .d{
+    display: flex; flex-direction: column;
+    /* 高さは top/bottom で決める＝画面が低いほど自動で縮む（max-height だと切れる） */
+    position: fixed; top: 11vh; bottom: 4vh;
+    /* 横は画面のど真ん中。ただし一覧に重なる幅のときは一覧の右隣まで逃がす（max で下限を作る） */
+    left: max(calc(50% - var(--dw) / 2), calc(var(--listend) + 1.5rem));
+    right: auto;
+    width: var(--dw);
+    overflow: hidden;
+    /* 一覧の下（注記・フッター）まで来ると背後の文字と重なって読めなくなる。
+       box-shadow の広がりで同色の余白を足す＝レイアウトを1pxも動かさずに背後を隠す。 */
+    background: var(--paper);
+    box-shadow: 0 0 0 1.4rem var(--paper);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translateY(6px);
+    transition: opacity .22s ease, transform .22s ease, visibility .22s;
+    z-index: 5;
+  }
+  /* パネルは不透明なので、その下に文字が来ると隠れて読めなくなる。
+     導入文と注記の折り返し幅を一覧の右端までに揃え、パネルの下に文字を置かない。 */
+  .intro{ max-width: calc(var(--listend) + var(--pad)); }
+  /* .notes-in の既定はこの下（後ろ）で定義されるため、詳細度を上げて勝たせる */
+  .notes .notes-in{ max-width: calc(var(--listend) - var(--pad)); }
+  /* 区切り帯の補足文だけは一覧の右端より外まで伸びるので、パネルを開いている間は
+     その右に文の終わりが残ってしまう。折り返す幅を狭めると 1100〜1379px で
+     見出しまで2行になるため、幅ではなく表示のほうを止める。 */
+  .grp em{ transition: opacity .22s ease; }
+  .list:has(.item:hover) .grp em,
+  .list:has(.item:focus-within) .grp em{ opacity: 0; }
+  /* 画面が低いときは、文字を切らずに写真のほうを縮める */
+  .d > *{ flex: 0 0 auto; }
+  .d figure{ display: flex; flex-direction: column; align-items: flex-start; min-height: 0; flex: 0 1 auto; }
+  /* align-items を既定（stretch）のままにすると、画像の枠だけがパネル幅いっぱいに伸びて
+     中の写真の右側に白い余白ができる。縦は縮めたいので flex-shrink は残す。 */
+  .d figure img, .d figure video{
+    flex: 0 1 auto; min-height: 0; max-height: 34vh;
+    width: auto; object-fit: contain; object-position: left top;
+  }
+  .item:hover > .d, .item:focus-within > .d{
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+  /* カーソルが一覧の上にあるときは、必ずカーソルの行だけを出す。
+     （キーボードで開いた行が残っていると、2枚が同じ場所に重なって読めなくなる） */
+  .list:hover .item:not(:hover):focus-within > .d{
+    opacity: 0; visibility: hidden; transform: translateY(6px);
+  }
+  /* 行の見た目（黒＋線）も同じで、選ばれて見える行は常に1本だけにする */
+  .list:hover .item:not(:hover):focus-within > .r{ color: var(--dim); --w: 300; --wm: 400; }
+  .list:hover .item:not(:hover):focus-within > .r::before,
+  .list:hover .item:not(:hover):focus-within > .r::after{ opacity: 0; }
+}
+
+/* スマホ・タブレット＝タップで行の下に開く */
+@media not all and (hover: hover), (max-width: 1099px){
+  .item.open > .d{
+    display: block;
+    padding: 1.2rem var(--pad) 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .r{ cursor: pointer; }
+}
+
+/* ══════ 注記・フッター ══════ */
+/* 区切り線だけは画面幅いっぱいに走らせる（max-width を親に付けると線も途中で切れる） */
+.notes{ padding: 2.6rem var(--pad) 0; border-top: 1px solid var(--rule); }
+.notes-in{ max-width: 46rem; }
+.notes h2{ font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-sub); font-weight: 400; margin: 0 0 0.9rem; }
+.notes ul{ margin: 0; padding-left: 1.1rem; }
+.notes li{ font-size: 13.4px; color: var(--text-sub); margin-bottom: 0.35rem; }
+footer{
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.6rem 1.8rem;
+  padding: 3.4rem var(--pad) 3.4rem; font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.1em; color: var(--text-sub);
+}
+footer a{ color: var(--text-sub); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
+footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: var(--ink); }
+
+/* ══════ 表示アニメーション（控えめ） ══════ */
+@media (prefers-reduced-motion: no-preference){
+  .fade{ opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+  .fade.on{ opacity: 1; transform: none; }
+}
+
+/* ══════ 幅が狭いとき ══════ */
+/* 1100〜1379px：一覧の列を詰めて、右のパネルと重ならないようにする */
+@media (min-width: 1100px) and (max-width: 1379px){
+  :root{
+    --gc: 3.2rem 9.5rem minmax(0, 14rem) 4rem;
+    --listend: calc(var(--pad) + 33.7rem);   /* 30.7rem＋すき間3rem */
+    --dw: min(36vw, 460px);
+  }
+}
+@media (max-width: 1099px){
+  :root{ --gc: 3.2rem 10rem minmax(0, 1fr) 4rem; }
+}
+@media (max-width: 700px){
+  /* 3列目は「2026-06」の7文字が入る幅を確保する（年だけの頃より広い） */
+  :root{ --gc: 2.4rem minmax(0, 1fr) 4.4rem; }
+  /* 区切り帯の補足文は、右端に置くと幅が足りないので見出しの下に折り返して出す
+     （消すと「取引先に納めたもの」だけが残り、何を指すのか伝わらないため） */
+  .grp{ padding-top: 1.8rem; flex-wrap: wrap; }
+  .grp em{
+    flex-basis: 100%; margin-left: 0; margin-top: 0.4rem;
+    text-align: left; font-size: 11px; line-height: 1.6;
+  }
+  .bar{ grid-template-columns: 1fr auto; gap: 0 0.8rem; }
+  .bar-sub{ display: none; }
+  .bar-yr{ display: none; }
+  .intro{ padding-top: 7rem; }
+  .intro h1{ font-size: 2.3rem; letter-spacing: 0.1em; }
+  .intro .lead{ font-size: 0.98rem; }
+
+  .head, .r{ grid-template-columns: var(--gc); row-gap: 0.1rem; padding-top: 0.6rem; padding-bottom: 0.6rem; }
+  /* スマホは1行目が「作ったもの」・2行目が「相手」になるので、見出しも1行目に合わせる */
+  .head span:nth-child(2){ display: none; }    /* 相手 */
+  .head span:nth-child(3){ grid-column: 2; }   /* 作ったもの */
+  .c-n{ grid-column: 1; grid-row: 1; }
+  .c-p{ grid-column: 2; grid-row: 1; font-size: 14px; }
+  .c-y{ grid-column: 3; grid-row: 1; }
+  .c-c{ grid-column: 2; grid-row: 2; font-size: 11.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ 上部の固定バー ══════ -->
+<div class="bar">
+  <a class="bar-brand" href="/" aria-label="合同会社Shisto トップページへ"><img src="images/logo-mark-dark.png" alt="" width="18" height="18"><span>Shisto</span></a>
+  <span class="bar-cur">WORKS</span>
+  <span class="bar-sub">いま、本番で動いているもの</span>
+  <span class="bar-yr">2026.03 —</span>
+</div>
+
+<!-- ══════ 導入 ══════ -->
+<div class="intro fade">
+  <h1>IN PRODUCTION</h1>
+  <p class="lead">いま、本番で動いているもの。</p>
+  <p>合同会社Shistoは、中小企業の仕事をAIで自動化しています。ここに並ぶ28本は、2026年3月から8月までの半年で作り、いまも動いているものです。企画から設計、開発、運用まで、すべて一人で行っています。</p>
+  <p>作るときに決めているのは、AIに任せないところです。個人情報や社外に出せないものは端末の中だけで扱い、外部のAIには送りません。報告に載る数字はAIに書かせず、そのつど元のデータを数え直します。送信するか、確定するかは、必ず人が決めます。</p>
+  <div class="facts">
+    <span><b>6</b> か月で <b>28</b> 本</span>
+    <span><b>27</b> 本が本番稼働・<b>1</b> 本が試験運用</span>
+    <span>設計から運用まで <b>1</b> 人</span>
+  </div>
+</div>
+
+<!-- ══════ 一覧（28本） ══════ -->
+<div class="list">
+  <div class="head"><span>NO.</span><span>相手</span><span>作ったもの</span><span>稼働開始</span></div>
+
+  <div class="grp"><b>取引先に納めたもの</b><i>01—11</i><em>社外のために作り、運用まで引き受けているもの</em></div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">01</span><span class="c-c">3社</span><span class="c-p">領収書のLINE取り込み</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">01</span>
+      <h3>領収書のLINE取り込み</h3>
+      <span class="d-for">3社で稼働中</span>
+      <dl>
+        <dt>課題</dt><dd>領収書を溜めておき、月末にまとめて台紙に貼り、日付と店名と金額を1件ずつ入力していた。</dd>
+        <dt>作ったもの</dt><dd>受け取った人が、その場で写真を会社の公式LINEに送るだけ。画像は各社のクラウドに保存され、日付・店名・金額が経費精算シートに転記されます。飲食店の領収書だけ、<strong>会議費か接待費かを尋ねるボタンがLINEに届きます。</strong>この案件が受け持つのは「写真を受け取ってクラウドに置くまで」で、読み取って台帳に書く本体は12です。</dd>
+        <dt>工夫</dt><dd>ボタンが押された時点でファイル名から行を特定し、店名と金額が一致するときだけ書きます。一致しなければ止まります。</dd>
+        <dt>いま</dt><dd>3社で動いていて、これまでに100件以上の領収書を取り込みました。</dd>
+      </dl>
+      <div class="stack">Google Apps Script ／ LINE Messaging API ／ Google Drive ／ Google スプレッドシート</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">02</span><span class="c-c">食品卸</span><span class="c-p">見積書・請求書の自動発行</span><span class="c-y">2026-05</span></div>
+    <div class="d">
+      <span class="d-no">02</span>
+      <h3>見積書・請求書の自動発行</h3>
+      <span class="d-for">食品卸</span>
+      <figure><img src="images/works/work-matcha-quote.webp" loading="lazy" fetchpriority="low" alt="発行された見積書のPDF。上に発行日と QUOTATION の見出し、左に宛先、右に発行元の連絡先とインボイス番号が並び、下にリードタイム・配送温度・支払い・販売ロット・見積期限の条件表と、産地・認証・商品名・規格ごとの単価が入った明細表がある。" width="1100" height="1170" decoding="async"><figcaption>ツールが出力した見積書PDF（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>見積書と請求書を、毎回もとのファイルを複製して手で書き換えていた。</dd>
+        <dt>作ったもの</dt><dd>ブラウザで入力1枚を埋めると、<strong>その会社の書式どおりのPDFが出ます。</strong>フォント・日付の書き方・レイアウトまで、それまで使っていた書類に合わせ込みました。スマートフォンからも発行できます。</dd>
+        <dt>いま</dt><dd>本番で運用中です。</dd>
+      </dl>
+      <div class="stack">Streamlit ／ WeasyPrint ／ Google Sheets API ／ GitHub Actions</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">03</span><span class="c-c">食品輸出商社</span><span class="c-p">海外営業のAI基盤</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">03</span>
+      <h3>海外営業のAI基盤</h3>
+      <span class="d-for">食品輸出商社</span>
+      <figure><img src="images/works/work-leads.webp" loading="lazy" fetchpriority="low" alt="見込み先の一覧画面。スコア・店名・業態・都市・住所・電話・評価が表形式で並び、上に業態で絞り込むボタンと検索欄がある。" width="1180" height="834" decoding="async"><figcaption>集めた見込み先の一覧画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>海外の取引先を探すところから商談の準備まで、すべて人手で回していた。</dd>
+        <dt>作ったもの</dt><dd>見込み先を集めるところから商談の準備までを<strong>一本の流れにまとめ</strong>、進み具合をLINEで受け取れるようにしました。</dd>
+        <dt>いま</dt><dd>クラウド上で本番稼働しています。50都市から20,000件を超える見込み先を集めました。</dd>
+      </dl>
+      <div class="stack">Python ／ Render ／ Supabase / PostgreSQL ／ Gemini API ／ LINE Messaging API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">04</span><span class="c-c">バスケットボールクラブ</span><span class="c-p">子供スポーツチームのLINE運営</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">04</span>
+      <h3>子供スポーツチームのLINE運営</h3>
+      <span class="d-for">バスケットボールクラブ</span>
+      <figure><img src="images/works/work-fee.webp" loading="lazy" fetchpriority="low" alt="運営が見る会費の画面。上に請求・納入済・未納の件数と未納合計の金額が並び、下に子供の名前ごとのカードが未納と納入済に分かれて表示されている。各カードに「納入を記録」と「催促を送る」のボタンがある。" width="440" height="980" decoding="async"><figcaption>運営が見る会費の画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>保護者への連絡、会費の管理、入会の受け付けがそれぞれ別の場所にあり、担当者の手作業でつないでいた。</dd>
+        <dt>作ったもの</dt><dd>保護者がふだん使っているLINEだけで完結する形にしました。子供の情報を扱うため、<strong>データベース側で行ごとにアクセスを制限し</strong>、他の家庭の情報が見えない作りにしています。</dd>
+        <dt>いま</dt><dd>クラブで試験運用中です。290人を超える保護者・関係者が登録しています。</dd>
+      </dl>
+      <div class="stack">Python / FastAPI ／ Supabase（行レベル制御）／ LINE Messaging API ／ Render</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">05</span><span class="c-c">バスケットボールクラブ</span><span class="c-p">交通費精算のLINE Bot</span><span class="c-y">2026-05</span></div>
+    <div class="d">
+      <span class="d-no">05</span>
+      <h3>交通費精算のLINE Bot</h3>
+      <span class="d-for">バスケットボールクラブ</span>
+      <dl>
+        <dt>課題</dt><dd>選手が紙やメッセージで交通費を申告し、担当者が毎月まとめて集計していた。</dd>
+        <dt>作ったもの</dt><dd>LINEの会話形式で、区間・高速代・手当を入力できるようにしました。入力されたものは月ごとに自動で集計されます。<strong>無料の範囲内で運用できるよう、送信の通数まで設計に織り込みました。</strong></dd>
+        <dt>いま</dt><dd>稼働中です。作った本人も、選手として毎月使っています。</dd>
+      </dl>
+      <div class="stack">Google Apps Script ／ Google スプレッドシート ／ LINE Messaging API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">06</span><span class="c-c">自社</span><span class="c-p">自作の会計ソフト</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">06</span>
+      <h3>自作の会計ソフト</h3>
+      <span class="d-for">自社</span>
+      <figure><video src="videos/works/work-kaikei.mp4" poster="images/works/work-kaikei.webp" width="1280" height="730" muted loop playsinline preload="none"></video><figcaption>ふつうの言葉で1件入れると仕訳になり、確定すると試算表の貸借が合う（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>市販の会計ソフトに合わせると、帳簿の付け方がソフトの都合に縛られる。</dd>
+        <dt>作ったもの</dt><dd>複式簿記の仕訳をただ一つの正しい形と定め、<strong>いったん確定した仕訳は書き換えられず、反対の仕訳を立てることでしか直せない</strong>設計にしました。外部のライブラリを使わず、標準の機能だけで書いています。</dd>
+        <dt>いま</dt><dd>端末の中で動いており、領収書の転記とつないで使っています。これまでに120件を超える仕訳を記帳しました。</dd>
+      </dl>
+      <div class="stack">Python（標準ライブラリのみ）／ SQLite</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">07</span><span class="c-c">食品輸出商社</span><span class="c-p">企業向けLinkedIn投稿の支援Bot</span><span class="c-y">2026-04</span></div>
+    <div class="d">
+      <span class="d-no">07</span>
+      <h3>企業向けLinkedIn投稿の支援Bot</h3>
+      <span class="d-for">食品輸出商社</span>
+      <figure><img src="images/works/work-linkedin.webp" loading="lazy" fetchpriority="low" alt="LINEに届いた投稿案の画面。カードが3枚横に並び、それぞれに記事の見出し、日本語と英語の投稿文、ハッシュタグが入っている。各カードの下に「採用」「元記事」「画像をDL」「画像を変更」のボタンがある。" width="927" height="1069" decoding="async"><figcaption>LINEに届く投稿案（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>企業アカウントの投稿は、書く人・確認する人・出す人が分かれていて、そのたびに社内で回覧していた。</dd>
+        <dt>作ったもの</dt><dd>毎朝、海外の記事から日本語と英語の投稿案を作ってLINEに届けます。<strong>「採用」を押すと、そのまま貼れる形の投稿文と画像が返ります</strong>。出すかどうかは担当者が決めます。画像は候補から選び直せます。</dd>
+        <dt>いま</dt><dd>稼働中です。</dd>
+      </dl>
+      <div class="stack">Python ／ LINE Messaging API ／ Google Apps Script</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">08</span><span class="c-c">食品卸</span><span class="c-p">海外向けの英語コーポレートサイト</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">08</span>
+      <h3>海外向けの英語コーポレートサイト</h3>
+      <span class="d-for">食品卸</span>
+      <dl>
+        <dt>課題</dt><dd>海外の取引先に商品や認証の状況を説明する場が無く、そのつどメールに資料を添えて送っていた。</dd>
+        <dt>作ったもの</dt><dd>英語のサイトを作り、独自ドメインで公開しました。商品の紹介・専門的な解説記事・プライバシーポリシー・利用規約の4ページ構成です。問い合わせフォームも自前で作り、<strong>送信された内容がそのまま担当者のメールに届きます</strong>（外部サービスへの登録は不要です）。</dd>
+        <dt>いま</dt><dd>公開中です。</dd>
+      </dl>
+      <div class="stack">HTML / CSS / JavaScript ／ Cloudflare Pages ／ Google Apps Script</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">09</span><span class="c-c">スポーツ関連企業</span><span class="c-p">打ち合わせ記録の自動登録</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">09</span>
+      <h3>打ち合わせ記録の自動登録</h3>
+      <span class="d-for">スポーツ関連企業</span>
+      <dl>
+        <dt>課題</dt><dd>打ち合わせのたびに、いつ誰と何を話したかを社内の業務システムへ手で登録していた。件数が増えるほど後回しになり、履歴が虫食いになる。</dd>
+        <dt>作ったもの</dt><dd>カレンダーの予定からその日の打ち合わせを拾い、相手先を判定して社内システムの活動履歴に自動で登録します。判定は決まった突き合わせで行い、<strong>予定の中身を外部のAIには一切送りません。</strong>毎週の定例のような繰り返しの予定でも、日程が変わったときに二重登録にならないようにしています。</dd>
+        <dt>いま</dt><dd>毎日自動で動いています。</dd>
+      </dl>
+      <div class="stack">Google Apps Script ／ カレンダー API ／ 業務システムの REST API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">10</span><span class="c-c">スポーツ関連企業</span><span class="c-p">担当者用の業務ツール</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">10</span>
+      <h3>担当者用の業務ツール</h3>
+      <span class="d-for">スポーツ関連企業</span>
+      <figure><img src="images/works/work-engate-search.webp" loading="lazy" fetchpriority="low" alt="過去の実施記録を検索する画面。左に月・年・競技・チーム・キーワードの絞り込み、下に検索結果の件数と合計・平均の数字、その下に1件ずつのカードが並ぶ。" width="1400" height="1013" decoding="async"><figcaption>過去の実施記録を検索する画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>担当する各チームの実績・企画・年間計画が別々のファイルに散らばり、「前に似た企画はあったか」を探すだけで毎回時間がかかっていた。</dd>
+        <dt>作ったもの</dt><dd>過去の実施記録5,600件超を検索し、企画の文書を作り、実施後の成績を分析するまでを1つの画面にまとめました。<strong>報告に載る数字はAIに書かせず、そのつど元データを数え直して出します</strong>（件数を書き写す運用をやめました）。</dd>
+        <dt>いま</dt><dd>認証をかけて本番で使っています。200チーム・5,600件を超えるイベント記録を扱っています。</dd>
+      </dl>
+      <div class="stack">Python ／ Streamlit ／ SQLite</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">11</span><span class="c-c">スポーツ関連企業</span><span class="c-p">SNS投稿案の自動生成</span><span class="c-y">2026-03</span></div>
+    <div class="d">
+      <span class="d-no">11</span>
+      <h3>SNS投稿案の自動生成</h3>
+      <span class="d-for">スポーツ関連企業</span>
+      <dl>
+        <dt>課題</dt><dd>公式アカウントの投稿は、まずネタを探すところに時間がかかる。担当者が忙しい週はそのまま止まってしまう。</dd>
+        <dt>作ったもの</dt><dd>毎朝4時に、ニュース・検索トレンド・海外の掲示板から400件以上を自動で集め、<strong>投稿する価値が高いものを8件選んで、本文とハッシュタグまで作ってスプレッドシートに並べます。</strong>同じ分野に偏らないよう、1分野は最大3件までにしています。</dd>
+        <dt>いま</dt><dd>毎朝自動で動いています。</dd>
+      </dl>
+      <div class="stack">Python ／ launchd ／ Google スプレッドシート API</div>
+    </div>
+  </div>
+
+  <div class="grp"><b>自社の業務を回しているもの</b><i>12—20</i><em>会社の経理・営業・記録を、この仕組みで回しています</em></div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">12</span><span class="c-c">自社</span><span class="c-p">領収書の自動転記</span><span class="c-y">2026-04</span></div>
+    <div class="d">
+      <span class="d-no">12</span>
+      <h3>領収書の自動転記</h3>
+      <span class="d-for">自社</span>
+      <dl>
+        <dt>課題</dt><dd>写真が集まっても、そこから日付・店名・金額を読み取って台帳に書くのは結局その都度の手作業だった。</dd>
+        <dt>作ったもの</dt><dd>保存された領収書を読み取り、経理の台帳へ転記する本体です。01「領収書のLINE取り込み」から流れてきた画像を受け取って動きます。<strong>読み取りに自信が無い金額は、勝手に決めずに人へ回します。</strong></dd>
+        <dt>いま</dt><dd>毎朝自動で動いていて、自社分だけで97件を転記しました。</dd>
+      </dl>
+      <div class="stack">Python ／ Google Drive・スプレッドシート API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">13</span><span class="c-c">自社</span><span class="c-p">営業書類のジェネレーター</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">13</span>
+      <h3>営業書類のジェネレーター</h3>
+      <span class="d-for">自社</span>
+      <figure><video src="videos/works/work-sales-docs.mp4" poster="images/works/work-proposal.webp" width="794" height="1130" muted loop playsinline preload="none"></video><figcaption>品目を選ぶと単価・金額・合計が自動で入る（表紙は生成される提案書／デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>提案・見積・請求のたびに前回のファイルを複製し、宛名と金額を書き換えていた。書き換え漏れが怖い。</dd>
+        <dt>作ったもの</dt><dd>提案書・見積書・請求書を、決まった書式で半自動で作ります。<strong>PDFにしたときに文字が化けて検索・コピーできなくなる問題を、出力後に必ず検査して直す</strong>ところまで組み込みました。02は取引先の書式に合わせ込んだ専用のもので、こちらは自社用に、提案書まで含めて作り直したものです。</dd>
+        <dt>いま</dt><dd>自社の書類はこれで出しています。取引先への請求書も、この仕組みで発行しました。</dd>
+      </dl>
+      <div class="stack">Python ／ Cloudflare Pages ／ Playwright</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">14</span><span class="c-c">自社</span><span class="c-p">取引先とのやりとりの記録</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">14</span>
+      <h3>取引先とのやりとりの記録</h3>
+      <span class="d-for">自社</span>
+      <dl>
+        <dt>課題</dt><dd>「あの話はいつ、どちらから出たか」が、メモとメッセージとカレンダーに散らばっていた。</dd>
+        <dt>作ったもの</dt><dd>打ち合わせ・提案・納品・実装を1本の履歴にまとめます。定例の前には、その2週間に何をしたかが自動でまとまります。<strong>打ち合わせの音声は端末の中だけで文字にし、外部のサービスに送りません。</strong></dd>
+        <dt>いま</dt><dd>取引先ごとに毎回記録していて、いまは126件たまっています。</dd>
+      </dl>
+      <div class="stack">Python ／ 音声文字起こし（ローカル実行）</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">15</span><span class="c-c">自社</span><span class="c-p">全案件の台帳と進行管理</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">15</span>
+      <h3>全案件の台帳と進行管理</h3>
+      <span class="d-for">自社</span>
+      <dl>
+        <dt>課題</dt><dd>案件が増えると、忘れているものほど思い出せない。止まっていること自体に気づけない。</dd>
+        <dt>作ったもの</dt><dd>毎晩すべての案件の状態を集計し直し、<strong>翌朝にLINEで報告します。</strong>止まっている案件と、期限が切れたものを自動で拾います。</dd>
+        <dt>いま</dt><dd>毎晩・毎朝、自動で動いています。いまは58件の案件を追っています。</dd>
+      </dl>
+      <div class="stack">Python ／ launchd ／ LINE通知</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">16</span><span class="c-c">自社</span><span class="c-p">全社ダッシュボード</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">16</span>
+      <h3>全社ダッシュボード</h3>
+      <span class="d-for">自社</span>
+      <figure><img src="images/works/work-dashboard.webp" loading="lazy" fetchpriority="low" alt="全社ダッシュボードの画面。上に月額の継続収益とその内訳、目標までの進み具合が並び、下に案件数のカードが表示されている。" width="1280" height="600" decoding="async"><figcaption>収益と案件の状況をまとめた画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>案件も収益も、見るたびに別のファイルを開いて足し算していた。全体がいくらなのか、すぐ答えられない。</dd>
+        <dt>作ったもの</dt><dd>案件と収益を1枚で見る画面です。<strong>外部のライブラリを一切使わず</strong>、標準の機能だけで作りました。</dd>
+        <dt>いま</dt><dd>社内で使っています。</dd>
+      </dl>
+      <div class="stack">HTML / JavaScript（依存ライブラリなし）</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">17</span><span class="c-c">自社</span><span class="c-p">コーポレートサイト</span><span class="c-y">2026-04</span></div>
+    <div class="d">
+      <span class="d-no">17</span>
+      <h3>コーポレートサイト</h3>
+      <span class="d-for">自社</span>
+      <figure><video src="videos/works/work-shisto-web.mp4" poster="images/works/work-shisto-web.webp" width="1280" height="800" muted loop playsinline preload="none"></video><figcaption>shisto.jp（公開中）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>会社を説明する場所が無く、何をしているのかを毎回口頭で伝えていた。</dd>
+        <dt>作ったもの</dt><dd>自社サイトです。<strong>日本語フォントを、そのサイトで実際に使う文字だけに絞って配信し、フォントの重さを約3分の1にしました。</strong>新しい漢字が増えたら検知する仕組みも入れています。</dd>
+        <dt>いま</dt><dd>shisto.jp で公開中です。</dd>
+      </dl>
+      <div class="stack">HTML / CSS / JavaScript ／ GitHub Pages</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">18</span><span class="c-c">自社</span><span class="c-p">AI業界ニュースの分析基盤</span><span class="c-y">2026-04</span></div>
+    <div class="d">
+      <span class="d-no">18</span>
+      <h3>AI業界ニュースの分析基盤</h3>
+      <span class="d-for">自社</span>
+      <figure><img src="images/works/work-newsbi.webp" loading="lazy" fetchpriority="low" alt="ニュース分析基盤のトレンド画面。記事数の30日推移の折れ線グラフと、カテゴリ別の円グラフが並んでいる。" width="1180" height="820" decoding="async"><figcaption>トレンドの画面（公開ニュースを集計した実データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>業界の動きを追うのに毎日ニュースを読み、しかも読んだそばから忘れていく。</dd>
+        <dt>作ったもの</dt><dd>ニュースを毎日集め、<strong>件数の推移・分野の偏り・出どころの内訳をグラフで見られる</strong>ようにしました。週次・月次でまとめて読み返せます。</dd>
+        <dt>いま</dt><dd>集めた記事は累計28,000件を超えました。</dd>
+      </dl>
+      <div class="stack">Python ／ DuckDB ／ YouTube Data API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">19</span><span class="c-c">自社</span><span class="c-p">調査のナレッジベース</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">19</span>
+      <h3>調査のナレッジベース</h3>
+      <span class="d-for">自社</span>
+      <figure><img src="images/works/work-kb.webp" loading="lazy" fetchpriority="low" alt="ナレッジベースの一覧画面。調査ページが表形式で並び、それぞれに情報の鮮度を示すバッジが付いている。" width="1180" height="700" decoding="async"><figcaption>調査の一覧画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>時間をかけて調べても、半年後には同じことをもう一度調べていた。</dd>
+        <dt>作ったもの</dt><dd>調べたことを、あとから引ける形で溜める仕組みです。<strong>調査ごとに「いつまでなら信じてよいか」を持たせ、古くなったものに印を出します。</strong></dd>
+        <dt>いま</dt><dd>調査のたびに書き足していて、いまは82件あります。</dd>
+      </dl>
+      <div class="stack">Python ／ Markdown ／ 静的HTML生成</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">20</span><span class="c-c">自社</span><span class="c-p">文書を漫画にするツール</span><span class="c-y">2026-08</span></div>
+    <div class="d">
+      <span class="d-no">20</span>
+      <h3>文書を漫画にするツール</h3>
+      <span class="d-for">自社</span>
+      <figure><img src="images/works/work-manga.webp" loading="lazy" fetchpriority="low" alt="ツールの本棚画面。上部に「Shisto マンガスタジオ」の帯と「＋ 新しい作品」ボタンがあり、作った漫画が表紙つきのカードで並んでいる。各カードには「検品待ち」の帯と、作品名（顔合わせ／ロボと社長／AI、どこから始める？）とページ数が表示されている。" width="720" height="560" decoding="async"><figcaption>ツールの本棚画面（自社の作品）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>社内向けの説明文書は、書いても最後まで読まれない。長いものほど読まれない。</dd>
+        <dt>作ったもの</dt><dd>文書を短編漫画（3ページ前後）にします。<strong>描き上がった絵の中の文字を機械で読み取り、脚本と突き合わせて、違っていれば描き直します。</strong>人が確認するのは脚本の段階と仕上がりの2か所だけと決めてあります。</dd>
+        <dt>いま</dt><dd>自社の資料で1本を仕上げました。社外の文書にはまだ使っていません。</dd>
+      </dl>
+      <div class="stack">Python ／ Flask ／ 画像生成AI ／ 文字読み取りによる照合</div>
+    </div>
+  </div>
+
+  <div class="grp"><b>自分のために作ったもの</b><i>21—28</i><em>作りたいものを試した場。ここで確かめた作りを、上の2つに回しています</em></div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">21</span><span class="c-c">自分用</span><span class="c-p">お店探しのBot</span><span class="c-y">2026-04</span></div>
+    <div class="d">
+      <span class="d-no">21</span>
+      <h3>お店探しのBot</h3>
+      <span class="d-for">自分用</span>
+      <dl>
+        <dt>課題</dt><dd>お店を探すたびに検索して口コミを読み比べ、結局決めきれずに時間だけ使っていた。</dd>
+        <dt>作ったもの</dt><dd>LINEで場所・人数・予算などの条件を伝えると、条件に合うお店を提案します。<strong>やりとりはLINEの中だけで完結し、アプリを入れる必要がありません。</strong></dd>
+        <dt>いま</dt><dd>稼働中です。</dd>
+      </dl>
+      <div class="stack">Cloudflare Workers ／ Gemini API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">22</span><span class="c-c">自分用</span><span class="c-p">写真カレンダー</span><span class="c-y">2026-05</span></div>
+    <div class="d">
+      <span class="d-no">22</span>
+      <h3>写真カレンダー</h3>
+      <span class="d-for">自分用</span>
+      <dl>
+        <dt>課題</dt><dd>紙で配られる試合日程や練習予定を、1件ずつ手でカレンダーに入れ直していた。</dd>
+        <dt>作ったもの</dt><dd>予定表の写真をLINEに送ると、<strong>日付・時間・場所を読み取って、そのままスマートフォンのカレンダーに登録されます。</strong></dd>
+        <dt>いま</dt><dd>稼働中です。最初の試験では、12件の試合日程を一度に登録できました。</dd>
+      </dl>
+      <div class="stack">Cloudflare Workers ／ Gemini（画像読み取り）／ CalDAV</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">23</span><span class="c-c">自分用</span><span class="c-p">固定費・サブスクの管理</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">23</span>
+      <h3>固定費・サブスクの管理</h3>
+      <span class="d-for">自分用</span>
+      <figure><video src="videos/works/work-subs.mp4" poster="images/works/work-subs.webp" width="430" height="860" muted loop playsinline preload="none"></video><figcaption>1件足すと今月の合計と内訳の円グラフがその場で変わる（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>少額の月額サービスが増え、毎月いくら出ているのかを把握できなくなっていた。</dd>
+        <dt>作ったもの</dt><dd>毎月の固定費を1画面で管理します。次の請求日と予算に対する使い方が分かります。<strong>データは端末の中だけに置き、外部に送りません。</strong></dd>
+        <dt>いま</dt><dd>毎月見ています。</dd>
+      </dl>
+      <div class="stack">Cloudflare Pages（PWA）</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">24</span><span class="c-c">自分用</span><span class="c-p">思想アーカイブ</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">24</span>
+      <h3>思想アーカイブ</h3>
+      <span class="d-for">自分用</span>
+      <figure><img src="images/works/work-rashin.webp" loading="lazy" fetchpriority="low" alt="思想アーカイブの画面。気になった言葉がカードで縦に並び、それぞれに自分のメモとタグが付いている。" width="430" height="860" decoding="async"><figcaption>スマートフォンでの表示（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>心に残った言葉をその場でメモしても、二度と開かないまま埋もれていた。</dd>
+        <dt>作ったもの</dt><dd>気になった言葉をLINEからでも放り込めるようにし、<strong>毎日1枚だけ過去の言葉が手元に戻ってくる</strong>ようにしました。読み返しながら自分の考えを書き足していきます。</dd>
+        <dt>いま</dt><dd>毎日届いています。</dd>
+      </dl>
+      <div class="stack">Cloudflare Pages / D1 ／ Gemini API</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">25</span><span class="c-c">自分用</span><span class="c-p">メール秘書</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">25</span>
+      <h3>メール秘書</h3>
+      <span class="d-for">自分用</span>
+      <figure><video src="videos/works/work-mail.mp4" poster="images/works/work-mail.webp" width="430" height="900" muted loop playsinline preload="none"></video><figcaption>返信が要るメールを開き、用件を1行書くと下書きができてGmailに保存される（デモ用の架空データ・下書き本文は見本）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>複数のメールアドレスを行き来しながら、返さなければならないものを探していた。</dd>
+        <dt>作ったもの</dt><dd>返信が必要なメールだけを集め、本人の書き方に寄せた下書きをメールソフトの下書きに保存します。<strong>送信する機能はあえて入れていません。</strong>出すかどうかは必ず人が決めます。</dd>
+        <dt>いま</dt><dd>毎日使っています。</dd>
+      </dl>
+      <div class="stack">Cloudflare Pages / D1 ／ Google Apps Script</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">26</span><span class="c-c">自分用</span><span class="c-p">情報の目利きアーカイブ</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">26</span>
+      <h3>情報の目利きアーカイブ</h3>
+      <span class="d-for">自分用</span>
+      <figure><img src="images/works/work-insight.webp" loading="lazy" fetchpriority="low" alt="情報の目利きアーカイブの画面。判定した情報がカードで並び、採用・保留などの判定と要点が表示されている。" width="1180" height="800" decoding="async"><figcaption>アーカイブの閲覧画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>良さそうな情報を見つけても、自分の事業に使えるかどうかを毎回ゼロから考えていた。</dd>
+        <dt>作ったもの</dt><dd>見つけた情報を<strong>「AIの使い方」「事業」「考え方」の3つの軸で判定し</strong>、採用・保留・見送りを付けて溜めます。あとから見返せます。</dd>
+        <dt>いま</dt><dd>端末の中で動いています。</dd>
+      </dl>
+      <div class="stack">Python / Flask ／ SQLite</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">27</span><span class="c-c">自分用</span><span class="c-p">Xのいいねアーカイブ</span><span class="c-y">2026-07</span></div>
+    <div class="d">
+      <span class="d-no">27</span>
+      <h3>Xのいいねアーカイブ</h3>
+      <span class="d-for">自分用</span>
+      <figure><img src="images/works/work-xlikes.webp" loading="lazy" fetchpriority="low" alt="いいねアーカイブの閲覧画面。保存された投稿が一覧で並び、それぞれに要点とタグが付いている。" width="1180" height="800" decoding="async"><figcaption>アーカイブの閲覧画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>いいねした投稿は溜まる一方で、あとから探し出すことができなかった。</dd>
+        <dt>作ったもの</dt><dd>いいねした投稿を<strong>公式のAPIだけを使って</strong>毎日集め、要点とタグを付けて検索できるようにしました。元の投稿が消されたら、こちらの控えも消えます。</dd>
+        <dt>いま</dt><dd>毎日自動で集めています。</dd>
+      </dl>
+      <div class="stack">X API ／ SQLite</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="r" tabindex="0"><span class="c-n">28</span><span class="c-c">自分用</span><span class="c-p">AI討論アプリ</span><span class="c-y">2026-06</span></div>
+    <div class="d">
+      <span class="d-no">28</span>
+      <h3>AI討論アプリ</h3>
+      <span class="d-for">自分用</span>
+      <figure><img src="images/works/work-debate.webp" loading="lazy" fetchpriority="low" alt="AI討論アプリの入力画面。討論のしかた・判断基準・往復数を選ぶボタンが並び、下に議題の入力欄がある。" width="1180" height="900" decoding="async"><figcaption>討論を始める前の入力画面（デモ用の架空データ）</figcaption></figure>
+      <dl>
+        <dt>課題</dt><dd>重い判断ほど相談相手がいない。1つのAIに聞くと、その答えに引きずられる。</dd>
+        <dt>作ったもの</dt><dd>2つの別々のAIに独立して討論させ、意見の違いをそのまま見せます。<strong>外部に送る前に、社名や個人名が混じっていないかを画面で確かめる関門を必ず通します。</strong>決めるのは自分です。</dd>
+        <dt>いま</dt><dd>端末の中で動いています。</dd>
+      </dl>
+      <div class="stack">Python / FastAPI ／ launchd</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ 注記 ══════ -->
+<div class="notes"><div class="notes-in">
+  <h2>NOTES</h2>
+  <ul>
+    <li>取引先の社名は、守秘のため業種のみを記載しています。</li>
+    <li>画面の写真と動画は、取引先の実際のデータが写らないものだけを載せています。出ている会社名・氏名・金額はすべて架空のものです。</li>
+    <li>動画は、本物のツールを実際に操作して録画したものです。再生の速さは変えていません。</li>
+    <li>設計だけのもの、開発中のものはこの一覧に含めていません。</li>
+    <li>「稼働開始」の月と、本文に出てくる件数は、開発の記録と実際のデータを数えたものです。数えられないものは書いていません。</li>
+  </ul>
+</div></div>
+
+<footer><a href="/">← shisto.jp</a><span>© 2026 合同会社Shisto</span></footer>
+
+<script>
+(function () {
+  // 幅が足りてホバーできるときは、右側に固定表示（CSSだけで動く）。
+  // それ以外はタップで行の下に開く。
+  var mq = window.matchMedia('(hover: hover) and (min-width: 1100px)');
+  var items = document.querySelectorAll('.item');
+
+  function closeAll(except) {
+    for (var i = 0; i < items.length; i++) {
+      if (items[i] !== except) items[i].classList.remove('open');
+    }
+  }
+  function toggle(item) {
+    if (mq.matches) return;              // PCではCSSのホバーに任せる
+    var willOpen = !item.classList.contains('open');
+    closeAll(null);
+    if (willOpen) item.classList.add('open');
+  }
+
+  // ══════ 動画：パネルが開いている間だけ再生する ══════
+  // 16本を同時に再生させないため、開いた1本だけを再生する。
+  // 動きを減らす設定の人には再生せず、poster（静止画）のままにする。
+  var noMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function video(item) { return item.querySelector('.d video'); }
+  function playIn(item) {
+    var v = video(item);
+    if (!v || noMotion) return;
+    var p = v.play();
+    // 自動再生を拒否されても poster が残るだけ＝画面は壊れない
+    if (p && p.catch) p.catch(function () {});
+  }
+  function stopIn(item) {
+    var v = video(item);
+    if (!v) return;
+    v.pause();
+    // ■ currentTime = 0 に戻すだけだと「動画の1コマ目」が残る（＝ログイン画面や空の一覧）。
+    //    load() まで呼ぶと表紙の写真に戻り、次に開いたときも必ず頭から始まる。
+    try { v.load(); } catch (e) {}
+  }
+  for (var k = 0; k < items.length; k++) {
+    (function (item) {
+      item.addEventListener('mouseenter', function () { if (mq.matches) playIn(item); });
+      item.addEventListener('mouseleave', function () { if (mq.matches) stopIn(item); });
+      item.addEventListener('focusin',  function () { if (mq.matches) playIn(item); });
+      item.addEventListener('focusout', function () { if (mq.matches) stopIn(item); });
+    })(items[k]);
+  }
+  // スマホ（タップで開く）側は open の付け外しに合わせる
+  var _toggle = toggle;
+  toggle = function (item) {
+    for (var n = 0; n < items.length; n++) stopIn(items[n]);
+    _toggle(item);
+    if (item.classList.contains('open')) playIn(item);
+  };
+
+  for (var i = 0; i < items.length; i++) {
+    (function (item) {
+      var row = item.querySelector('.r');
+      // クリックで行にフォーカスが残ると、:focus-within でその概要が出っぱなしになり、
+      // 別の行にカーソルを合わせたときに2枚が重なる。マウス操作ではフォーカスを付けない。
+      row.addEventListener('mousedown', function (e) { if (mq.matches) e.preventDefault(); });
+      // キーボードで開いたあとにマウスを動かしたときも、古いほうを必ず消す
+      row.addEventListener('mouseenter', function () {
+        var a = document.activeElement;
+        if (a && a !== row && a.classList && a.classList.contains('r')) a.blur();
+      });
+      row.addEventListener('click', function () { toggle(item); });
+      row.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          toggle(item);
+        }
+      });
+    })(items[i]);
+  }
+
+  // 表示の切り替わりで開いたままにならないようにする
+  if (mq.addEventListener) mq.addEventListener('change', function () { closeAll(null); });
+  else if (mq.addListener) mq.addListener(function () { closeAll(null); });
+
+  // 導入だけ、控えめにフェードイン
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var intro = document.querySelector('.intro');
+  if (reduce || !window.requestAnimationFrame) {
+    if (intro) intro.classList.remove('fade');
+  } else if (intro) {
+    requestAnimationFrame(function () { requestAnimationFrame(function () { intro.classList.add('on'); }); });
+  }
+})();
+</script>
+
+</body>
+</html>

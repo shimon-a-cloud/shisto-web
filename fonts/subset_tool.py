@@ -3,14 +3,18 @@
 """日本語フォントのサブセット管理ツール（shisto.jp）
 
 このサイトの日本語フォント（Shippori Mincho 400 / Zen Kaku Gothic New 300・500）は、
-index.html で実際に使っている文字だけを収録して自前配信している（834KB→268KB・2026-07-24）。
+PAGES に挙げたページで実際に使っている文字だけを収録して自前配信している（834KB→268KB・2026-07-24）。
 
-⚠️ index.html の文言に「新しい漢字」を足すと、その文字だけOS標準フォントで表示される
+⚠️ 文言に「新しい漢字」を足すと、その文字だけOS標準フォントで表示される
 （目視では気づきにくい）。文言を変えたら必ず --check を実行すること。
 
+🚨 このフォントを読み込むページを増やしたら PAGES に必ず足すこと。
+   足し忘れると --check は✅を返すのに --build でそのページの文字が削られる
+   （2026-08-16: works.html を追加。それ以前は index.html しか見ていなかった）。
+
 使い方:
-  python3 fonts/subset_tool.py --check   # index.htmlの全文字がフォントに収録済みか検査（漏れがあればexit 1）
-  python3 fonts/subset_tool.py --build   # Google Fonts(GitHub)から原本TTFを取得し、現在のindex.htmlで再サブセット
+  python3 fonts/subset_tool.py --check   # PAGESの全文字がフォントに収録済みか検査（漏れがあればexit 1）
+  python3 fonts/subset_tool.py --build   # Google Fonts(GitHub)から原本TTFを取得し、現在のPAGESで再サブセット
 
 依存: fontTools + brotli（無ければ fonts/.venv に自動インストール）
 """
@@ -18,7 +22,10 @@ import os, sys, subprocess, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-INDEX = os.path.join(ROOT, "index.html")
+# 自前配信フォント（fonts/*.woff2）を @font-face で読み込んでいる公開ページ。
+# privacy.html は 'Shippori Mincho' を指定しているが woff2 を読み込んでいないため対象外。
+# preview-*.html は下書きで公開していないため対象外。
+PAGES = [os.path.join(ROOT, p) for p in ("index.html", "works.html")]
 VENV = os.path.join(HERE, ".venv")
 
 FONTS = [
@@ -46,9 +53,14 @@ def ensure_venv():
 
 
 def site_chars():
-    """index.html の全文字（HTML全文＝JSが挿す文字も含む・取りこぼしゼロ方針）"""
+    """PAGES の全文字（HTML全文＝JSが挿す文字も含む・取りこぼしゼロ方針）"""
     import string
-    h = open(INDEX, encoding="utf-8").read()
+    missing_pages = [p for p in PAGES if not os.path.exists(p)]
+    if missing_pages:
+        # 黙って飛ばすとそのページの文字が削られる＝必ず止める
+        print("❌ PAGES に無いファイル: " + ", ".join(os.path.basename(p) for p in missing_pages))
+        sys.exit(1)
+    h = "".join(open(p, encoding="utf-8").read() for p in PAGES)
     chars = set(h) | set(string.printable)
     chars |= set("。、・「」『』（）〜―…※→←↑↓■□●○◆★☆　％：；？！")
     return {c for c in chars if ord(c) >= 0x20 or c == "　"}
@@ -79,7 +91,7 @@ print(json.dumps(missing, ensure_ascii=False))
                 ng = True
                 print(f"❌ {out}: 未収録 {len(missing)}文字 → {''.join(missing[:30])}")
             else:
-                print(f"✅ {out}: index.htmlの全文字を収録済み")
+                print(f"✅ {out}: {'+'.join(os.path.basename(p) for p in PAGES)} の全文字を収録済み")
     finally:
         os.remove(tmp)
     if ng:
@@ -96,7 +108,15 @@ def build():
             ttf = os.path.join(HERE, "." + os.path.basename(src))
             url = f"https://raw.githubusercontent.com/google/fonts/main/{src}"
             print(f"取得中: {url}")
-            urllib.request.urlretrieve(url, ttf)
+            # curl を使う（Pythonのurllibはこの環境でHTTPS本文が途中で切れることがある）。
+            # --fail で HTTP エラーを、下の cmap 判定で「途中で切れた原本」を弾く。
+            subprocess.run(["curl", "-fsSL", "-o", ttf, url], check=True)
+            # 途中で切れた原本で作ると「静かに字が減ったwoff2」ができるので、開けるか確かめる
+            v = subprocess.run([py, "-c", "import sys;from fontTools.ttLib import TTFont;print(len(TTFont(sys.argv[1]).getBestCmap()))", ttf],
+                               capture_output=True, text=True)
+            if v.returncode != 0 or int(v.stdout.strip() or 0) < 3000:
+                print(f"❌ 原本が壊れています（{os.path.getsize(ttf):,}バイト・収録字数 {v.stdout.strip() or '読めない'}）: {url}")
+                sys.exit(1)
             subprocess.run([
                 os.path.join(VENV, "bin", "pyftsubset"), ttf,
                 f"--text-file={chars_file}", "--flavor=woff2",

@@ -4,8 +4,9 @@
 
 このサイトの日本語フォント（Shippori Mincho 400 / Zen Kaku Gothic New 300・500）は、
 PAGES に挙げたページで実際に使っている文字だけを収録して自前配信している（834KB→268KB・2026-07-24）。
-英字の Cormorant Garamond 300・400 も 2026-08-16 に自前配信へ移した
-（Google Fonts の CSS が描画を887ms止めており、スマホLCPの主因だったため）。
+英字の Cormorant Garamond 300・400 と、works.html の数字用 IBM Plex Mono 400・500 も
+2026-08-16 に自前配信へ移した（Google Fonts の CSS が描画を887ms止めていたため）。
+🚨 IBM Plex Mono は予約名つきのため 'Shisto Mono' に改名して配信している（理由＝fonts/LICENSE.md）。
 
 ⚠️ 文言に「新しい漢字」を足すと、その文字だけOS標準フォントで表示される
 （目視では気づきにくい）。文言を変えたら必ず --check を実行すること。
@@ -31,16 +32,24 @@ PAGES = [os.path.join(ROOT, p) for p in ("index.html", "works.html")]
 VENV = os.path.join(HERE, ".venv")
 
 FONTS = [
-    # (原本TTF: google/fonts リポジトリのパス, 出力woff2, weight, 収録範囲, 原本の最低収録字数)
+    # (原本TTF: google/fonts リポジトリのパス, 出力woff2, weight, 収録範囲, 原本の最低収録字数, 改名先)
     #   収録範囲 "jp"    = PAGESの全文字（日本語書体）
     #   収録範囲 "latin" = LATIN_CHARS のみ（英字書体。日本語の字は元から入っていない）
-    # 末尾の数字は「途中で切れた原本」を弾くための閾値（原本の実収録字数を下回る値）。
-    ("ofl/shipporimincho/ShipporiMincho-Regular.ttf", "shippori-400.woff2", 400, "jp", 3000),
-    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Light.ttf", "zenkaku-300.woff2", 300, "jp", 3000),
-    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Medium.ttf", "zenkaku-500.woff2", 500, "jp", 3000),
+    #   最低収録字数 = 「途中で切れた原本」を弾くための閾値（原本の実収録字数を下回る値）
+    #   改名先 = None 以外なら、フォント内部の名前をこの名前に書き換える（後述の RFN 対応）
+    ("ofl/shipporimincho/ShipporiMincho-Regular.ttf", "shippori-400.woff2", 400, "jp", 3000, None),
+    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Light.ttf", "zenkaku-300.woff2", 300, "jp", 3000, None),
+    ("ofl/zenkakugothicnew/ZenKakuGothicNew-Medium.ttf", "zenkaku-500.woff2", 500, "jp", 3000, None),
     # Cormorant Garamond は可変フォント1本しか配布されていないため、wght=300/400 に切り出してから使う
-    ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-300.woff2", 300, "latin", 400),
-    ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-400.woff2", 400, "latin", 400),
+    ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-300.woff2", 300, "latin", 400, None),
+    ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-400.woff2", 400, "latin", 400, None),
+    # 🚨 IBM Plex Mono だけは「予約名（Reserved Font Name）"Plex"」つきで公開されている。
+    #    OFL 1.1 第3条＋公式FAQ 2.6/2.8 により、サブセット化した版は改変版にあたり
+    #    予約名を名乗れない（収録字数を減らした時点で Functional Equivalence を満たさない）。
+    #    → 内部名を 'Shisto Mono' に書き換えて配信する。著作権表示・ライセンス表記は原本のまま残す。
+    #    works.html の CSS の font-family もこの名前に合わせること。
+    ("ofl/ibmplexmono/IBMPlexMono-Regular.ttf", "shistomono-400.woff2", 400, "latin", 300, "Shisto Mono"),
+    ("ofl/ibmplexmono/IBMPlexMono-Medium.ttf", "shistomono-500.woff2", 500, "latin", 300, "Shisto Mono"),
 ]
 
 # 原本フォント自体に存在しない文字（検証済み 2026-07-24）。
@@ -58,9 +67,52 @@ LATIN_CHARS = (
     | set(chr(c) for c in range(0xA0, 0x100))
     | set("‐‑‒–—―‘’‚“”„†‡•…‰′″‹›⁄€™−")
 )
-# Cormorant Garamond の原本自体に無い文字（2026-08-16 に原本974字のcmapを直接見て確認）。
-# µ(U+00B5 マイクロ記号)は原本に無い。ギリシャ文字のμ(U+03BC)は有る。どちらも画面では使っていない。
-LATIN_KNOWN_MISSING = set("µ")
+# 英字書体の原本自体に無い文字（いずれも2026-08-16に原本のcmapを直接見て確認）。
+# 書体ごとに分ける＝1つにまとめると、片方の本物の漏れをもう片方の既知漏れが隠してしまう。
+#   cormorant  : µ(U+00B5 マイクロ記号)が原本974字に無い。ギリシャ文字のμ(U+03BC)は有る
+#   shistomono : ‐‑‒―(U+2010/2011/2012/2015)が原本930字に無い。–(U+2013)と—(U+2014)は有る
+#                ＝Google Fonts配信時代から代替表示だった。自前配信による悪化ではない
+LATIN_KNOWN_MISSING = {
+    "cormorant": set("µ"),
+    "shistomono": set("‐‑‒―"),
+}
+
+# 予約名つきフォント（IBM Plex Mono）の改名処理。名前の記録だけを差し替え、
+# 書き換え漏れがあればその場で止める（予約名が残った版を配布しないため）。
+RENAME_CODE = r"""
+import sys
+from fontTools.ttLib import TTFont
+src, dst, newname, weight = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4])
+sub = {400: "Regular", 500: "Medium"}.get(weight, str(weight))
+want = {1: newname, 16: newname, 4: newname + " " + sub,
+        3: newname.replace(" ", "") + "-" + sub, 6: newname.replace(" ", "") + "-" + sub}
+f = TTFont(src)
+for rec in f["name"].names:
+    if rec.nameID in want:
+        rec.string = want[rec.nameID]
+bad = [(r.nameID, str(r)) for r in f["name"].names if r.nameID in want and str(r) != want[r.nameID]]
+if bad:
+    print("改名に失敗しました: " + repr(bad)); sys.exit(1)
+f.save(dst)
+"""
+
+# 出来上がった woff2 に予約名が残っていないかを検査する（--check で毎回通す）
+NAMECHECK_CODE = r"""
+import sys
+from fontTools.ttLib import TTFont
+path, newname, weight = sys.argv[1], sys.argv[2], int(sys.argv[3])
+sub = {400: "Regular", 500: "Medium"}.get(weight, str(weight))
+want = {1: newname, 16: newname, 4: newname + " " + sub,
+        3: newname.replace(" ", "") + "-" + sub, 6: newname.replace(" ", "") + "-" + sub}
+names = TTFont(path)["name"].names
+bad = [(r.nameID, str(r)) for r in names if r.nameID in want and str(r) != want[r.nameID]]
+if bad:
+    print("名前の記録に予約名が残っています: " + repr(bad)); sys.exit(1)
+fam = [str(r) for r in names if r.nameID == 1]
+if not fam:
+    print("ファミリー名が入っていません"); sys.exit(1)
+print(fam[0])
+"""
 
 
 def ensure_venv():
@@ -101,9 +153,13 @@ print(json.dumps(missing, ensure_ascii=False))
     tmp = os.path.join(HERE, ".chars.tmp")
     ng = False
     try:
-        for _, out, _, kind, _ in FONTS:
+        for _, out, weight, kind, _, rename in FONTS:
             if kind == "latin":
-                chars, known, min_ord, label = LATIN_CHARS, LATIN_KNOWN_MISSING, 0x20, "英字・数字・約物"
+                known = LATIN_KNOWN_MISSING.get(out.split("-")[0])
+                if known is None:  # 書体を足して既知漏れの登録を忘れたら止める
+                    print(f"❌ {out}: LATIN_KNOWN_MISSING に '{out.split('-')[0]}' の登録がありません")
+                    sys.exit(1)
+                chars, min_ord, label = LATIN_CHARS, 0x20, "英字・数字・約物"
             else:
                 chars, known, min_ord = site_chars(), KNOWN_MISSING, 0x80
                 label = "+".join(os.path.basename(p) for p in PAGES) + " の全文字"
@@ -118,6 +174,15 @@ print(json.dumps(missing, ensure_ascii=False))
                 print(f"❌ {out}: 未収録 {len(missing)}文字 → {''.join(missing[:30])}")
             else:
                 print(f"✅ {out}: {label}を収録済み")
+            if rename:
+                # 予約名が残っていないか毎回確かめる（残ったまま配ると OFL 第3条違反）
+                r2 = subprocess.run([py, "-c", NAMECHECK_CODE, woff, rename, str(weight)],
+                                    capture_output=True, text=True)
+                if r2.returncode != 0:
+                    ng = True
+                    print(f"❌ {out}: {r2.stdout.strip() or r2.stderr.strip()}")
+                else:
+                    print(f"   ↳ 内部名 {r2.stdout.strip()}（予約名は残っていない）")
     finally:
         if os.path.exists(tmp):
             os.remove(tmp)
@@ -130,7 +195,7 @@ def build():
     py = ensure_venv()
     chars_file = os.path.join(HERE, ".chars.tmp")
     try:
-        for src, out, weight, kind, min_cmap in FONTS:
+        for src, out, weight, kind, min_cmap, rename in FONTS:
             open(chars_file, "w", encoding="utf-8").write(
                 "".join(sorted(LATIN_CHARS if kind == "latin" else site_chars())))
             ttf = os.path.join(HERE, "." + os.path.basename(src))
@@ -154,6 +219,15 @@ def build():
                 subprocess.run([os.path.join(VENV, "bin", "fonttools"), "varLib.instancer",
                                 ttf, f"wght={weight}", "-o", inst], check=True, capture_output=True)
                 src_ttf = inst
+            if rename:
+                # 予約名つきフォントの改変版は元の名前を名乗れない（OFL 1.1 第3条）。
+                # 名前の記録（1=ファミリー・3=固有ID・4=フルネーム・6=PostScript名・16=タイポグラフィ）
+                # だけを書き換え、著作権(0)・ライセンス(13/14)・商標(7)は原本のまま残す。
+                renamed = os.path.join(HERE, f".renamed-{weight}.ttf")
+                subprocess.run([py, "-c", RENAME_CODE, src_ttf, renamed, rename, str(weight)], check=True)
+                if src_ttf != ttf:
+                    os.remove(src_ttf)
+                src_ttf = renamed
             # 英字書体は OpenType 機能を既定セット（カーニング・標準合字など）に絞る。
             # `*` にすると小型大文字・スワッシュなど画面で使っていない字形まで抱えて2倍になる
             # （実測 37KB→17KB。サイトのCSSに font-feature-settings / font-variant は無いことを確認済み）。
@@ -161,6 +235,9 @@ def build():
             subprocess.run([
                 os.path.join(VENV, "bin", "pyftsubset"), src_ttf,
                 f"--text-file={chars_file}", "--flavor=woff2",
+                # 既定では著作権(0)とライセンス(13/14)の記録が捨てられるので、明示して残す
+                # （OFLの再配布物は著作権表示を伴う必要がある。fonts/LICENSE.md と二重に担保）
+                "--name-IDs=0,1,2,3,4,5,6,13,14,16",
                 *features, f"--output-file={os.path.join(HERE, out)}",
             ], check=True)
             os.remove(ttf)

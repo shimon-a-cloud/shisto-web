@@ -68,27 +68,33 @@
        本文  : Shippori Mincho 400（明朝）／字間 0.06em
        見出し: Zen Kaku Gothic New 300（大）・500（小）／字間 0.06em
        社名  : Cormorant Garamond 300／字間 0.14em
-       数字  : IBM Plex Mono
+       数字  : Shisto Mono（＝IBM Plex Mono のサブセット版。改名の理由は下記）
      shisto.jp の見出しは 300（細い）です。太いゴシックにすると別のサイトに見えます。
 
-  ■ 日本語2書体は自前サブセット配信（fonts/*.woff2）。このページの文字も収録済みです。
+  ■ 書体は日本語・英字とも自前サブセット配信（fonts/*.woff2）。外部のフォントCDNは読みません
+     （2026-08-16: Google Fonts の CSS が描画を止めていたため、index.html と揃えて撤去した）。
      文言に新しい漢字を足したら `python3 fonts/subset_tool.py --check` を必ず実行すること
      （works.html は fonts/subset_tool.py の PAGES に登録済み。漏れがあると、その1字だけ
      OS標準フォントで表示され、目視では気づけません）。
-     Google Fonts から読むのは欧文の Cormorant Garamond と、数字の IBM Plex Mono だけです。
+
+  ■ 数字の 'Shisto Mono' は IBM Plex Mono のサブセット版です。IBM Plex は予約名つきで
+     公開されているため、サブセット版は元の名前を名乗れません（OFL 1.1 第3条）。
+     名前だけを変え、著作権表示とライセンスはフォント内と fonts/LICENSE.md に残しています。
+     🚨 名前を 'IBM Plex Mono' に戻さないこと。
 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   @font-face { font-family:'Shippori Mincho'; font-weight:400; font-display:swap; src:url('fonts/shippori-400.woff2') format('woff2'); }
   @font-face { font-family:'Zen Kaku Gothic New'; font-weight:300; font-display:swap; src:url('fonts/zenkaku-300.woff2') format('woff2'); }
   @font-face { font-family:'Zen Kaku Gothic New'; font-weight:500; font-display:swap; src:url('fonts/zenkaku-500.woff2') format('woff2'); }
+  @font-face { font-family:'Cormorant Garamond'; font-weight:300; font-display:swap; src:url('fonts/cormorant-300.woff2') format('woff2'); }
+  @font-face { font-family:'Cormorant Garamond'; font-weight:400; font-display:swap; src:url('fonts/cormorant-400.woff2') format('woff2'); }
+  @font-face { font-family:'Shisto Mono'; font-weight:400; font-display:swap; src:url('fonts/shistomono-400.woff2') format('woff2'); }
+  @font-face { font-family:'Shisto Mono'; font-weight:500; font-display:swap; src:url('fonts/shistomono-500.woff2') format('woff2'); }
 </style>
 
 <style>
 :root{
-  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --mono: 'Shisto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   /* shisto.jp と同じ組み合わせ。本文は明朝、見出しは細いゴシック、社名だけ欧文セリフ。 */
   --serif: 'Shippori Mincho', serif;
   --disp: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;

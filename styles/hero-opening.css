@@ -1,5 +1,8 @@
-/* The title film is opt-in: the original hero remains visible until the opening has
-   compiled and drawn a frame. It is an independent scene, not a hero transition. */
+/* Keep the later hero sculpture out of the first paint while the opening prepares. */
+html.brand-opening-preflight .hero .hero-architecture { visibility: hidden !important; }
+
+/* The title film is opt-in: the rest of the hero remains available until the opening
+   has compiled and drawn a frame. It is an independent scene, not a hero transition. */
 .brand-opening {
   position: fixed;
   z-index: 90;

@@ -7,12 +7,13 @@
   'use strict';
   const hero = document.querySelector('.hero');
   const skip = hero?.querySelector('.hero-opening-skip');
-  if (!hero || !skip) return;
+  const releasePreflight = () => document.documentElement.classList.remove('brand-opening-preflight');
+  if (!hero || !skip) { releasePreflight(); return; }
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const navigation = performance.getEntriesByType?.('navigation')[0];
   const bypass = () => reduced.matches || Boolean(location.hash) || scrollY > 2 || navigation?.type === 'back_forward';
-  if (bypass()) return;
+  if (bypass()) { releasePreflight(); return; }
   /* Tells hero-decode.js to hold the hero copy until the film hands over. */
   document.body.classList.add('brand-opening-pending');
 
@@ -439,6 +440,7 @@ void main() {
       active = false; if (frame) cancelAnimationFrame(frame); frame = 0;
       release(); overlay?.remove(); canvas.remove();
       if (skip.parentElement !== hero) hero.append(skip);
+      releasePreflight();
       skip.hidden = true; document.body.classList.remove('brand-opening-active', 'brand-opening-leaving', 'brand-opening-revealing', 'brand-opening-pending'); document.body.classList.add('brand-opening-complete');
     };
     const finish = (immediate = false) => {
@@ -453,6 +455,7 @@ void main() {
     const beginReveal = () => {
       if (revealing) return;
       revealing = true;
+      releasePreflight();
       document.body.classList.add('brand-opening-revealing', 'brand-opening-complete');
       document.body.classList.remove('brand-opening-active');
       skip.hidden = true;
@@ -496,8 +499,13 @@ void main() {
 
   const fontReady = document.fonts?.load ? Promise.race([document.fonts.load('400 120px "Cormorant Garamond"'), new Promise(resolve => window.setTimeout(resolve, 900))]) : Promise.resolve();
   fontReady.catch(() => {}).then(() => window.requestAnimationFrame(() => {
-    start();
-    /* Bypassed or no WebGL: the film never ran, so release the hero copy now. */
-    if (!document.body.classList.contains('brand-opening-active') && !document.body.classList.contains('brand-opening-complete')) document.body.classList.remove('brand-opening-pending');
+    try { start(); }
+    finally {
+      /* No WebGL or failed setup: release the original hero and its sculpture. */
+      if (!document.body.classList.contains('brand-opening-active') && !document.body.classList.contains('brand-opening-complete')) {
+        document.body.classList.remove('brand-opening-pending');
+        releasePreflight();
+      }
+    }
   }));
 })();

@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* Hide the later hero sculpture before the deferred opening script starts. */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash &&
+        performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
+      document.documentElement.classList.add('brand-opening-preflight');
+    }
+  </script>
   <title>合同会社Shisto｜埼玉のAI活用・Web制作｜中小企業の「AI担当」として継続伴走</title>
   <meta name="description" content="合同会社Shisto（埼玉）は、中小企業の「AI担当」として伴走するひとり起業家の会社です。AI業務効率化・Web制作・運用支援を、単発のご依頼から継続伴走まで、窓口ひとつで。代表は元Bリーグ選手。相談は無料です。">
 
@@ -892,7 +899,7 @@
   <!-- 既存スタイルを明示的に上書きする、トップページ専用の最終レイヤー -->
   <link rel="stylesheet" href="styles/home-2026.css">
   <link rel="stylesheet" href="styles/liquid-glass.css?v=8">
-  <link rel="stylesheet" href="styles/hero-opening.css?v=9">
+  <link rel="stylesheet" href="styles/hero-opening.css?v=10">
   <link rel="stylesheet" href="styles/text-decode.css?v=5">
   <link rel="stylesheet" href="styles/immersive-sections.css?v=9">
   <link rel="stylesheet" href="styles/dark-contrast.css?v=11">
@@ -1718,7 +1725,7 @@
 })();
 
 </script>
-<script src="scripts/brand-opening.js?v=9" defer></script>
+<script src="scripts/brand-opening.js?v=10" defer></script>
 <script src="scripts/text-decode.js?v=6" defer></script>
 <script src="scripts/home-3d.js?v=24" defer></script>
 <script src="scripts/immersive-sections.js?v=9" defer></script>

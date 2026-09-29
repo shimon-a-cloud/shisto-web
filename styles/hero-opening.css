@@ -1,0 +1,76 @@
+/* The title film is opt-in: the original hero remains visible until the opening has
+   compiled and drawn a frame. It is an independent scene, not a hero transition. */
+.brand-opening {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  overflow: hidden;
+  /* The film paints its own dark field and cuts a hole in it to reveal the hero. */
+  background: transparent;
+  cursor: default;
+  opacity: 1;
+  transition: opacity .52s cubic-bezier(.7,0,.84,0);
+}
+
+.brand-opening-canvas,
+.brand-opening-ui {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.brand-opening-ui { pointer-events: none; }
+
+/* While the ring opens, the hero underneath is already live and clickable. */
+body.brand-opening-revealing .brand-opening { pointer-events: none; }
+
+body.brand-opening-active #header {
+  opacity: 0;
+  pointer-events: none;
+}
+body.brand-opening-leaving .brand-opening { opacity: 0; }
+
+/* A user who skips before the original split-text delay finishes must land on a
+   complete, operable hero rather than a temporarily blank one. */
+body.brand-opening-complete .hero .fade-up,
+body.brand-opening-complete .hero .split-char {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.hero-opening-skip {
+  position: fixed;
+  z-index: 12;
+  top: max(5.5rem, calc(env(safe-area-inset-top) + 4.25rem));
+  left: max(1rem, env(safe-area-inset-left));
+  min-width: 44px;
+  min-height: 44px;
+  padding: .68rem .86rem;
+  border: 1px solid rgba(255,255,255,.34);
+  border-radius: 999px;
+  background: rgba(0,0,0,.54);
+  color: #fff;
+  font: 500 .58rem/1 'Zen Kaku Gothic New', sans-serif;
+  letter-spacing: .14em;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease;
+}
+
+body.brand-opening-active .hero-opening-skip { opacity: 1; pointer-events: auto; }
+.hero-opening-skip[hidden] { display: none; }
+.hero-opening-skip:hover { border-color: #fff; background: #111; }
+.hero-opening-skip:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .hero-opening-skip { display: none; } }
+
+@media (max-width: 768px) {
+  .hero-opening-skip {
+    top: max(5rem, calc(env(safe-area-inset-top) + 3.75rem));
+    left: max(.8rem, env(safe-area-inset-left));
+    padding: .62rem .74rem;
+    font-size: .53rem;
+  }
+}

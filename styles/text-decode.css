@@ -1,0 +1,99 @@
+/* Hero and IN PRODUCTION intro retain the approved code-to-text entrance.
+   Top section copy uses whole-block fades in scripts/text-decode.js. */
+.hd-on .split-char,
+.hd-on .fade-up,
+.hd-on.fade {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+.hd-ch { position: relative; }
+.hd-ch.is-wait { visibility: hidden; }
+.hd-ch.is-scr { -webkit-text-fill-color: transparent; text-shadow: none !important; }
+.hd-ch.is-scr::before {
+  content: attr(data-g);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #78ebff;
+  -webkit-text-fill-color: #78ebff;
+  font-family: Menlo, Consolas, monospace;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-shadow: 0 0 10px rgba(120,235,255,.7);
+}
+.hd-wipe {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, transparent 100%);
+}
+
+/* Top sections: the entrances above replace the fade/slide of [data-reveal]. */
+[data-reveal].hd-own {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Shared positioning for the overlays below. */
+.hd-photo-place { position: relative; }
+
+/* Figures: two stacked digits slide past each other inside the digit's own box. */
+.hd-roll {
+  display: inline-block;
+  position: relative;
+  -webkit-text-fill-color: transparent;
+  clip-path: inset(0 -.2em);
+}
+.hd-roll::before,
+.hd-roll::after {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  -webkit-text-fill-color: currentColor;
+}
+.hd-roll::before { content: attr(data-a); transform: translateY(calc(var(--r, 0) * -100%)); }
+.hd-roll::after { content: attr(data-b); transform: translateY(calc((1 - var(--r, 0)) * 100%)); }
+
+/* Table values: a thin caret sits after the last typed character. */
+.hd-caret { position: relative; }
+.hd-caret::after {
+  content: "";
+  position: absolute;
+  top: .12em;
+  bottom: .06em;
+  right: -3px;
+  width: 1px;
+  background: currentColor;
+}
+
+/* Cards: the light that runs around the edge. */
+.hd-trace {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.hd-trace rect { fill: none; stroke: rgba(226,240,255,.95); stroke-width: 1; }
+.hd-trace circle { fill: #fff; filter: drop-shadow(0 0 4px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(170,210,255,.8)); }
+
+/* FAQ: the rule drawn under the question. */
+.hd-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,.15), rgba(255,255,255,.85));
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Photos: the mosaic laid over each image while it resolves. */
+.hd-mosaic {
+  position: absolute;
+  pointer-events: none;
+  image-rendering: pixelated;
+}

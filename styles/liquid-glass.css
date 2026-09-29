@@ -1,0 +1,57 @@
+/* V8 — black gallery, liquid glass, centered typography. */
+.hero { --hero-shift:0px; --hero-copy-opacity:1; position:relative; min-height:max(760px,100svh); padding:0; display:grid; place-items:center; background:#000; color:#fff; isolation:isolate; overflow:hidden; }
+.hero::before,.hero::after { content:none; }
+.hero .hero-architecture { position:absolute; inset:0!important; z-index:0; width:100%; height:100%; opacity:1; overflow:hidden; pointer-events:none; background:#000; transform:none; }
+/* Static glass silhouette remains available without WebGL. */
+.hero .hero-architecture::before { content:''; position:absolute; width:min(62vh,78vw,610px); aspect-ratio:1; left:50%; top:50%; transform:translate(-50%,-50%) rotate(-14deg); border-radius:46% 54% 38% 62% / 51% 35% 65% 49%; background:radial-gradient(ellipse at 81% 65%,#fff 0%,#cfdeff 4%,transparent 12%),radial-gradient(ellipse at 29% 18%,#ffa128,transparent 39%),radial-gradient(ellipse at 60% 38%,#dc21bc,transparent 45%),radial-gradient(ellipse at 40% 67%,#035eba,transparent 56%),#020919; box-shadow:inset 5px 0 12px #27549d,inset -8px -5px 16px #121027; opacity:.85; }
+.hero .hero-architecture.sculpture-ready::before { opacity:0; }
+.sculpture-canvas { display:block; position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.hero .hero-content { position:relative; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:0; width:100%; max-width:980px; margin:0 auto; padding:120px 24px; text-align:center; transform:translateY(var(--hero-shift)); opacity:var(--hero-copy-opacity); }
+.hero .hero-brand { position:static; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; width:auto; margin-bottom:25px; padding:7px 14px; border:1px solid #ffffff38; border-radius:99px; background:#0007; text-align:center; pointer-events:auto; }
+.hero .hero-brand-line { overflow:visible; }
+.hero .hero-brand-line + .hero-brand-line { margin-top:0!important; }
+.hero .hero-brand-origin { font:500 .57rem/1.2 'Zen Kaku Gothic New',sans-serif; color:#d4d4d8; letter-spacing:.09em; }
+.hero .hero-brand-name { display:block; font:400 1.15rem/1 'Cormorant Garamond',serif; color:#fff; letter-spacing:.02em; mix-blend-mode:normal; }
+.hero .hero-brand-sub { margin:0; font-size:.5rem; color:#ddd; letter-spacing:.08em; }
+.hero .hero-content > .flex { display:flex; flex-direction:column!important; align-items:center; gap:22px; margin:0 auto; padding:0; max-width:900px; }
+.hero .hero-content > .flex > :first-child { max-width:900px; }
+.hero .hero-headline { font-family:'Zen Kaku Gothic New',sans-serif; font-size:3.4rem; font-weight:500; line-height:1.28; letter-spacing:-.035em; color:#fff; text-shadow:0 2px 18px #0009; }
+.hero .hero-content > .flex > :last-child { align-self:center; align-items:center; width:min(100%,490px); margin:0; padding:0; border:0; border-radius:0; background:none; backdrop-filter:none; }
+.hero .hero-introduction { margin:0 0 15px; font-family:'Zen Kaku Gothic New',sans-serif; font-size:.8rem; line-height:1.95; font-weight:400; color:#ececf1; letter-spacing:.015em; text-shadow:0 1px 5px #000,0 2px 14px #000; }
+.hero .btn-primary { border-radius:99px; padding:.88rem 1.45rem; background:#fff; color:#111; border:1px solid #fff; font-size:.72rem; font-weight:500; box-shadow:none; }
+.hero .btn-primary:hover { background:#e5e5ea; color:#111; transform:translateY(-2px); }
+.hero .btn-ghost { background:#0007; color:#fff; border-color:#ffffff45; backdrop-filter:none; }
+.hero .btn-ghost:hover { background:#ffffff20; color:#fff; }
+.hero .hero-content > .flex > :last-child > p:last-child { margin-top:12px; color:#c5c5cd!important; font-size:.57rem!important; text-shadow:0 1px 5px #000; }
+#header:not(.scrolled) { background:#000; border-bottom:0; backdrop-filter:none; }
+#header:not(.scrolled) #logo { color:#fff; }
+#header .logo-mark { width:48px; height:48px; }
+#header:not(.scrolled) .logo-mark--light { display:block; }
+#header:not(.scrolled) .logo-mark--dark { display:none; }
+#header:not(.scrolled) nav a,#header:not(.scrolled) #menu-btn { color:#d4d4d8; }
+#header:not(.scrolled) nav a:hover { color:#fff; }
+#header:not(.scrolled) #header-cta { background:#fff; border-color:#fff; color:#111; }
+.hero .sculpture-motion-control { position:absolute; z-index:5; right:clamp(1.25rem,5vw,5rem); bottom:25px; min-height:44px; padding:.6rem .85rem; border:1px solid #ffffff30; border-radius:99px; background:#080808; color:#bbb; font:500 .55rem/1.2 'Zen Kaku Gothic New',sans-serif; letter-spacing:.12em; cursor:pointer; }
+.hero .sculpture-motion-control::before { content:''; display:inline-block; width:4px; height:4px; margin-right:8px; border-radius:50%; background:#fff; }
+.hero .sculpture-motion-control[aria-pressed="true"]::before { background:#666; }
+.hero .sculpture-motion-control:hover { color:#fff; border-color:#fff; }
+.hero .sculpture-motion-control:focus-visible { outline:2px solid #fff; outline-offset:5px; }
+.hero .sculpture-motion-control[hidden] { display:none; }
+.hero + .marquee-wrap { background:#000; border-color:#ffffff20!important; }
+@media(min-width:1500px){.hero .hero-headline{font-size:3.8rem}}
+@media(max-width:768px){
+ .hero{min-height:max(680px,100svh)}
+ .hero .hero-content{padding:110px 22px 100px}
+ .hero .hero-brand{gap:9px;margin-bottom:24px;padding:7px 10px}
+ .hero .hero-brand-origin{font-size:.48rem}
+ .hero .hero-brand-sub{font-size:.43rem}
+ .hero .hero-content > .flex{gap:24px}
+ .hero .hero-headline{font-size:1.72rem;line-height:1.4;letter-spacing:-.04em}
+ .hero .hero-introduction{font-size:.76rem;line-height:1.95;max-width:350px}
+ .hero .hero-content > .flex > :last-child > div{flex-direction:row!important;gap:9px;width:100%;justify-content:center}
+ .hero .btn-primary{width:auto;padding:.9rem 1rem;font-size:.65rem;white-space:nowrap}
+ .hero .hero-content > .flex > :last-child > p:last-child{font-size:.51rem!important;letter-spacing:.01em!important}
+ .hero .sculpture-motion-control{bottom:20px;right:20px}
+}
+@media(max-width:360px){.hero .hero-content{padding-inline:15px}.hero .hero-headline{font-size:1.45rem}.hero .hero-brand{gap:7px}}
+@media(prefers-reduced-motion:reduce){.hero{--hero-shift:0px!important;--hero-copy-opacity:1!important}.sculpture-canvas{transition:none}}

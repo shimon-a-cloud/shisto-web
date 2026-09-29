@@ -409,12 +409,15 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
   .c-c{ grid-column: 2; grid-row: 2; font-size: 11.5px; }
 }
 </style>
+<link rel="stylesheet" href="styles/section-depth.css?v=16">
+<link rel="stylesheet" href="styles/works-depth.css?v=1">
+<link rel="stylesheet" href="styles/text-decode.css?v=5">
 </head>
-<body>
+<body class="works-page" data-section-depth-targets=".intro|.list|.notes|footer" data-section-depth-styles="0|1|5|6">
 
 <!-- ══════ 上部の固定バー ══════ -->
 <div class="bar">
-  <a class="bar-brand" href="/" aria-label="合同会社Shisto トップページへ"><img src="images/logo-mark-dark.png" alt="" width="18" height="18"><span>Shisto</span></a>
+  <a class="bar-brand" href="/" aria-label="合同会社Shisto トップページへ"><img src="images/logo-mark-light.png" alt="" width="18" height="18"><span>Shisto</span></a>
   <span class="bar-cur">WORKS</span>
   <span class="bar-sub">いま、本番で動いているもの</span>
   <span class="bar-yr">2026.03 —</span>
@@ -422,6 +425,7 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
 
 <!-- ══════ 導入 ══════ -->
 <div class="intro fade">
+  <div class="intro-inner">
   <h1>IN PRODUCTION</h1>
   <p class="lead">いま、本番で動いているもの。</p>
   <p>合同会社Shistoは、中小企業の仕事をAIで自動化しています。ここに並ぶ28本は、<time datetime="2026-03">2026年3月</time>から<time datetime="2026-08">8月</time>までの半年で作り、いまも動いているものです。企画から設計、開発、運用まで、すべて一人で行っています。</p>
@@ -430,6 +434,7 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
     <span><b>6</b> か月で <b>28</b> 本</span>
     <span><b>27</b> 本が本番稼働・<b>1</b> 本が試験運用</span>
     <span>設計から運用まで <b>1</b> 人</span>
+  </div>
   </div>
 </div>
 
@@ -987,6 +992,9 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
   }
 })();
 </script>
+<script src="scripts/section-depth.js?v=16" defer></script>
+<script src="scripts/works-depth.js?v=1" defer></script>
+<script src="scripts/text-decode.js?v=6" defer></script>
 
 </body>
 </html>

@@ -1,0 +1,152 @@
+/*
+ * Section Depth — one WebGL gallery behind the seven reading sections.
+ *
+ * The original section colours remain the no-WebGL fallback. Only after the
+ * renderer has completed its first frame does JS add .section-depth-ready and
+ * let the canvas supply those same tonal fields plus the edge sculptures.
+ */
+
+.section-depth-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.section-depth-ready .section-depth-canvas {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* A successful canvas draw replaces only the opaque field. Content remains in
+   each section's own stacking context, above the body-level canvas. */
+body.section-depth-ready .section-services,
+body.section-depth-ready .section-numbers,
+body.section-depth-ready .section-why,
+body.section-depth-ready .section-flow,
+body.section-depth-ready .section-founder,
+body.section-depth-ready .section-faq,
+body.section-depth-ready #contact.section-contact {
+  z-index: 1;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body.section-depth-ready .section-services > div,
+body.section-depth-ready .section-numbers > div,
+body.section-depth-ready .section-why > div,
+body.section-depth-ready .section-flow > div,
+body.section-depth-ready .section-founder > div,
+body.section-depth-ready .section-faq > div,
+body.section-depth-ready #contact.section-contact > div {
+  position: relative;
+  z-index: 2;
+}
+
+/* Contact keeps the quieter background-only treatment. Services retains its
+   original inline sculpture, upgraded below, at exactly the existing position. */
+body.section-depth-ready .section-contact .section-sculpture {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Services: five optical-glass blades above two counter-rotating light rings.
+   Keep the existing container dimensions/margins and the original DOM anchor. */
+#services .section-sculpture {
+  opacity: 1;
+  visibility: visible;
+  perspective: 850px;
+}
+#services .sculpture-orbit {
+  animation: service-orbit 24s linear infinite;
+  animation-play-state: paused;
+}
+#services .sculpture-orbit::before,
+#services .sculpture-orbit::after {
+  border: 1px solid rgba(170, 220, 255, .65);
+  background: conic-gradient(from 30deg, transparent 10%, rgba(111,222,255,.16), transparent 39%, rgba(244,135,199,.15) 62%, transparent 83%);
+  box-shadow: inset 0 0 12px rgba(106,193,255,.12), 0 0 9px rgba(108,181,255,.12);
+  animation: service-inner-orbit 16s linear infinite reverse;
+  animation-play-state: inherit;
+}
+#services .sculpture-orbit::after {
+  border-color: rgba(247,189,218,.72);
+  animation-name: service-raised-orbit;
+  animation-duration: 11s;
+}
+#services .sculpture-orbit i {
+  border-radius: 7px;
+  border-color: rgba(216,240,255,.84);
+  background:
+    linear-gradient(115deg, transparent 28%, rgba(255,255,255,.8) 30%, transparent 33%) 0 0 / 240% 100%,
+    linear-gradient(135deg, rgba(15,26,48,.9), rgba(51,170,223,.62) 28%, rgba(18,37,74,.88) 49%, rgba(215,82,151,.55) 76%, rgba(255,181,99,.6));
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.85), inset -2px -2px 4px rgba(89,205,255,.55), 0 7px 16px rgba(0,0,0,.4);
+  animation: service-glass-light 6s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+#services .sculpture-orbit i:nth-child(2) { animation-delay: -1.2s; }
+#services .sculpture-orbit i:nth-child(3) { animation-delay: -2.4s; }
+#services .sculpture-orbit i:nth-child(4) { animation-delay: -3.6s; }
+#services .sculpture-orbit i:nth-child(5) { animation-delay: -4.8s; }
+#services .sculpture-orbit i::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(128,214,255,.6);
+  border-radius: inherit;
+  background: rgba(32,78,110,.25);
+  transform: translateZ(-5px);
+}
+#services .sculpture-orbit i::after {
+  inset: 5px;
+  border-radius: 4px;
+  border-color: rgba(230,247,255,.48);
+  background: linear-gradient(140deg, rgba(235,249,255,.16), transparent 45%);
+  transform: translateZ(5px);
+}
+#services .section-sculpture.running .sculpture-orbit,
+#services .section-sculpture.running .sculpture-orbit i { animation-play-state: running; }
+@keyframes service-orbit {
+  from { transform: translate(-50%, -50%) rotateX(64deg) rotateZ(-24deg); }
+  50% { transform: translate(-50%, -50%) rotateX(54deg) rotateZ(156deg); }
+  to { transform: translate(-50%, -50%) rotateX(64deg) rotateZ(336deg); }
+}
+@keyframes service-inner-orbit {
+  from { transform: translateZ(3px) rotateZ(0deg); }
+  to { transform: translateZ(3px) rotateZ(360deg); }
+}
+@keyframes service-raised-orbit {
+  from { transform: translateZ(34px) rotateZ(0deg); }
+  to { transform: translateZ(34px) rotateZ(360deg); }
+}
+@keyframes service-glass-light {
+  from { background-position: 0% 0, 0 0; filter: brightness(.95); }
+  to { background-position: 100% 0, 0 0; filter: brightness(1.2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #services .sculpture-orbit,
+  #services .sculpture-orbit::before,
+  #services .sculpture-orbit::after,
+  #services .sculpture-orbit i { animation: none !important; }
+}
+
+/* The service drafting grid remains useful, but is lowered enough for the
+   chrome silhouette and copy to read as separate depth planes. */
+body.section-depth-ready .section-services::before {
+  opacity: .42;
+}
+
+@media (max-width: 768px) {
+  /* Small screens have less margin. The shader already pulls its camera back;
+     a softer canvas keeps the edge highlights from overpowering the copy. */
+  body.section-depth-ready .section-depth-canvas { opacity: .9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-depth-canvas { transition: none; }
+}

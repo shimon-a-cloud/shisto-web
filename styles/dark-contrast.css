@@ -1,0 +1,31 @@
+/* V11: V9's black gallery, with alternating tonal fields, not a light theme. */
+:root {
+  --immersive-muted: rgba(247,247,248,.82);
+  --immersive-faint: rgba(247,247,248,.7);
+  --immersive-line: rgba(226,235,255,.23);
+  --immersive-soft-line: rgba(226,235,255,.15);
+}
+
+/* Keep the hero, white typography, and transparent copy treatment from V9. */
+.section-services { background: #17191f !important; }
+.section-numbers,
+.section-services + .section-numbers { background: #08090c !important; }
+.section-why { background: #202630 !important; }
+.section-flow { background: #101216 !important; }
+.section-founder { background: #231f20 !important; }
+.section-faq { background: #101216 !important; }
+#contact.section-contact { background: #202b3a !important; }
+.photo-marquee,
+.photo-marquee + .mobile-hide { background: #17191f !important; }
+footer { background: #08090c !important; }
+
+/* Raised surfaces catch a little more light without washing out the dark base. */
+.section-services .svc-row:hover,
+.section-services .svc-row.active { background: rgba(185,211,255,.09) !important; }
+.section-numbers > div > .grid.grid-cols-3 { background: #161b24; }
+.section-numbers .work-card { background: #171e29 !important; }
+.section-numbers .work-card:hover { background: #202b3a !important; }
+.section-faq details[open] { background: #222a36 !important; }
+.section-contact form { background: rgba(255,255,255,.075); }
+.section-contact > div > div:first-child > p:not(.sec-label) { color: var(--immersive-muted) !important; }
+.section-flow > div > p { color: var(--immersive-muted) !important; }

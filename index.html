@@ -889,22 +889,17 @@
     [data-d] { transition-delay: 0s !important; }
   }
   </style>
+  <!-- 既存スタイルを明示的に上書きする、トップページ専用の最終レイヤー -->
+  <link rel="stylesheet" href="styles/home-2026.css">
+  <link rel="stylesheet" href="styles/liquid-glass.css?v=8">
+  <link rel="stylesheet" href="styles/hero-opening.css?v=9">
+  <link rel="stylesheet" href="styles/text-decode.css?v=5">
+  <link rel="stylesheet" href="styles/immersive-sections.css?v=9">
+  <link rel="stylesheet" href="styles/dark-contrast.css?v=11">
+  <link rel="stylesheet" href="styles/section-depth.css?v=14">
+  <noscript><style>[data-reveal],.fade-up,.split-char{opacity:1!important;transform:none!important}.svc-detail{max-height:none!important;padding-bottom:1.6rem!important}</style></noscript>
 </head>
 <body>
-
-<!-- ═══════════ INTRO ═══════════ -->
-<div id="intro">
-  <img class="intro-mark" src="images/logo-mark-light.png" alt="">
-  <div class="intro-rule" id="intro-rule"></div>
-  <div class="intro-logo-wrap">
-    <div class="intro-logo" id="intro-logo">Shisto</div>
-  </div>
-  <div class="intro-sub" id="intro-sub">AI &nbsp;·&nbsp; Web &nbsp;·&nbsp; Operations</div>
-
-  <div class="intro-progress">
-    <div class="intro-progress-bar" id="intro-bar"></div>
-  </div>
-</div>
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header id="header">
@@ -967,13 +962,12 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero grain">
-  <video class="hero-video" id="hero-video" autoplay muted loop playsinline webkit-playsinline style="pointer-events:none;">
-    <source src="videos/hero-bg.mp4" type="video/mp4">
-  </video>
-  <div class="hero-grad"></div>
+  <div class="hero-architecture" aria-hidden="true">
+  </div>
+
+  <button class="hero-opening-skip" type="button" aria-label="オープニングをスキップ" hidden>SKIP INTRO</button>
 
   <div class="hero-content">
-    <!-- brand: centered -->
     <div class="hero-brand">
       <div class="hero-brand-line">
         <span class="hero-brand-origin" id="brand-origin" data-split>Shimon × Assist</span>
@@ -984,13 +978,12 @@
       <div class="hero-brand-sub" id="brand-sub" data-split>AI · Web · Operations</div>
     </div>
 
-    <!-- bottom bar -->
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between" style="width:100%;">
       <div class="fade-up" style="transition-delay:.5s">
         <h1 class="hero-headline">バスケで培った実行力を、<br>AIに注ぐ。</h1>
-        <p style="font-size:clamp(0.75rem,1.2vw,0.95rem);font-weight:300;color:rgba(255,255,255,0.55);letter-spacing:0.06em;line-height:1.85;margin-top:0.7rem;max-width:32rem;">元Bリーグ選手のひとり起業家が、中小企業の「AI担当」として伴走します。単発の制作から継続的な改善まで、相談・設計・制作のすべてを同じ人間が担当します。</p>
       </div>
       <div class="fade-up flex flex-col gap-2 flex-shrink-0" style="transition-delay:.6s">
+        <p class="hero-introduction">元Bリーグ選手のひとり起業家が、中小企業の「AI担当」として伴走します。単発の制作から継続的な改善まで、相談・設計・制作のすべてを同じ人間が担当します。</p>
         <div class="flex flex-col sm:flex-row gap-3">
           <a href="#contact" class="btn-primary btn-accent w-full sm:w-auto text-center">無料で相談する</a>
           <a href="#services" class="btn-primary btn-ghost w-full sm:w-auto text-center">サービスを見る</a>
@@ -1022,7 +1015,7 @@
 
 
 <!-- ═══════════ SERVICES ═══════════ -->
-<section id="services" class="px-6 md:px-16 pt-12 pb-10 md:pt-32 md:pb-28" style="border-top:0.5px solid rgba(0,0,0,0.1);">
+<section id="services" class="section-services px-6 md:px-16 pt-12 pb-10 md:pt-32 md:pb-28" style="border-top:0.5px solid rgba(0,0,0,0.1);">
   <div class="max-w-7xl mx-auto">
     <div class="md:flex md:items-end md:justify-between gap-10 mb-10 md:mb-20">
       <div data-reveal>
@@ -1159,7 +1152,7 @@
 </section>
 
 <!-- ═══════════ NUMBERS（実績） ═══════════ -->
-<section class="px-6 md:px-16 py-12 md:py-20" style="background:#0B1120;border-top:0.5px solid rgba(255,255,255,0.06);">
+<section class="section-numbers px-6 md:px-16 py-12 md:py-20" style="background:#0B1120;border-top:0.5px solid rgba(255,255,255,0.06);">
   <div class="max-w-5xl mx-auto">
     <p data-reveal style="font-size:0.6rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:0.75rem;">By the Numbers ・ Works</p>
     <h2 class="sec-title" data-reveal style="color:#fff;text-align:center;margin-bottom:1.5rem;">これまでの実績</h2>
@@ -1233,7 +1226,7 @@
 </section>
 
 <!-- ═══════════ WHY ═══════════ -->
-<section class="why-value-section">
+<section class="section-why why-value-section">
   <div class="why-value-header">
     <p class="sec-label">Why Shisto</p>
     <h2>選ばれる理由</h2>
@@ -1281,7 +1274,7 @@
 </section>
 
 <!-- ═══════════ FLOW ═══════════ -->
-<section class="flow-section">
+<section class="section-flow flow-section">
   <div class="flow-inner">
     <div class="flow-header">
       <p class="sec-label" data-reveal>Flow</p>
@@ -1341,7 +1334,7 @@
 
 
 <!-- ═══════════ ABOUT ═══════════ -->
-<section id="about" class="px-6 md:px-16 pt-14 pb-10 md:pt-44 md:pb-24" style="background:#EEF2FF; border-top:0.5px solid rgba(0,0,0,0.08);">
+<section id="about" class="section-founder px-6 md:px-16 pt-14 pb-10 md:pt-44 md:pb-24" style="background:#EEF2FF; border-top:0.5px solid rgba(0,0,0,0.08);">
   <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-16 items-start">
     <div class="md:col-span-5" data-reveal="from-left">
       <div class="mb-6 md:mb-10 overflow-hidden rounded-lg" style="aspect-ratio:4/5;">
@@ -1400,7 +1393,7 @@
 </section>
 
 <!-- ═══════════ FAQ ═══════════ -->
-<section class="px-6 md:px-16 pt-8 pb-12 md:pt-12 md:pb-20" style="border-top:0.5px solid rgba(0,0,0,0.1);">
+<section class="section-faq px-6 md:px-16 pt-8 pb-12 md:pt-12 md:pb-20" style="border-top:0.5px solid rgba(0,0,0,0.1);">
   <div class="max-w-7xl mx-auto">
     <p class="sec-label mb-4 md:mb-8" data-reveal>FAQ</p>
     <h2 class="sec-title mb-8 md:mb-10" data-reveal>よくあるご質問</h2>
@@ -1469,7 +1462,7 @@
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section id="contact" style="background:#0B1120;position:relative;" class="grain px-6 md:px-16 py-14 md:py-44">
+<section id="contact" style="background:#0B1120;position:relative;" class="section-contact grain px-6 md:px-16 py-14 md:py-44">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-20 items-start">
     <div data-reveal="from-left">
       <p class="sec-label mb-6 md:mb-10" style="color:rgba(255,255,255,0.2);">Contact</p>
@@ -1576,34 +1569,6 @@
 <!-- ═══════════ JS ═══════════ -->
 <script>
 (function(){
-  /* ── HERO VIDEO ── */
-  const heroVideo = document.getElementById('hero-video');
-  if(heroVideo){
-    heroVideo.style.opacity = '0';
-    heroVideo.style.transition = 'opacity 1.2s ease';
-
-    const showVideo = () => {
-      const isMobile = window.innerWidth <= 768;
-      heroVideo.style.opacity = isMobile ? '0.45' : '0.55';
-    };
-    heroVideo.addEventListener('playing', showVideo, { once: true });
-
-    const tryPlay = () => {
-      heroVideo.play().catch(() => {});
-    };
-    const p = heroVideo.play();
-    if(p !== undefined){
-      p.catch(() => {
-        document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
-        document.addEventListener('scroll', tryPlay, { once: true, passive: true });
-      });
-    }
-  }
-
-  /* ── INTRO ── */
-  const intro   = document.getElementById('intro');
-  const skipIntro = sessionStorage.getItem('shisto-visited');
-
   /* ── SPLIT TEXT SETUP ── */
   function splitText(el){
     const text = el.textContent;
@@ -1628,42 +1593,18 @@
     const d = baseDelay || 0;
     setTimeout(() => {
       requestAnimationFrame(() => {
-        revealSplit(document.getElementById('brand-origin'), 200, 40);
-        revealSplit(document.getElementById('brand-name'), 600, 80);
-        revealSplit(document.getElementById('brand-sub'), 1400, 30);
+        revealSplit(document.getElementById('brand-origin'), 0, 18);
+        revealSplit(document.getElementById('brand-name'), 120, 50);
+        revealSplit(document.getElementById('brand-sub'), 360, 12);
         setTimeout(() => {
           document.querySelectorAll('.fade-up').forEach(el => el.classList.add('show'));
-        }, 2000);
+        }, 520);
       });
     }, d);
   }
 
-  if(skipIntro){
-    // リピーター：イントロ即スキップ
-    intro.style.display = 'none';
-    revealHero(100);
-  } else {
-    // 初回：フルアニメーション
-    const rule    = document.getElementById('intro-rule');
-    const logEl   = document.getElementById('intro-logo');
-    const subEl   = document.getElementById('intro-sub');
-    const bar     = document.getElementById('intro-bar');
-
-    requestAnimationFrame(() => { bar.classList.add('run'); });
-
-    setTimeout(() => rule.classList.add('show'), 200);
-    setTimeout(() => logEl.classList.add('show'), 500);
-    setTimeout(() => subEl.classList.add('show'), 950);
-
-    setTimeout(() => {
-      intro.classList.add('fade-out');
-      setTimeout(() => intro.style.display = 'none', 700);
-    }, 2100);
-
-    setTimeout(() => revealHero(0), 2300);
-
-    sessionStorage.setItem('shisto-visited', '1');
-  }
+  /* Loader removed: show the page immediately. */
+  revealHero(0);
 
   /* ── HEADER ── */
   const header = document.getElementById('header');
@@ -1777,5 +1718,10 @@
 })();
 
 </script>
+<script src="scripts/brand-opening.js?v=9" defer></script>
+<script src="scripts/text-decode.js?v=6" defer></script>
+<script src="scripts/home-3d.js?v=24" defer></script>
+<script src="scripts/immersive-sections.js?v=9" defer></script>
+<script src="scripts/section-depth.js?v=16" defer></script>
 </body>
 </html>

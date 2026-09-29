@@ -1,0 +1,141 @@
+/*
+ * Works depth — the works page uses the homepage's single section-depth
+ * renderer. These are the same dark tonal fields as the homepage's non-hero
+ * sequence, with the list and its existing detail drawer kept readable.
+ */
+
+body.works-page {
+  --ink: #fff;
+  --paper: #17191f;
+  --text: #f7f7f8;
+  --text-sub: rgba(247, 247, 248, .82);
+  --dim: rgba(247, 247, 248, .78);
+  --inkmax: #fff;
+  --brand: #9fc4ff;
+  --mark: #ffb088;
+  --rule: rgba(226, 235, 255, .18);
+  background: #17191f;
+  color: var(--text);
+}
+
+/* These opaque fields are the no-WebGL and context-loss fallback. */
+body.works-page .intro {
+  max-width: none;
+  padding: 8.5rem 0 3.6rem;
+  background: #17191f;
+}
+body.works-page .intro-inner {
+  max-width: 46rem;
+  padding: 0 var(--pad);
+}
+body.works-page .list { background: #08090c; }
+body.works-page .notes {
+  display: flow-root;
+  background: #101216;
+}
+body.works-page footer { background: #202b3a; }
+
+body.works-page .bar {
+  background: rgba(8, 9, 12, .96);
+  border-bottom-color: rgba(226, 235, 255, .2);
+}
+body.works-page .bar-brand span,
+body.works-page .bar-cur { color: #fff; }
+body.works-page .bar-sub,
+body.works-page .bar-yr { color: rgba(247, 247, 248, .72); }
+
+body.works-page .intro h1,
+body.works-page .intro .lead,
+body.works-page .intro .facts b,
+body.works-page .grp b,
+body.works-page .d h3,
+body.works-page .d dd strong { color: #fff; }
+body.works-page .intro p,
+body.works-page .intro .facts,
+body.works-page .grp i,
+body.works-page .grp em,
+body.works-page .head,
+body.works-page .d-for,
+body.works-page .d dt,
+body.works-page .d figcaption,
+body.works-page .d .stack,
+body.works-page .notes h2,
+body.works-page .notes li,
+body.works-page footer,
+body.works-page footer a { color: rgba(247, 247, 248, .78); }
+body.works-page .d dd { color: rgba(247, 247, 248, .9); }
+body.works-page footer a:hover,
+body.works-page footer a:focus-visible { color: #fff; border-bottom-color: #fff; }
+
+/* The fixed detail drawer must stay opaque: it is an interaction surface,
+   not a decorative layer, and it cannot let the active row show through. */
+body.works-page .d {
+  background: #17191f;
+  box-shadow: 0 0 0 1.4rem #17191f;
+}
+body.works-page .d figure img,
+body.works-page .d figure video { border-color: rgba(226, 235, 255, .24); }
+body.works-page .d .stack { border-top-color: rgba(226, 235, 255, .2); }
+
+body.works-page .item:hover > .r,
+body.works-page .item:focus-within > .r,
+body.works-page .item.open > .r { color: #fff; }
+body.works-page .r::before,
+body.works-page .r::after { background: #9fc4ff; }
+body.works-page .r:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Once the first frame succeeds, the original shader supplies every section
+   field. Each reading region remains a layer above its fixed canvas. */
+body.works-page.section-depth-ready .intro,
+body.works-page.section-depth-ready .list,
+body.works-page.section-depth-ready .notes,
+body.works-page.section-depth-ready footer {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+/* The fixed detail drawer belongs to the list; keep its interaction surface
+   above later reading regions while the shared canvas is active. */
+body.works-page.section-depth-ready .list { z-index: 2; }
+
+body.works-page > .works-motion-control {
+  position: fixed;
+  z-index: 90;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  min-height: 42px;
+  padding: .58rem .82rem;
+  border: 1px solid rgba(255, 255, 255, .42);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(3, 3, 3, .88);
+  font: 500 .7rem/1.2 'Zen Kaku Gothic New', sans-serif;
+  letter-spacing: .08em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+body.works-page > .works-motion-control:hover { background: #fff; color: #050505; }
+body.works-page > .works-motion-control:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+body.works-page > .works-motion-control:disabled { cursor: default; opacity: .72; }
+
+@media (max-width: 768px) {
+  body.works-page.section-depth-ready .section-depth-canvas { opacity: .9; }
+  body.works-page > .works-motion-control { right: .9rem; bottom: .9rem; }
+}
+
+@media (hover: hover) and (min-width: 1100px) {
+  body.works-page .intro-inner { max-width: calc(var(--listend) + var(--pad)); }
+}
+
+@media (max-width: 700px) {
+  body.works-page .intro { padding-top: 7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.works-page .fade { opacity: 1; transform: none; transition: none; }
+  body.works-page > .works-motion-control { transition: none; }
+}

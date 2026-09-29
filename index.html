@@ -14,12 +14,18 @@
   <meta name="description" content="合同会社Shisto（埼玉）は、中小企業の「AI担当」として伴走するひとり起業家の会社です。AI業務効率化・Web制作・運用支援を、単発のご依頼から継続伴走まで、窓口ひとつで。代表は元Bリーグ選手。相談は無料です。">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZJ4CH0ZM8"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-5ZJ4CH0ZM8');
+    /* The same homepage appears inside work 17; only the top-level visit is counted. */
+    if (window.self === window.top) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-5ZJ4CH0ZM8');
+      const analytics = document.createElement('script');
+      analytics.async = true;
+      analytics.src = 'https://www.googletagmanager.com/gtag/js?id=G-5ZJ4CH0ZM8';
+      document.head.appendChild(analytics);
+    }
   </script>
 
   <!-- Favicon -->

@@ -266,6 +266,27 @@ img, video { max-width: 100%; height: auto; display: block; }
 .d-for{ font-family: var(--disp); font-weight: 300; font-size: 12.5px; letter-spacing: 0.06em; color: var(--text-sub); }
 .d figure{ margin: 1.1rem 0 0; }
 .d figure img, .d figure video{ border: 1px solid var(--rule); }
+/* 17: keep the homepage preview at the same aspect ratio as the former media. */
+.d figure.work-shisto-figure { flex: 0 0 auto; }
+.work-shisto-stage {
+  position: relative;
+  width: min(100%, calc(34vh * 1.6));
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #05070d;
+  border: 1px solid var(--rule);
+}
+.work-shisto-stage iframe {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: block;
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  transform-origin: top left;
+  transform: scale(var(--work-shisto-scale, .35));
+  pointer-events: none;
+}
 /* ══════ 動画（成果物が動いているところ） ══════ */
 /* 動画は静止画とまったく同じ扱いにする。見た目の指定は増やさず、
    写真用の既存3規則にそのまま video を足した（下の SELECTORS）。
@@ -695,13 +716,13 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
     </div>
   </div>
 
-  <div class="item">
+  <div class="item work-shisto-current" id="work-17">
     <div class="r" tabindex="0"><span class="c-n">17</span><span class="c-c">自社</span><span class="c-p">コーポレートサイト</span><span class="c-y">2026-04</span></div>
     <div class="d">
       <span class="d-no">17</span>
       <h3>コーポレートサイト</h3>
       <span class="d-for">自社</span>
-      <figure><video src="videos/works/work-shisto-web.mp4" poster="images/works/work-shisto-web.webp" width="1280" height="800" muted loop playsinline preload="none"></video><figcaption>shisto.jp（公開中）</figcaption></figure>
+      <figure class="work-shisto-figure"><div class="work-shisto-stage"><iframe title="現在のShistoサイトのトップ画面" data-src="index.html" sandbox="allow-same-origin allow-scripts" referrerpolicy="no-referrer" tabindex="-1"></iframe></div><figcaption>現在のshisto.jpをサイトのコードで表示</figcaption></figure>
       <dl>
         <dt>課題</dt><dd>会社を説明する場所が無く、何をしているのかを毎回口頭で伝えていた。</dd>
         <dt>作ったもの</dt><dd>自社サイトです。<strong>日本語フォントを、そのサイトで実際に使う文字だけに絞って配信し、フォントの重さを約3分の1にしました。</strong>新しい漢字が増えたら検知する仕組みも入れています。</dd>
@@ -992,6 +1013,7 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
   }
 })();
 </script>
+<script src="scripts/works-shisto-embed.js?v=1" defer></script>
 <script src="scripts/section-depth.js?v=16" defer></script>
 <script src="scripts/works-depth.js?v=1" defer></script>
 <script src="scripts/text-decode.js?v=6" defer></script>

@@ -429,7 +429,6 @@ void main() {
         const pad = inset + (narrow ? 8 : 12), rowTop = inset + (narrow ? 9 : 11), rowBottom = H - inset - (narrow ? 9 : 11);
         ux.textAlign = 'left'; ux.fillText(narrow ? phase : `SHISTO  //  ${phase}`, pad, rowTop); ux.fillText(tc, pad, rowBottom);
         ux.textAlign = 'right'; ux.fillText(`PARTICLES ${count.toLocaleString('en-US')}`, W - pad, rowTop); ux.fillText(fps ? `${fps} FPS · LIVE` : 'LIVE', W - pad, rowBottom);
-        ux.fillStyle = 'rgba(255,255,255,.14)'; ux.fillRect(W * .3, rowBottom, W * .4, 1); ux.fillStyle = 'rgba(255,255,255,.7)'; ux.fillRect(W * .3, rowBottom, W * .4 * Math.min(1, t / END), 1);
         ux.globalAlpha = 1; ux.textAlign = 'left';
       }
     };

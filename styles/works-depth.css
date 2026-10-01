@@ -1,12 +1,12 @@
 /*
  * Works depth — the works page uses the homepage's single section-depth
- * renderer. These are the same dark tonal fields as the homepage's non-hero
- * sequence, with the list and its existing detail drawer kept readable.
+ * renderer. The introduction, notes, and footer use charcoal; the list uses
+ * the same paper field and metal material as the homepage.
  */
 
 body.works-page {
   --ink: #fff;
-  --paper: #17191f;
+  --paper: #1b191a;
   --text: #f7f7f8;
   --text-sub: rgba(247, 247, 248, .82);
   --dim: rgba(247, 247, 248, .78);
@@ -14,7 +14,7 @@ body.works-page {
   --brand: #9fc4ff;
   --mark: #ffb088;
   --rule: rgba(226, 235, 255, .18);
-  background: #17191f;
+  background: #1b191a;
   color: var(--text);
 }
 
@@ -22,21 +22,33 @@ body.works-page {
 body.works-page .intro {
   max-width: none;
   padding: 8.5rem 0 3.6rem;
-  background: #17191f;
+  background: #1b191a;
 }
 body.works-page .intro-inner {
   max-width: 46rem;
   padding: 0 var(--pad);
 }
-body.works-page .list { background: #08090c; }
+body.works-page .list {
+  --ink: #231f20;
+  --paper: #f1f0eb;
+  --text: #231f20;
+  --text-sub: #393536;
+  --dim: #393536;
+  --inkmax: #231f20;
+  --brand: #393536;
+  --mark: #393536;
+  --rule: #b6b1af;
+  background: #f1f0eb;
+  color: #231f20;
+}
 body.works-page .notes {
   display: flow-root;
-  background: #101216;
+  background: #1b191a;
 }
-body.works-page footer { background: #202b3a; }
+body.works-page footer { background: #1b191a; }
 
 body.works-page .bar {
-  background: rgba(8, 9, 12, .96);
+  background: rgba(27, 25, 26, .96);
   border-bottom-color: rgba(226, 235, 255, .2);
 }
 body.works-page .bar-brand span,
@@ -69,13 +81,13 @@ body.works-page footer a:focus-visible { color: #fff; border-bottom-color: #fff;
 
 /* The fixed detail drawer must stay opaque: it is an interaction surface,
    not a decorative layer, and it cannot let the active row show through. */
-body.works-page .d {
-  background: #17191f;
-  box-shadow: 0 0 0 1.4rem #17191f;
+body.works-page .list .d {
+  background: #f1f0eb;
+  box-shadow: 0 0 0 1.4rem #f1f0eb;
 }
-body.works-page .d figure img,
-body.works-page .d figure video { border-color: rgba(226, 235, 255, .24); }
-body.works-page .d .stack { border-top-color: rgba(226, 235, 255, .2); }
+body.works-page .list .d figure img,
+body.works-page .list .d figure video { border-color: #b6b1af; }
+body.works-page .list .d .stack { border-top-color: #b6b1af; }
 
 body.works-page .item:hover > .r,
 body.works-page .item:focus-within > .r,
@@ -86,6 +98,17 @@ body.works-page .r:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }
+
+/* List copy and the opaque detail drawer remain legible over the paper shader. */
+body.works-page .list :is(.grp b, .d h3, .d dd strong) { color: #231f20; }
+body.works-page .list :is(.grp i, .grp em, .head, .d-for, .d dt, .d figcaption, .d .stack, .d dd) { color: #393536; }
+body.works-page .list :is(.grp em, .d-for) { font-weight: 500; }
+body.works-page .list .r { color: #393536; --w: 500; --wm: 500; }
+body.works-page .list:hover .item:not(:hover):focus-within > .r { --w: 500; --wm: 500; }
+body.works-page .list .item:is(:hover, :focus-within, .open) > .r { color: #231f20; }
+body.works-page .list .r::before,
+body.works-page .list .r::after { background: #393536; }
+body.works-page .list .r:focus-visible { outline-color: #231f20; }
 
 /* Once the first frame succeeds, the original shader supplies every section
    field. Each reading region remains a layer above its fixed canvas. */
@@ -111,7 +134,7 @@ body.works-page > .works-motion-control {
   border: 1px solid rgba(255, 255, 255, .42);
   border-radius: 999px;
   color: #fff;
-  background: rgba(3, 3, 3, .88);
+  background: rgba(27, 25, 26, .92);
   font: 500 .7rem/1.2 'Zen Kaku Gothic New', sans-serif;
   letter-spacing: .08em;
   cursor: pointer;

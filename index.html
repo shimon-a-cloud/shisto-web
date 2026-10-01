@@ -3,11 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* The opening gate must apply before the first paint, even if CSS loads late. */
+    html.brand-opening-preflight .hero :is(.hero-architecture, .hero-content) { visibility: hidden !important; }
+  </style>
   <script>
-    /* Hide the later hero sculpture before the deferred opening script starts. */
+    /* Keep the hero behind the opening until its first frame is ready. */
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash &&
         performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
       document.documentElement.classList.add('brand-opening-preflight');
+      window.__brandOpeningPreflightTimer = window.setTimeout(() => {
+        /* A missing or failed deferred script must never leave the hero hidden. */
+        window.__brandOpeningPreflightExpired = true;
+        document.documentElement.classList.remove('brand-opening-preflight');
+        document.body?.classList.remove('brand-opening-pending');
+      }, 5000);
     }
   </script>
   <title>合同会社Shisto｜埼玉のAI活用・Web制作｜中小企業の「AI担当」として継続伴走</title>
@@ -905,13 +915,13 @@
   <!-- 既存スタイルを明示的に上書きする、トップページ専用の最終レイヤー -->
   <link rel="stylesheet" href="styles/home-2026.css">
   <link rel="stylesheet" href="styles/liquid-glass.css?v=8">
-  <link rel="stylesheet" href="styles/hero-opening.css?v=10">
+  <link rel="stylesheet" href="styles/hero-opening.css?v=11">
   <link rel="stylesheet" href="styles/text-decode.css?v=5">
   <link rel="stylesheet" href="styles/immersive-sections.css?v=9">
   <link rel="stylesheet" href="styles/dark-contrast.css?v=12">
   <link rel="stylesheet" href="styles/section-depth.css?v=14">
   <link rel="stylesheet" href="styles/hero-editorial.css?v=4">
-  <link rel="stylesheet" href="styles/paper-sections.css?v=9">
+  <link rel="stylesheet" href="styles/paper-sections.css?v=10">
   <noscript><style>[data-reveal],.fade-up,.split-char{opacity:1!important;transform:none!important}.svc-detail{max-height:none!important;padding-bottom:1.6rem!important}</style></noscript>
 </head>
 <body data-section-depth-charcoal="true">
@@ -1738,7 +1748,7 @@
 })();
 
 </script>
-<script src="scripts/brand-opening.js?v=11" defer></script>
+<script src="scripts/brand-opening.js?v=12" defer></script>
 <script src="scripts/text-decode.js?v=6" defer></script>
 <script src="scripts/hero-ribbons.js?v=5" defer></script>
 <script src="scripts/immersive-sections.js?v=9" defer></script>

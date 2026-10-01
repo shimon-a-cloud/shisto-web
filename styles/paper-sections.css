@@ -2,10 +2,10 @@
 body .paper-section.paper-section,
 body #contact.paper-section,
 body.section-depth-ready .paper-section {
-  --immersive-muted: #60595a;
+  --immersive-muted: #393536;
   --immersive-text: #231f20;
-  --immersive-faint: #70696a;
-  --immersive-blue: #60595a;
+  --immersive-faint: #4b4647;
+  --immersive-blue: #393536;
   --immersive-line: #b6b1af;
   --immersive-soft-line: #d4cfcb;
   background: #f1f0eb !important;
@@ -15,8 +15,15 @@ body.section-depth-ready .paper-section {
 body .paper-section.paper-section :is(h2,h3,strong,span,td,div[style*="color:"]) {
   color: #231f20 !important;
 }
-body .paper-section.paper-section :is(p,td:first-child,.tag) {
-  color: #60595a !important;
+/* The paper sections use Zen Kaku's existing 500 weight for small copy. The
+   site's bundled Zen faces are 300 and 500, so a 400 request is ambiguous. */
+body .paper-section.paper-section :is(p,li,.svc-item,.tag,td:first-child) {
+  color: #393536 !important;
+  font-weight: 500 !important;
+}
+body .paper-section.paper-section td:not(:first-child),
+body .paper-section.paper-section :is(h3,.arrow-link,label) {
+  font-weight: 500 !important;
 }
 body .paper-section.paper-section [style*="border"],
 body .paper-section.paper-section :is(table,tr,.tag) { border-color: #b6b1af !important; }

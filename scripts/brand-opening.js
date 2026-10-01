@@ -7,12 +7,15 @@
   'use strict';
   const hero = document.querySelector('.hero');
   const skip = hero?.querySelector('.hero-opening-skip');
-  const releasePreflight = () => document.documentElement.classList.remove('brand-opening-preflight');
+  const releasePreflight = () => {
+    window.clearTimeout(window.__brandOpeningPreflightTimer);
+    document.documentElement.classList.remove('brand-opening-preflight');
+  };
   if (!hero || !skip) { releasePreflight(); return; }
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const navigation = performance.getEntriesByType?.('navigation')[0];
-  const bypass = () => reduced.matches || Boolean(location.hash) || scrollY > 2 || navigation?.type === 'back_forward';
+  const bypass = () => window.__brandOpeningPreflightExpired || reduced.matches || Boolean(location.hash) || scrollY > 2 || navigation?.type === 'back_forward';
   if (bypass()) { releasePreflight(); return; }
   /* Tells hero-decode.js to hold the hero copy until the film hands over. */
   document.body.classList.add('brand-opening-pending');
@@ -478,6 +481,7 @@ void main() {
     gl.viewport(0, 0, canvas.width, canvas.height); draw(0);
     if (gl.getError() !== gl.NO_ERROR) { destroy(); return; }
     overlay = document.createElement('div'); overlay.className = 'brand-opening';
+    window.clearTimeout(window.__brandOpeningPreflightTimer);
     overlay.append(canvas, ui); document.body.append(overlay); overlay.append(skip); skip.hidden = false;
     document.body.classList.add('brand-opening-active'); resume();
 

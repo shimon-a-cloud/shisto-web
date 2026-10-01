@@ -908,11 +908,13 @@
   <link rel="stylesheet" href="styles/hero-opening.css?v=10">
   <link rel="stylesheet" href="styles/text-decode.css?v=5">
   <link rel="stylesheet" href="styles/immersive-sections.css?v=9">
-  <link rel="stylesheet" href="styles/dark-contrast.css?v=11">
+  <link rel="stylesheet" href="styles/dark-contrast.css?v=12">
   <link rel="stylesheet" href="styles/section-depth.css?v=14">
+  <link rel="stylesheet" href="styles/hero-editorial.css?v=4">
+  <link rel="stylesheet" href="styles/paper-sections.css?v=9">
   <noscript><style>[data-reveal],.fade-up,.split-char{opacity:1!important;transform:none!important}.svc-detail{max-height:none!important;padding-bottom:1.6rem!important}</style></noscript>
 </head>
-<body>
+<body data-section-depth-charcoal="true">
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header id="header">
@@ -974,7 +976,7 @@
 </div>
 
 <!-- ═══════════ HERO ═══════════ -->
-<section class="hero grain">
+<section class="hero grain ribbon-hero">
   <div class="hero-architecture" aria-hidden="true">
   </div>
 
@@ -985,11 +987,13 @@
       <div class="hero-brand-line">
         <span class="hero-brand-origin" id="brand-origin" data-split>Shimon × Assist</span>
       </div>
-      <div class="hero-brand-line" style="margin-top:0.5rem;">
+      <div class="hero-brand-line hero-brand-wordmark" style="margin-top:0.5rem;">
         <span class="hero-brand-name" id="brand-name" data-split>Shisto</span>
       </div>
       <div class="hero-brand-sub" id="brand-sub" data-split>AI · Web · Operations</div>
     </div>
+
+    <div class="hero-display" aria-hidden="true">ASSIST<span class="motion-line"><em>in</em> MOTION.</span></div>
 
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between" style="width:100%;">
       <div class="fade-up" style="transition-delay:.5s">
@@ -1028,7 +1032,7 @@
 
 
 <!-- ═══════════ SERVICES ═══════════ -->
-<section id="services" class="section-services px-6 md:px-16 pt-12 pb-10 md:pt-32 md:pb-28" style="border-top:0.5px solid rgba(0,0,0,0.1);">
+<section id="services" class="section-services paper-section px-6 md:px-16 pt-12 pb-10 md:pt-32 md:pb-28" style="border-top:0.5px solid rgba(0,0,0,0.1);">
   <div class="max-w-7xl mx-auto">
     <div class="md:flex md:items-end md:justify-between gap-10 mb-10 md:mb-20">
       <div data-reveal>
@@ -1167,7 +1171,7 @@
 <!-- ═══════════ NUMBERS（実績） ═══════════ -->
 <section class="section-numbers px-6 md:px-16 py-12 md:py-20" style="background:#0B1120;border-top:0.5px solid rgba(255,255,255,0.06);">
   <div class="max-w-5xl mx-auto">
-    <p data-reveal style="font-size:0.6rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:0.75rem;">By the Numbers ・ Works</p>
+    <p class="section-eyebrow-line section-eyebrow-centered" data-reveal style="font-size:0.6rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:0.75rem;">By the Numbers ・ Works</p>
     <h2 class="sec-title" data-reveal style="color:#fff;text-align:center;margin-bottom:1.5rem;">これまでの実績</h2>
     <p data-reveal style="text-align:center;color:rgba(255,255,255,0.7);font-size:clamp(0.9rem,1.4vw,1rem);font-weight:300;letter-spacing:0.04em;line-height:1.95;max-width:42rem;margin:0 auto 2.75rem;">企業のAI活用を月額で継続支援しながら、Shisto自身の業務もAIで毎日動かしています。机上の知識ではなく、自分で作り、動かし続けているシステムが土台です。</p>
     <div class="grid grid-cols-3 gap-4 md:gap-10 text-center">
@@ -1191,7 +1195,7 @@
 
     <!-- 代表的な事例 -->
     <div data-reveal style="display:flex;align-items:baseline;gap:0.8rem;margin-bottom:22px;">
-      <span style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#93c5fd;letter-spacing:0.1em;">Selected Work</span>
+      <span class="section-eyebrow-line" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#93c5fd;letter-spacing:0.1em;">Selected Work</span>
       <span style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:0.95rem;font-weight:500;color:#fff;letter-spacing:0.08em;">代表的な事例</span>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1239,7 +1243,7 @@
 </section>
 
 <!-- ═══════════ WHY ═══════════ -->
-<section class="section-why why-value-section">
+<section class="section-why paper-section why-value-section">
   <div class="why-value-header">
     <p class="sec-label">Why Shisto</p>
     <h2>選ばれる理由</h2>
@@ -1347,7 +1351,10 @@
 
 
 <!-- ═══════════ ABOUT ═══════════ -->
-<section id="about" class="section-founder px-6 md:px-16 pt-14 pb-10 md:pt-44 md:pb-24" style="background:#EEF2FF; border-top:0.5px solid rgba(0,0,0,0.08);">
+<section id="about" class="section-founder paper-section px-6 md:px-16 pt-14 pb-10 md:pt-44 md:pb-24" style="background:#EEF2FF; border-top:0.5px solid rgba(0,0,0,0.08);">
+  <div class="founder-intro max-w-7xl mx-auto">
+    <p class="founder-eyebrow" data-reveal>The person behind Shisto</p>
+  </div>
   <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-16 items-start">
     <div class="md:col-span-5" data-reveal="from-left">
       <div class="mb-6 md:mb-10 overflow-hidden rounded-lg" style="aspect-ratio:4/5;">
@@ -1475,7 +1482,7 @@
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section id="contact" style="background:#0B1120;position:relative;" class="section-contact grain px-6 md:px-16 py-14 md:py-44">
+<section id="contact" style="background:#0B1120;position:relative;" class="section-contact paper-section grain px-6 md:px-16 py-14 md:py-44">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-20 items-start">
     <div data-reveal="from-left">
       <p class="sec-label mb-6 md:mb-10" style="color:rgba(255,255,255,0.2);">Contact</p>
@@ -1733,8 +1740,8 @@
 </script>
 <script src="scripts/brand-opening.js?v=11" defer></script>
 <script src="scripts/text-decode.js?v=6" defer></script>
-<script src="scripts/home-3d.js?v=24" defer></script>
+<script src="scripts/hero-ribbons.js?v=4" defer></script>
 <script src="scripts/immersive-sections.js?v=9" defer></script>
-<script src="scripts/section-depth.js?v=16" defer></script>
+<script src="scripts/section-depth.js?v=19" defer></script>
 </body>
 </html>

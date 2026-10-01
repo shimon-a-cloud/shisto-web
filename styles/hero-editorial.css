@@ -1,0 +1,203 @@
+/* Adopt the selected preview's hero typography using the same local fonts.
+   Keep the existing hero children and IDs for the opening/decode handover. */
+@font-face {
+  font-family: 'Shisto Hero Zen';
+  src: url('../fonts/zenkaku-500.woff2') format('woff2');
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+.hero {
+  min-height: 0;
+  background: #1b191a;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero .hero-content {
+  max-width: 1440px;
+  min-height: inherit;
+  padding: 144px clamp(24px, 5%, 80px) 52px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.hero .hero-brand {
+  flex: none;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  text-align: left;
+}
+
+.hero .hero-brand-origin,
+.hero .hero-brand-sub {
+  color: #bebbb7;
+  font: 400 11px/14px 'Zen Kaku Gothic New', sans-serif;
+  letter-spacing: .14em;
+}
+
+.hero .hero-brand-line:first-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero .hero-brand-line:first-child::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  color: #bebbb7;
+}
+
+/* The header and opening already identify Shisto. Retain this ID for decode. */
+.hero .hero-brand-wordmark {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero .hero-display {
+  flex: none;
+  margin: 38px 0 0 -10px;
+  font-family: 'Shisto Hero Zen', sans-serif;
+  font-weight: 500;
+  font-size: 190px;
+  line-height: .84;
+  letter-spacing: -.08em;
+  color: #fafaf7;
+  pointer-events: none;
+}
+
+.hero .hero-display .motion-line {
+  display: block;
+  margin-top: 5px;
+  font-size: 140px;
+  letter-spacing: -.09em;
+  white-space: nowrap;
+}
+
+.hero .hero-display em {
+  padding: 0 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 176px;
+  letter-spacing: -.06em;
+}
+
+.hero .hero-content > .flex {
+  align-items: flex-start;
+  gap: 20px;
+  max-width: none;
+  margin: 0;
+  padding-top: 0;
+}
+
+.hero .hero-content > .flex > :first-child {
+  max-width: 740px;
+}
+
+.hero .hero-headline {
+  font-family: 'Shisto Hero Zen', sans-serif;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 1.5;
+  letter-spacing: -.02em;
+  color: #fafaf7;
+  text-shadow: 0 2px 25px #000;
+}
+
+.hero .hero-content > .flex > :last-child {
+  align-self: flex-start;
+  align-items: flex-start;
+  width: min(100%, 485px);
+}
+
+.hero .hero-introduction {
+  margin: 0 0 7px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #e0dcda;
+}
+
+.hero .hero-content > .flex > :last-child > p:last-child {
+  text-align: left !important;
+}
+
+/* Move the existing liquid glass as one canvas; its renderer stays unchanged. */
+.hero .hero-architecture {
+  background: #1b191a;
+  transform: translate(25%, -3%);
+}
+
+#header:not(.scrolled) { background: #1b191a; }
+.hero + .marquee-wrap { background: #1b191a; }
+
+@media (min-width: 1650px) {
+  .hero { min-height: 0; }
+  .hero .hero-display { font-size: 226px; }
+  .hero .hero-display .motion-line { font-size: 169px; }
+  .hero .hero-display em { font-size: 207px; }
+  .hero .hero-headline { font-size: 57px; }
+}
+
+@media (max-width: 1100px) {
+  .hero { min-height: 0; }
+  .hero .hero-display { font-size: 154px; }
+  .hero .hero-display .motion-line { font-size: 114px; }
+  .hero .hero-display em { font-size: 147px; }
+  .hero .hero-headline { font-size: 41px; }
+}
+
+@media (max-width: 767px) {
+  .hero { min-height: 800px; }
+  .hero .hero-content { padding: 113px 24px 55px; }
+  .hero .hero-brand { gap: 0; }
+  .hero .hero-brand-sub { display: none; }
+  .hero .hero-display {
+    margin-top: 31px;
+    margin-left: -3px;
+    font-size: 89px;
+    line-height: .87;
+    letter-spacing: -.075em;
+  }
+  .hero .hero-display .motion-line {
+    margin-top: 9px;
+    font-size: 62px;
+    letter-spacing: -.09em;
+  }
+  .hero .hero-display em { font-size: 81px; padding: 0 4px; }
+  .hero .hero-content > .flex { gap: 16px; padding-top: 100px; margin: auto 0 0; }
+  .hero .hero-content > .flex > :first-child { max-width: none; }
+  .hero .hero-headline {
+    font-size: 29px;
+    line-height: 1.65;
+    font-weight: 400;
+    letter-spacing: -.025em;
+  }
+  .hero .hero-introduction { max-width: 330px; font-size: 13px; }
+  .hero .hero-content > .flex > :last-child > div { justify-content: flex-start; }
+  .hero .hero-architecture { transform: translate(0, -2%) scale(.45); }
+}
+
+@media (max-width: 360px) {
+  .hero .hero-content { padding-inline: 20px; }
+  .hero .hero-display { font-size: 75px; }
+  .hero .hero-display .motion-line { font-size: 53px; }
+  .hero .hero-display em { font-size: 69px; }
+  .hero .hero-headline { font-size: 26px; }
+}
+
+/* Original ribbon preview: full viewport composition, clipped to the hero. */
+.hero.ribbon-hero .hero-architecture { transform: none; }
+.ribbon-canvas { position: absolute; top: 0; left: 0; display: block; width: 100vw; height: 100vh; pointer-events: none; }

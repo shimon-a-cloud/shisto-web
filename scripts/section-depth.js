@@ -69,6 +69,8 @@
       uniform float uTime;
       uniform float uProgress;
       uniform float uStyle;
+      uniform float uPaper;
+      const bool uniformCharcoal = ${body.dataset.sectionDepthCharcoal === 'true' ? 'true' : 'false'};
 
       #define FAR 16.0
       /* Keep the surface test below a rendered pixel without materially
@@ -138,6 +140,8 @@
       }
 
       vec3 sectionBase() {
+        if (uPaper > 0.5) return vec3(241., 240., 235.) / 255.;
+        if (uniformCharcoal) return vec3(27., 25., 26.) / 255.;
         if (uStyle < 0.5) return vec3(0.090, 0.098, 0.122); /* #17191f */
         if (uStyle < 1.5) return vec3(0.031, 0.035, 0.047); /* #08090c */
         if (uStyle < 2.5) return vec3(0.125, 0.149, 0.188); /* #202630 */
@@ -168,6 +172,20 @@
         return colour;
       }
 
+      vec3 spectrum(float t) { return .5+.5*cos(6.28318*(vec3(0.,.32,.64)+t)); }
+      vec3 heroMetal(vec3 r, float facing, vec3 point) {
+        vec2 surfaceUv=vec2(point.x*.2+.5,point.y*.2+.5);
+        float f=pow(1.-facing,2.5);float band=pow(max(0.,cos(r.y*5.1+r.x*2.4+.7)),24.);float broad=pow(max(0.,cos(r.y*2.6-r.x*.8)),8.);float rim=pow(1.-facing,4.);vec3 ir=spectrum(r.y*.31+r.x*.22+surfaceUv.y*.18+uTime*.014);ir.g*=.69;ir=mix(vec3(.32,.43,.46),ir,.68);vec3 col=vec3(.045,.042,.046)+vec3(.24,.25,.25)*broad;col+=vec3(.91,.91,.87)*(band*.80);col+=ir*(band*.31+f*.10);float stripe=pow(max(0.,cos(surfaceUv.x*6.28318)),12.);col+=vec3(.065,.075,.072)*stripe*broad;col+=vec3(.42,.55,.57)*rim*.10;float goldLight=max(0.,cos(r.x*3.1+r.y*1.7-.65));
+float silverLight=max(0.,cos(r.y*3.6-r.x*2.1+1.2));
+vec3 gold=vec3(1.,.69,.27);
+vec3 silver=vec3(.82,.90,1.);
+col+=gold*(pow(goldLight,7.)*.28+pow(goldLight,65.)*.95);
+col+=silver*(pow(silverLight,9.)*.20+pow(silverLight,80.)*1.05);
+col+=mix(gold,silver,smoothstep(-.3,.4,r.x))*rim*.14;
+col=pow(col,vec3(.94));
+        return col;
+      }
+
       float hash21(vec2 p) {
         p = fract(p * vec2(123.34, 456.21));
         p += dot(p, p + 45.32);
@@ -185,6 +203,8 @@
         float upperLight = smoothstep(-0.72, 0.82, uv.y);
         vec3 colour = base * (0.83 + 0.15 * upperLight);
         colour += vec3(0.018, 0.045, 0.105) * sideAura * 0.42;
+
+        if (uniformCharcoal) colour = base;
 
         /* Pulling back on portrait screens keeps the sculpture visibly large at
            both margins without letting it cross the central reading column. */
@@ -230,6 +250,7 @@
           material += vec3(0.32, 0.58, 1.00) * edgeLight * 0.86;
           material += vec3(1.00, 0.94, 0.90) * specular * 1.82;
           material = 1.0 - exp(-material * 1.13);
+          if (uniformCharcoal) material = heroMetal(reflected, facing, point);
 
           /* The polished material exists only at the outer perimeter. Forms may
              continue through world space, but never wash through the reading
@@ -243,11 +264,15 @@
         /* A broad, non-graphic exposure mask protects real headings, details,
            and fields. It does not erase the high-impact edge silhouettes. */
         float readingGuard = 1.0 - smoothstep(0.26, 0.72, screenX);
-        colour *= 1.0 - readingGuard * 0.42;
+        if (uniformCharcoal) colour = base + (colour - base) * (1.0 - readingGuard * 0.42);
+        else colour *= 1.0 - readingGuard * 0.42;
 
         float vignette = 1.0 - smoothstep(0.26, 1.35, length(uv * vec2(0.66, 0.82)));
-        colour *= 0.88 + 0.12 * vignette;
-        colour += (hash21(frag) - 0.5) / 255.0;
+        if (uniformCharcoal) colour = base + (colour - base) * (0.88 + 0.12 * vignette);
+        else {
+          colour *= 0.88 + 0.12 * vignette;
+          colour += (hash21(frag) - 0.5) / 255.0;
+        }
         gl_FragColor = vec4(colour, 1.0);
       }
     `;
@@ -321,7 +346,8 @@
         resolution: gl.getUniformLocation(program, 'uResolution'),
         time: gl.getUniformLocation(program, 'uTime'),
         progress: gl.getUniformLocation(program, 'uProgress'),
-        style: gl.getUniformLocation(program, 'uStyle')
+        style: gl.getUniformLocation(program, 'uStyle'),
+        paper: gl.getUniformLocation(program, 'uPaper')
       };
       gl.disable(gl.DEPTH_TEST);
       gl.disable(gl.BLEND);
@@ -383,6 +409,7 @@
 
         gl.scissor(x, y, width, height);
         gl.uniform1f(locations.style, section.style);
+        gl.uniform1f(locations.paper, section.element.classList.contains('paper-section') ? 1 : 0);
         gl.uniform1f(locations.progress, globalProgress);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         draws += 1;

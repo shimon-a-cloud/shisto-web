@@ -6,18 +6,19 @@
   --immersive-soft-line: rgba(226,235,255,.15);
 }
 
-/* Keep the hero, white typography, and transparent copy treatment from V9. */
-.section-services { background: #17191f !important; }
+/* Section fields share the selected hero charcoal. */
+:root { --immersive-black: #1b191a; --immersive-deep: #1b191a; }
+.section-services,
 .section-numbers,
-.section-services + .section-numbers { background: #08090c !important; }
-.section-why { background: #202630 !important; }
-.section-flow { background: #101216 !important; }
-.section-founder { background: #231f20 !important; }
-.section-faq { background: #101216 !important; }
-#contact.section-contact { background: #202b3a !important; }
+.section-services + .section-numbers,
+.section-why,
+.section-flow,
+.section-founder,
+.section-faq,
+#contact.section-contact,
 .photo-marquee,
-.photo-marquee + .mobile-hide { background: #17191f !important; }
-footer { background: #08090c !important; }
+.photo-marquee + .mobile-hide,
+footer { background: #1b191a !important; }
 
 /* Raised surfaces catch a little more light without washing out the dark base. */
 .section-services .svc-row:hover,

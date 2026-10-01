@@ -1,0 +1,83 @@
+/* Adopt the renewal preview's paper / charcoal contrast. */
+body .paper-section.paper-section,
+body #contact.paper-section,
+body.section-depth-ready .paper-section {
+  --immersive-muted: #60595a;
+  --immersive-text: #231f20;
+  --immersive-faint: #70696a;
+  --immersive-blue: #60595a;
+  --immersive-line: #b6b1af;
+  --immersive-soft-line: #d4cfcb;
+  background: #f1f0eb !important;
+  color: #231f20 !important;
+  border-color: #b6b1af !important;
+}
+body .paper-section.paper-section :is(h2,h3,strong,span,td,div[style*="color:"]) {
+  color: #231f20 !important;
+}
+body .paper-section.paper-section :is(p,td:first-child,.tag) {
+  color: #60595a !important;
+}
+body .paper-section.paper-section [style*="border"],
+body .paper-section.paper-section :is(table,tr,.tag) { border-color: #b6b1af !important; }
+body .paper-section.paper-section > div > div[style*="height:1px"] { background: #b6b1af !important; }
+body .paper-section.paper-section a { color: #231f20 !important; border-color: #b6b1af !important; }
+body .paper-section.paper-section a:hover { color: #231f20 !important; background: #dedbd4 !important; }
+body .paper-section.paper-section a:focus-visible { outline: 2px solid #231f20; outline-offset: 5px; }
+body .paper-section.paper-section > div > .grid.grid-cols-3 { background: transparent; border-color: #b6b1af; }
+body .paper-section.paper-section .work-card {
+  background: #fafaf7 !important;
+  border-color: #b6b1af !important;
+  box-shadow: none;
+}
+body .paper-section.paper-section .work-card:hover { background: #e9e6df !important; border-color: #60595a !important; }
+/* Preserve the cursor-following light, with enough contrast on paper. */
+body .paper-section.paper-section .work-card::before {
+  opacity: 1;
+  background: radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), #fff 0%, rgba(255,255,255,.85) 12%, transparent 42%);
+}
+body .paper-section.paper-section .work-card > * { position: relative; z-index: 1; }
+body .paper-section.paper-section .rounded-lg { background: #dedbd4 !important; border-color: #b6b1af !important; }
+body .paper-section.paper-section .rounded-lg::before { border-color: #b6b1af; }
+body .paper-section.paper-section .tag { background: transparent; }
+
+/* The shared animated canvas supplies the paper field after its first frame. */
+body.section-depth-ready .paper-section.paper-section,
+body.section-depth-ready #contact.paper-section { background: transparent !important; }
+
+body .paper-section.paper-section label { color: #231f20 !important; }
+body .paper-section.paper-section form { background: rgba(250,250,247,.9); border-color: #b6b1af; }
+body .paper-section.paper-section :is(input,select,textarea) { border-color: #b6b1af !important; }
+body .paper-section.paper-section .btn-accent { background: #231f20 !important; color: #fafaf7 !important; border-color: #231f20 !important; }
+body .paper-section.paper-section .btn-accent:hover { background: #454041 !important; }
+body .paper-section.paper-section .svc-row:hover,
+body .paper-section.paper-section .svc-row.active,
+body .paper-section.paper-section .svc-detail.open { background: rgba(35,31,32,.06) !important; }
+
+.section-founder .founder-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+.section-founder .founder-eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+.section-founder .founder-intro { margin-bottom: 40px; }
+
+/* One consistent lead-in rule for section labels on both light and dark. */
+body section :is(.sec-label, .section-eyebrow-line, .founder-eyebrow):is(p,span,.founder-eyebrow) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+body section :is(.sec-label, .section-eyebrow-line, .founder-eyebrow):is(p,span,.founder-eyebrow)::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  flex: 0 0 28px;
+  background: currentColor;
+  color: inherit;
+}
+body section .section-eyebrow-centered { justify-content: center; }

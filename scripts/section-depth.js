@@ -54,8 +54,12 @@
     let lost = false;
     let ready = false;
     let needsDraw = true;
+    let hasDrawnContent = false;
+    let needsResize = false;
     let pixelScaleX = 1;
     let pixelScaleY = 1;
+    let viewportWidth = 1;
+    let viewportHeight = 1;
 
     const vertexSource = `
       attribute vec2 aPosition;
@@ -288,6 +292,7 @@ col=pow(col,vec3(.94));
 
     const fail = () => {
       ready = false;
+      hasDrawnContent = false;
       body.classList.remove('section-depth-ready');
       canvas.style.visibility = 'hidden';
       if (frame) cancelAnimationFrame(frame);
@@ -355,24 +360,32 @@ col=pow(col,vec3(.94));
     };
 
     const resize = () => {
-      const width = Math.max(window.innerWidth, 1);
-      const height = Math.max(window.innerHeight, 1);
-      const longEdgeLimit = width <= 768 ? 1000 : 1440;
-      const scale = Math.min(window.devicePixelRatio || 1, 1.25, longEdgeLimit / Math.max(width, height));
+      /* CSS 100vh stays stable while a mobile browser bar opens and closes.
+         Use the canvas box so that chrome-only resize events do not repeatedly
+         allocate a new WebGL drawing buffer. */
+      const width = Math.max(canvas.clientWidth, 1);
+      const height = Math.max(canvas.clientHeight, 1);
+      const mobile = width <= 768;
+      const longEdgeLimit = mobile ? 700 : 1440;
+      const scale = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.25, longEdgeLimit / Math.max(width, height));
       const nextWidth = Math.max(1, Math.round(width * scale));
       const nextHeight = Math.max(1, Math.round(height * scale));
       if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
         canvas.width = nextWidth;
         canvas.height = nextHeight;
       }
+      viewportWidth = width;
+      viewportHeight = height;
       pixelScaleX = canvas.width / width;
       pixelScaleY = canvas.height / height;
-      needsDraw = true;
     };
 
     const draw = () => {
       if (!gl || !program || lost) return false;
-      resize();
+      if (needsResize) {
+        resize();
+        needsResize = false;
+      }
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.scissor(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0);
@@ -392,17 +405,17 @@ col=pow(col,vec3(.94));
         if (!section.visible) return;
         const rect = section.element.getBoundingClientRect();
         const left = Math.max(0, rect.left);
-        const right = Math.min(window.innerWidth, rect.right);
+        const right = Math.min(viewportWidth, rect.right);
         const top = Math.max(0, rect.top);
-        const bottom = Math.min(window.innerHeight, rect.bottom);
+        const bottom = Math.min(viewportHeight, window.innerHeight, rect.bottom);
         if (right <= left || bottom <= top) return;
 
         /* Rounding both sides of an adjacent boundary to the same canvas pixel
            prevents a one-pixel overlap or gap between scissored sections. */
         const x = Math.max(0, Math.round(left * pixelScaleX));
-        const y = Math.max(0, Math.round((window.innerHeight - bottom) * pixelScaleY));
+        const y = Math.max(0, Math.round((viewportHeight - bottom) * pixelScaleY));
         const rightEdge = Math.min(canvas.width, Math.round(right * pixelScaleX));
-        const topEdge = Math.min(canvas.height, Math.round((window.innerHeight - top) * pixelScaleY));
+        const topEdge = Math.min(canvas.height, Math.round((viewportHeight - top) * pixelScaleY));
         const width = rightEdge - x;
         const height = topEdge - y;
         if (width <= 0 || height <= 0) return;
@@ -415,7 +428,10 @@ col=pow(col,vec3(.94));
         draws += 1;
       });
       needsDraw = false;
-      const succeeded = draws > 0 && gl.getError() === gl.NO_ERROR;
+      hasDrawnContent = draws > 0;
+      /* A synchronous GPU status query on every animation frame can stall the
+         pipeline. Check activation and context restoration only. */
+      const succeeded = draws > 0 && (ready || gl.getError() === gl.NO_ERROR);
       /* Activation belongs to the successful draw path so a restored context
          comes back immediately even when the page has not scrolled. */
       if (succeeded && !ready) {
@@ -459,6 +475,13 @@ col=pow(col,vec3(.94));
     const schedule = () => {
       needsDraw = true;
       if (lost || document.hidden) return;
+      /* Clear once after the final section leaves, then stay idle offscreen.
+         Replace a throttled animation frame so the clear cannot be skipped. */
+      if (!sections.some(section => section.visible)) {
+        if (!hasDrawnContent) return;
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+      }
       if (animationAllowed()) {
         if (!frame) frame = requestAnimationFrame(tick);
         return;
@@ -506,7 +529,6 @@ col=pow(col,vec3(.94));
           const section = sections.find(item => item.element === entry.target);
           if (section) section.visible = entry.isIntersecting && entry.intersectionRatio > 0;
         });
-        draw();
         schedule();
       }, { threshold: [0, 0.001] });
       sections.forEach(section => observer.observe(section.element));
@@ -516,14 +538,17 @@ col=pow(col,vec3(.94));
           const rect = section.element.getBoundingClientRect();
           section.visible = rect.bottom > 0 && rect.top < window.innerHeight;
         });
-        draw();
         schedule();
       };
       updateVisibility();
       window.addEventListener('scroll', updateVisibility, { passive: true });
     }
 
+    let lastPaused = reduced.matches || body.classList.contains('motion-paused') || document.hidden;
     const syncMotion = () => {
+      const paused = reduced.matches || body.classList.contains('motion-paused') || document.hidden;
+      if (paused === lastPaused) return;
+      lastPaused = paused;
       if (frame) cancelAnimationFrame(frame);
       frame = 0;
       lastFrame = 0;
@@ -535,7 +560,12 @@ col=pow(col,vec3(.94));
     reduced.addEventListener?.('change', syncMotion);
     document.addEventListener('visibilitychange', syncMotion);
     window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule, { passive: true });
+    const scheduleResize = () => {
+      needsResize = true;
+      schedule();
+    };
+    window.addEventListener('resize', scheduleResize, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(scheduleResize).observe(canvas);
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });

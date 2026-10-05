@@ -124,9 +124,9 @@
    }
   },
   "site:画像1枚の最大バイト": {
-   "ceiling": 1141937,
+   "ceiling": 632101,
    "files": {
-    "images/screenshot-shisto.png": 1141937
+    "images/bi-prediction.png": 632101
    }
   },
   "works.html:CSS合計バイト": {
@@ -351,6 +351,13 @@
    "kind": "登録",
    "metric": "works.html:読込数",
    "to": 39
+  },
+  {
+   "date": "2026-10-05",
+   "kind": "下げた",
+   "metric": "site:画像1枚の最大バイト",
+   "from": 1141937,
+   "to": 632101
   }
  ]
 }

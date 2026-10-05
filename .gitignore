@@ -21,3 +21,4 @@ secrets.toml
 credentials.toml
 *credential*
 service_account*.json
+_perf/__pycache__/

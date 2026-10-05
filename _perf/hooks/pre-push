@@ -1,0 +1,5 @@
+#!/bin/sh
+# git push の直前に自動で呼ばれる（sh _perf/install.sh で有効化）。
+# main へ送るコミットの「表示の重さ」を上限と比べ、超えていたら送信を止める＝shisto.jp は変わらない。
+# 中身は _perf/perf_ratchet.py --hook。止まった時の表示に、何がどれだけ重くなったかと戻し方が出る。
+exec python3 "$(git rev-parse --show-toplevel)/_perf/perf_ratchet.py" --hook

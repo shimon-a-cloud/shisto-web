@@ -150,3 +150,25 @@ body.section-depth-ready .section-services::before {
 @media (prefers-reduced-motion: reduce) {
   .section-depth-canvas { transition: none; }
 }
+
+/* Charcoal mode: the flat section colours are page-anchored stripes beneath
+   the fixed canvas, which then carries only the transparent edge sculpture.
+   Hidden until the first successful draw, exactly like the canvas. */
+.section-depth-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.section-depth-backdrop > div { position: absolute; }
+body.section-depth-ready .section-depth-backdrop { visibility: visible; }
+/* Small screens keep the former softened layer (.9) on the backdrop. The
+   overlay canvas folds that opacity into its own alpha, so it stays at 1. */
+@media (max-width: 768px) {
+  .section-depth-backdrop { opacity: .9; }
+}
+body.section-depth-ready .section-depth-canvas--overlay { opacity: 1 !important; }

@@ -10,6 +10,14 @@
   const start = () => {
     const body = document.body;
     if (!body || body.dataset.sectionDepth === 'active') return;
+    /* Small screens keep the plain section colours (田中さん 2026-10-11): the
+       edge sculpture is too coarse there and crowds the copy. Start only once
+       the viewport is wide, and stand down again if it narrows. */
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    if (smallScreen.matches) {
+      smallScreen.addEventListener?.('change', start, { once: true });
+      return;
+    }
 
     const defaultSelectors = [
       '.section-services',
@@ -41,7 +49,54 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const canvas = document.createElement('canvas');
     canvas.className = 'section-depth-canvas';
+    if (body.dataset.sectionDepthCharcoal === 'true') canvas.classList.add('section-depth-canvas--overlay');
     canvas.setAttribute('aria-hidden', 'true');
+
+    /* Charcoal mode: each section's flat colour is a plain element in page
+       coordinates, so the white/black boundaries scroll with the copy on the
+       compositor instead of being redrawn (and lagging) inside the fixed
+       canvas. Positions change only on layout, never on scroll. */
+    const overlayMode = body.dataset.sectionDepthCharcoal === 'true';
+    let layerOpacity = 1;
+    let underColour = [0, 0, 0];
+    const parseColour = value => {
+      const match = /rgba?\(([^)]+)\)/.exec(value || '');
+      if (!match) return null;
+      const parts = match[1].split(/[ ,/]+/).filter(Boolean).map(Number);
+      if (parts.length > 3 && parts[3] === 0) return null;
+      return parts.slice(0, 3).map(channel => channel / 255);
+    };
+    /* The colour a translucent backdrop is composited over: body's own
+       background when it has one, otherwise the root's, otherwise white. */
+    const readUnderColour = () => (
+      parseColour(getComputedStyle(body).backgroundColor) ||
+      parseColour(getComputedStyle(document.documentElement).backgroundColor) ||
+      [1, 1, 1]
+    );
+    const backdrop = overlayMode ? document.createElement('div') : null;
+    const layoutBackdrop = () => {
+      if (!backdrop) return;
+      const origin = backdrop.getBoundingClientRect();
+      sections.forEach(section => {
+        const rect = section.element.getBoundingClientRect();
+        const style = section.stripe.style;
+        style.top = `${rect.top - origin.top}px`;
+        style.left = `${rect.left - origin.left}px`;
+        style.width = `${rect.width}px`;
+        style.height = `${rect.height}px`;
+      });
+    };
+    if (backdrop) {
+      backdrop.className = 'section-depth-backdrop';
+      backdrop.setAttribute('aria-hidden', 'true');
+      sections.forEach(section => {
+        section.stripe = document.createElement('div');
+        section.stripe.style.background = section.element.classList.contains('paper-section')
+          ? 'rgb(241, 240, 235)'
+          : 'rgb(27, 25, 26)';
+        backdrop.append(section.stripe);
+      });
+    }
 
     let gl = null;
     let program = null;
@@ -74,6 +129,8 @@
       uniform float uProgress;
       uniform float uStyle;
       uniform float uPaper;
+      uniform vec3 uUnder;
+      uniform float uLayerOpacity;
       const bool uniformCharcoal = ${body.dataset.sectionDepthCharcoal === 'true' ? 'true' : 'false'};
 
       #define FAR 16.0
@@ -210,6 +267,16 @@ col=pow(col,vec3(.94));
 
         if (uniformCharcoal) colour = base;
 
+        /* The sculpture is fully masked out across the reading column, so the
+           ray march only runs in the outer margins. In charcoal mode the flat
+           section colour is painted natively by the page (it scrolls with the
+           copy); the canvas supplies only the sculpture as a transparent layer. */
+        if (screenX <= 0.66) {
+          gl_FragColor = uniformCharcoal ? vec4(0.0) : vec4(colour * (1.0 - (1.0 - smoothstep(0.26, 0.72, screenX)) * 0.42) * (0.88 + 0.12 * (1.0 - smoothstep(0.26, 1.35, length(uv * vec2(0.66, 0.82))))) + (hash21(frag) - 0.5) / 255.0, 1.0);
+          return;
+        }
+        float weight = 0.0;
+
         /* Pulling back on portrait screens keeps the sculpture visibly large at
            both margins without letting it cross the central reading column. */
         float portrait = 1.0 - smoothstep(0.72, 1.15, aspect);
@@ -262,18 +329,33 @@ col=pow(col,vec3(.94));
              headings begin near that edge. */
           float sculptureExposure = smoothstep(0.66, 0.86, screenX);
           float leftCopyGuard = mix(0.68, 1.0, smoothstep(0.0, 0.56, frag.x / uResolution.x));
-          colour = mix(colour, material, sculptureExposure * leftCopyGuard);
+          weight = sculptureExposure * leftCopyGuard;
+          if (uniformCharcoal) colour = material;
+          else colour = mix(colour, material, weight);
         }
 
         /* A broad, non-graphic exposure mask protects real headings, details,
            and fields. It does not erase the high-impact edge silhouettes. */
         float readingGuard = 1.0 - smoothstep(0.26, 0.72, screenX);
-        if (uniformCharcoal) colour = base + (colour - base) * (1.0 - readingGuard * 0.42);
-        else colour *= 1.0 - readingGuard * 0.42;
+        if (!uniformCharcoal) colour *= 1.0 - readingGuard * 0.42;
 
         float vignette = 1.0 - smoothstep(0.26, 1.35, length(uv * vec2(0.66, 0.82)));
-        if (uniformCharcoal) colour = base + (colour - base) * (0.88 + 0.12 * vignette);
-        else {
+        if (uniformCharcoal) {
+          /* base + w * (material - base), expressed as straight alpha over the
+             natively painted base: identical pixels, no canvas-drawn edges. */
+          /* The former opaque canvas showed clamp(base + w * (material - base))
+             at the layer opacity over the page colour. Keep the blend weight
+             itself as alpha so it stays smooth across the silhouette, and emit
+             premultiplied colour: upscaling then filters colour and alpha
+             together, with no fringes on any browser. */
+          float w = weight * (1.0 - readingGuard * 0.42) * (0.88 + 0.12 * vignette);
+          vec3 shown = clamp(base + w * (colour - base), 0.0, 1.0);
+          vec3 backdrop = mix(uUnder, base, uLayerOpacity);
+          vec3 target = mix(uUnder, shown, uLayerOpacity);
+          float alpha = w * uLayerOpacity;
+          gl_FragColor = vec4(clamp(target - backdrop * (1.0 - alpha), 0.0, alpha), alpha);
+          return;
+        } else {
           colour *= 0.88 + 0.12 * vignette;
           colour += (hash21(frag) - 0.5) / 255.0;
         }
@@ -318,7 +400,7 @@ col=pow(col,vec3(.94));
         antialias: false,
         depth: false,
         stencil: false,
-        premultipliedAlpha: false,
+        premultipliedAlpha: overlayMode,
         preserveDrawingBuffer: false,
         powerPreference: 'high-performance'
       });
@@ -352,7 +434,9 @@ col=pow(col,vec3(.94));
         time: gl.getUniformLocation(program, 'uTime'),
         progress: gl.getUniformLocation(program, 'uProgress'),
         style: gl.getUniformLocation(program, 'uStyle'),
-        paper: gl.getUniformLocation(program, 'uPaper')
+        paper: gl.getUniformLocation(program, 'uPaper'),
+        under: gl.getUniformLocation(program, 'uUnder'),
+        layerOpacity: gl.getUniformLocation(program, 'uLayerOpacity')
       };
       gl.disable(gl.DEPTH_TEST);
       gl.disable(gl.BLEND);
@@ -376,12 +460,25 @@ col=pow(col,vec3(.94));
       }
       viewportWidth = width;
       viewportHeight = height;
+      if (backdrop) {
+        layerOpacity = Number(getComputedStyle(backdrop).opacity) || 1;
+        underColour = readUnderColour();
+      }
       pixelScaleX = canvas.width / width;
       pixelScaleY = canvas.height / height;
     };
 
     const draw = () => {
       if (!gl || !program || lost) return false;
+      if (smallScreen.matches) {
+        if (ready) {
+          ready = false;
+          hasDrawnContent = false;
+          body.classList.remove('section-depth-ready');
+          canvas.style.visibility = 'hidden';
+        }
+        return false;
+      }
       if (needsResize) {
         resize();
         needsResize = false;
@@ -393,6 +490,8 @@ col=pow(col,vec3(.94));
       gl.useProgram(program);
       gl.uniform2f(locations.resolution, canvas.width, canvas.height);
       gl.uniform1f(locations.time, elapsed);
+      gl.uniform3f(locations.under, underColour[0], underColour[1], underColour[2]);
+      gl.uniform1f(locations.layerOpacity, layerOpacity);
       const firstRect = sections[0].element.getBoundingClientRect();
       const lastRect = sections[sections.length - 1].element.getBoundingClientRect();
       const contentHeight = Math.max(lastRect.bottom - firstRect.top, 1);
@@ -443,6 +542,7 @@ col=pow(col,vec3(.94));
     };
 
     const animationAllowed = () => (
+      !smallScreen.matches &&
       !reduced.matches &&
       !body.classList.contains('motion-paused') &&
       !document.hidden &&
@@ -498,12 +598,17 @@ col=pow(col,vec3(.94));
 
     try {
       body.prepend(canvas);
+      if (backdrop) {
+        body.prepend(backdrop);
+        layoutBackdrop();
+      }
       initialiseGL();
       resize();
       body.dataset.sectionDepth = 'active';
     } catch (_) {
       destroyResources();
       canvas.remove();
+      if (backdrop) backdrop.remove();
       return;
     }
 
@@ -566,6 +671,24 @@ col=pow(col,vec3(.94));
     };
     window.addEventListener('resize', scheduleResize, { passive: true });
     if ('ResizeObserver' in window) new ResizeObserver(scheduleResize).observe(canvas);
+    if (backdrop) {
+      let layoutFrame = 0;
+      const scheduleLayout = () => {
+        if (!layoutFrame) layoutFrame = requestAnimationFrame(() => { layoutFrame = 0; layoutBackdrop(); });
+      };
+      window.addEventListener('resize', scheduleLayout, { passive: true });
+      window.addEventListener('load', scheduleLayout, { once: true });
+      document.addEventListener('transitionend', scheduleLayout, { passive: true });
+      document.fonts?.ready?.then(scheduleLayout);
+      if ('ResizeObserver' in window) {
+        /* Resize observations are delivered after layout and before paint, so
+           laying out here keeps the stripes on the same frame as an animating
+           accordion (a rAF would trail it by one frame). */
+        const layoutObserver = new ResizeObserver(layoutBackdrop);
+        layoutObserver.observe(body);
+        sections.forEach(section => layoutObserver.observe(section.element));
+      }
+    }
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });

@@ -61,7 +61,7 @@ col=pow(col,vec3(.94));gl_FragColor=vec4(col,uOpacity);}`;
 
  function buffer(name,data,size){const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);const a=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,size,gl.FLOAT,false,0,0);}buffer('aPosition',positions,3);buffer('aNormal',normals,3);buffer('aUv',uvs,3);const ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indices),gl.STATIC_DRAW);gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.clearColor(0,0,0,0);
  function multiply(a,b){const o=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k];return o;}function projection(aspect){const f=1/Math.tan(.59/2),n=.1,far=40;return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+n)/(n-far),-1,0,0,2*far*n/(n-far),0]);}
- let pointer=[0,0],smoothPointer=[0,0],elapsed=0,last=0,raf=0,lastDraw=0,staticFrame=0,resizeFrame=0,visible=true,contextLost=false;
+ let pointer=[0,0],smoothPointer=[0,0],elapsed=0,last=0,raf=0,lastDraw=0,scrollDirty=false,staticFrame=0,resizeFrame=0,visible=true,contextLost=false;
  const hero=document.querySelector('.hero');
  function resize(){
   /* CSS viewport units stay steady through mobile browser-bar animation. */
@@ -82,13 +82,15 @@ col=pow(col,vec3(.94));gl_FragColor=vec4(col,uOpacity);}`;
  },{passive:true});
  window.addEventListener('pointerleave',()=>{pointer=[0,0];});
  function render(){if(contextLost)return;const hr=hero.getBoundingClientRect(),mobile=innerWidth<768;visible=hr.bottom>0&&hr.top<innerHeight;if(!visible)return;gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const progress=Math.min(1,Math.max(0,-hr.top/Math.max(canvas.clientHeight,1)));smoothPointer[0]+=(pointer[0]-smoothPointer[0])*.055;smoothPointer[1]+=(pointer[1]-smoothPointer[1])*.055;const t=elapsed,ry=.20+Math.sin(t*.16)*.30+smoothPointer[0]*.20+progress*.65,rx=.10+Math.sin(t*.12)*.09+smoothPointer[1]*.11,rz=-.40+Math.sin(t*.11)*.08+progress*.21,sc=mobile?.19:.82;const cy=Math.cos(ry),sy=Math.sin(ry),cx=Math.cos(rx),sx=Math.sin(rx),cz=Math.cos(rz),sz=Math.sin(rz);const rotX=new Float32Array([1,0,0,0,0,cx,sx,0,0,-sx,cx,0,0,0,0,1]),rotY=new Float32Array([cy,0,-sy,0,0,1,0,0,sy,0,cy,0,0,0,0,1]),rotZ=new Float32Array([cz,sz,0,0,-sz,cz,0,0,0,0,1,0,0,0,0,1]);let model=multiply(rotZ,multiply(rotY,rotX));for(let i=0;i<12;i++)model[i]*=sc;model[12]=mobile?.1:1.85;model[13]=(mobile?.28:-.14)+progress*2.8;model[14]=mobile?-8.3:-9.;const mvp=multiply(projection(canvas.clientWidth/Math.max(canvas.clientHeight,1)),model);gl.uniformMatrix4fv(loc.uModel,false,model);gl.uniformMatrix4fv(loc.uMVP,false,mvp);gl.uniform1f(loc.uTime,t);gl.uniform1f(loc.uFlow,progress);gl.uniform1f(loc.uOpacity,1);gl.drawElements(gl.TRIANGLES,indices.length,gl.UNSIGNED_SHORT,0);}
- function frame(now){raf=0;if(paused||document.hidden||contextLost)return;if(last)elapsed+=Math.min((now-last)/1000,.05);last=now;if(now-lastDraw>33){render();lastDraw=now;}if(visible)raf=requestAnimationFrame(frame);}
+ function frame(now){raf=0;if(paused||document.hidden||contextLost)return;if(last)elapsed+=Math.min((now-last)/1000,.05);last=now;if(scrollDirty||now-lastDraw>33){scrollDirty=false;render();lastDraw=now;}if(visible)raf=requestAnimationFrame(frame);}
  function start(){if(paused||document.hidden||contextLost||raf)return;last=0;lastDraw=0;raf=requestAnimationFrame(frame);}
  function stop(){if(raf)cancelAnimationFrame(raf);raf=0;last=0;}
  function scheduleStatic(){if(staticFrame||document.hidden||contextLost)return;staticFrame=requestAnimationFrame(()=>{staticFrame=0;render();});}
  document.addEventListener('motionchange',()=>{if(paused){stop();scheduleStatic();}else start();});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(paused)scheduleStatic();else start();});
- window.addEventListener('scroll',()=>{if(paused)scheduleStatic();else if(!visible)start();},{passive:true});
+ /* Scroll moves the ribbon with the page; draw on every frame while scrolling
+    so it does not step at the 30fps idle cadence. */
+ window.addEventListener('scroll',()=>{scrollDirty=true;if(paused)scheduleStatic();else if(!visible)start();},{passive:true});
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();contextLost=true;stop();stage.classList.remove('sculpture-ready');});
  const syncMotion=()=>{paused=reduce.matches||body.classList.contains('motion-paused')||body.classList.contains('brand-opening-active');if(paused)stop();else start();};
  new MutationObserver(syncMotion).observe(body,{attributes:true,attributeFilter:['class']});

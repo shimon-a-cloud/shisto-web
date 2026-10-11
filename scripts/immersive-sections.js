@@ -131,8 +131,11 @@
     observeControl();
     refreshControl();
 
+    /* Only the sculpture reads --section-progress. Writing the inherited
+       property on the whole section forced a style pass over every descendant
+       on each scroll frame. */
     const setProgress = value => {
-      sections.forEach(section => section.style.setProperty('--section-progress', value));
+      sculptures.forEach(({ sculpture }) => sculpture.style.setProperty('--section-progress', value));
     };
     resetSectionProgress = () => setProgress('0');
     const updateProgress = () => {
@@ -142,10 +145,11 @@
         return;
       }
       const viewport = Math.max(window.innerHeight, 1);
-      sections.forEach(section => {
+      sculptures.forEach(({ section, sculpture }) => {
+        if (visible.get(section) === false) return;
         const rect = section.getBoundingClientRect();
         const progress = clamp((viewport - rect.top) / (viewport + rect.height), 0, 1);
-        section.style.setProperty('--section-progress', progress.toFixed(4));
+        sculpture.style.setProperty('--section-progress', progress.toFixed(4));
       });
     };
     const requestProgress = () => {

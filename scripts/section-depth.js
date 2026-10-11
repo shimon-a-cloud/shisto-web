@@ -10,6 +10,14 @@
   const start = () => {
     const body = document.body;
     if (!body || body.dataset.sectionDepth === 'active') return;
+    /* Small screens keep the plain section colours (田中さん 2026-10-11): the
+       edge sculpture is too coarse there and crowds the copy. Start only once
+       the viewport is wide, and stand down again if it narrows. */
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    if (smallScreen.matches) {
+      smallScreen.addEventListener?.('change', start, { once: true });
+      return;
+    }
 
     const defaultSelectors = [
       '.section-services',
@@ -335,18 +343,17 @@ col=pow(col,vec3(.94));
         if (uniformCharcoal) {
           /* base + w * (material - base), expressed as straight alpha over the
              natively painted base: identical pixels, no canvas-drawn edges. */
-          /* Reproduce the former opaque result exactly: the old canvas showed
-             clamp(base + w * (material - base)) at the layer opacity over the
-             page colour beneath. Solve for the straight-alpha colour that gives
-             that same pixel over the (equally translucent) native backdrop. */
+          /* The former opaque canvas showed clamp(base + w * (material - base))
+             at the layer opacity over the page colour. Keep the blend weight
+             itself as alpha so it stays smooth across the silhouette, and emit
+             premultiplied colour: upscaling then filters colour and alpha
+             together, with no fringes on any browser. */
           float w = weight * (1.0 - readingGuard * 0.42) * (0.88 + 0.12 * vignette);
           vec3 shown = clamp(base + w * (colour - base), 0.0, 1.0);
           vec3 backdrop = mix(uUnder, base, uLayerOpacity);
-          vec3 delta = uLayerOpacity * (shown - base);
-          vec3 need = max(delta / max(1.0 - backdrop, 1e-4), -delta / max(backdrop, 1e-4));
-          float alpha = clamp(max(need.r, max(need.g, need.b)), 0.0, 1.0);
-          if (alpha < 0.5 / 255.0) { gl_FragColor = vec4(0.0); return; }
-          gl_FragColor = vec4(clamp(backdrop + delta / alpha, 0.0, 1.0), alpha);
+          vec3 target = mix(uUnder, shown, uLayerOpacity);
+          float alpha = w * uLayerOpacity;
+          gl_FragColor = vec4(clamp(target - backdrop * (1.0 - alpha), 0.0, alpha), alpha);
           return;
         } else {
           colour *= 0.88 + 0.12 * vignette;
@@ -393,7 +400,7 @@ col=pow(col,vec3(.94));
         antialias: false,
         depth: false,
         stencil: false,
-        premultipliedAlpha: false,
+        premultipliedAlpha: overlayMode,
         preserveDrawingBuffer: false,
         powerPreference: 'high-performance'
       });
@@ -463,6 +470,15 @@ col=pow(col,vec3(.94));
 
     const draw = () => {
       if (!gl || !program || lost) return false;
+      if (smallScreen.matches) {
+        if (ready) {
+          ready = false;
+          hasDrawnContent = false;
+          body.classList.remove('section-depth-ready');
+          canvas.style.visibility = 'hidden';
+        }
+        return false;
+      }
       if (needsResize) {
         resize();
         needsResize = false;
@@ -526,6 +542,7 @@ col=pow(col,vec3(.94));
     };
 
     const animationAllowed = () => (
+      !smallScreen.matches &&
       !reduced.matches &&
       !body.classList.contains('motion-paused') &&
       !document.hidden &&

@@ -2,7 +2,7 @@
  "説明": "表示の重さの上限（_perf/perf_ratchet.py）。上げるのは --raise（田中さんの承認＋理由）だけ。手で書き換えない",
  "metrics": {
   "index.html:CSS合計バイト": {
-   "ceiling": 81086,
+   "ceiling": 81907,
    "files": {
     "styles/tailwind.css": 11900,
     "styles/home-2026.css": 13242,
@@ -11,19 +11,19 @@
     "styles/text-decode.css": 2809,
     "styles/immersive-sections.css": 27864,
     "styles/dark-contrast.css": 1348,
-    "styles/section-depth.css": 5689,
+    "styles/section-depth.css": 6510,
     "styles/hero-editorial.css": 4979,
     "styles/paper-sections.css": 4388
    }
   },
   "index.html:JS合計バイト": {
-   "ceiling": 99519,
+   "ceiling": 105981,
    "files": {
     "scripts/brand-opening.js": 30357,
     "scripts/text-decode.js": 26024,
-    "scripts/hero-ribbons.js": 9980,
-    "scripts/immersive-sections.js": 10088,
-    "scripts/section-depth.js": 23070
+    "scripts/hero-ribbons.js": 10179,
+    "scripts/immersive-sections.js": 10358,
+    "scripts/section-depth.js": 29063
    }
   },
   "index.html:動画合計バイト": {
@@ -130,18 +130,18 @@
    }
   },
   "works.html:CSS合計バイト": {
-   "ceiling": 13964,
+   "ceiling": 14785,
    "files": {
-    "styles/section-depth.css": 5689,
+    "styles/section-depth.css": 6510,
     "styles/works-depth.css": 5466,
     "styles/text-decode.css": 2809
    }
   },
   "works.html:JS合計バイト": {
-   "ceiling": 52948,
+   "ceiling": 58941,
    "files": {
     "scripts/works-shisto-embed.js": 2284,
-    "scripts/section-depth.js": 23070,
+    "scripts/section-depth.js": 29063,
     "scripts/works-depth.js": 1570,
     "scripts/text-decode.js": 26024
    }
@@ -358,6 +358,42 @@
    "metric": "site:画像1枚の最大バイト",
    "from": 1141937,
    "to": 632101
+  },
+  {
+   "date": "2026-10-11",
+   "kind": "上げた",
+   "metric": "index.html:CSS合計バイト",
+   "from": 81086,
+   "to": 81907,
+   "reason": "2026-10-11 M1で本番反映済みのスクロール修正(336a62d・5c33431)の分。上限が10/5のままだったため現行本番に合わせる",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-11",
+   "kind": "上げた",
+   "metric": "index.html:JS合計バイト",
+   "from": 99519,
+   "to": 105981,
+   "reason": "2026-10-11 M1で本番反映済みのスクロール修正(336a62d・5c33431)の分。上限が10/5のままだったため現行本番に合わせる",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-11",
+   "kind": "上げた",
+   "metric": "works.html:CSS合計バイト",
+   "from": 13964,
+   "to": 14785,
+   "reason": "2026-10-11 M1で本番反映済みのスクロール修正(336a62d・5c33431)の分。上限が10/5のままだったため現行本番に合わせる",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-11",
+   "kind": "上げた",
+   "metric": "works.html:JS合計バイト",
+   "from": 52948,
+   "to": 58941,
+   "reason": "2026-10-11 M1で本番反映済みのスクロール修正(336a62d・5c33431)の分。上限が10/5のままだったため現行本番に合わせる",
+   "approved_by": "田中志門"
   }
  ]
 }

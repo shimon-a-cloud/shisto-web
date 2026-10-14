@@ -50,7 +50,7 @@ body.section-depth-ready #contact.section-contact > div {
 
 /* Contact keeps the quieter background-only treatment. Services retains its
    original inline sculpture, upgraded below, at exactly the existing position. */
-body.section-depth-ready .section-contact .section-sculpture {
+body .section-contact .section-sculpture {
   opacity: 0 !important;
   visibility: hidden !important;
 }

@@ -236,8 +236,9 @@
        スマホLCP 5.67秒の主因だったため。参照＝projects/shisto-web.md） -->
   <style>
     @font-face { font-family:'Shippori Mincho'; font-weight:400; font-display:swap; src:url('fonts/shippori-400.woff2') format('woff2'); }
-    @font-face { font-family:'Zen Kaku Gothic New'; font-weight:300; font-display:swap; src:url('fonts/zenkaku-300.woff2') format('woff2'); }
-    @font-face { font-family:'Zen Kaku Gothic New'; font-weight:500; font-display:swap; src:url('fonts/zenkaku-500.woff2') format('woff2'); }
+    /* 2026-10-19 田中さんがBIZ UDPゴシックを採用。既存CSSの書体名はそのままに、中身だけ差し替える（細字は標準、太字は太字） */
+    @font-face { font-family:'Zen Kaku Gothic New'; font-weight:100 599; font-display:swap; src:url('fonts/bizudp-400.woff2') format('woff2'); }
+    @font-face { font-family:'Zen Kaku Gothic New'; font-weight:600 900; font-display:swap; src:url('fonts/bizudp-700.woff2') format('woff2'); }
     @font-face { font-family:'Cormorant Garamond'; font-weight:300; font-display:swap; src:url('fonts/cormorant-300.woff2') format('woff2'); }
     @font-face { font-family:'Cormorant Garamond'; font-weight:400; font-display:swap; src:url('fonts/cormorant-400.woff2') format('woff2'); }
     /* フォーム入力欄はOS標準フォントで表示する（お客様が入力する文字はサブセット652字の
@@ -920,9 +921,10 @@
   <link rel="stylesheet" href="styles/immersive-sections.css?v=9">
   <link rel="stylesheet" href="styles/dark-contrast.css?v=12">
   <link rel="stylesheet" href="styles/section-depth.css?v=16">
-  <link rel="stylesheet" href="styles/hero-editorial.css?v=4">
+  <link rel="stylesheet" href="styles/hero-editorial.css?v=5">
   <link rel="stylesheet" href="styles/paper-sections.css?v=10">
   <noscript><style>[data-reveal],.fade-up,.split-char{opacity:1!important;transform:none!important}.svc-detail{max-height:none!important;padding-bottom:1.6rem!important}</style></noscript>
+  <link rel="stylesheet" href="styles/simplify.css?v=1">
 </head>
 <body data-section-depth-charcoal="true">
 
@@ -1007,10 +1009,10 @@
 
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between" style="width:100%;">
       <div class="fade-up" style="transition-delay:.5s">
-        <h1 class="hero-headline">バスケで培った実行力を、<br>AIに注ぐ。</h1>
+        <h1 class="hero-headline">その仕事、<br>AIに任せませんか？</h1>
       </div>
       <div class="fade-up flex flex-col gap-2 flex-shrink-0" style="transition-delay:.6s">
-        <p class="hero-introduction">元Bリーグ選手のひとり起業家が、中小企業の「AI担当」として伴走します。単発の制作から継続的な改善まで、相談・設計・制作のすべてを同じ人間が担当します。</p>
+        <p class="hero-introduction"><span class="hi-s">転記・集計・毎日の連絡を、AIで回る仕組みに。</span><span class="hi-s">相談は30分無料、最後まで代表が直接担当します。</span></p>
         <div class="flex flex-col sm:flex-row gap-3">
           <a href="#contact" class="btn-primary btn-accent w-full sm:w-auto text-center">無料で相談する</a>
           <a href="#services" class="btn-primary btn-ghost w-full sm:w-auto text-center">サービスを見る</a>
@@ -1042,148 +1044,50 @@
 
 
 <!-- ═══════════ SERVICES ═══════════ -->
-<section id="services" class="section-services paper-section px-6 md:px-16 pt-12 pb-10 md:pt-32 md:pb-28" style="border-top:0.5px solid rgba(0,0,0,0.1);">
-  <div class="max-w-7xl mx-auto">
-    <div class="md:flex md:items-end md:justify-between gap-10 mb-10 md:mb-20">
-      <div data-reveal>
-        <p class="sec-label mb-4 md:mb-8">Services</p>
-        <h2 class="sec-title">あなたの困りごとを、<br>私とAIで解決します。</h2>
-        <p class="text-sm font-light leading-[1.9] text-ink/75 mt-4 md:mt-8 max-w-xl">AI活用・Web制作・SNS運用——課題の整理から実行まで一貫して伴走します。単発のご依頼から、会社の「AI担当」としての継続伴走まで、必要な深さでお選びいただけます。法人・個人を問わず、お気軽にご相談ください。</p>
-      </div>
+<section id="services" class="section-services paper-section sv-section">
+  <div class="sv-inner">
+    <div class="sv-head">
+      <p class="sec-label">Services</p>
+      <h2 class="sv-title">頼めること</h2>
+      <p class="sv-lead">単発の制作から、毎月の継続支援まで。法人・個人どちらのご相談も受けています。</p>
     </div>
-
-    <div style="border-top:0.5px solid rgba(0,0,0,0.1);">
-
-      <!-- ── 継続で頼む ── -->
-      <p data-reveal style="font-size:0.62rem;font-weight:500;letter-spacing:0.18em;color:#2563EB;text-transform:uppercase;padding-top:1.4rem;">継続で頼む</p>
-
-      <!-- ◆ AIパートナー（継続伴走） -->
-      <div data-reveal data-d="1">
-        <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:#2563EB;">◆</span>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-xl md:text-2xl font-normal tracking-wide">AIパートナー（継続伴走）</h3>
-            </div>
-            <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">あなたの会社の「AI担当」を、外から。社内でAIを使いこなせるようになるまで、月額で伴走します。</p>
-          </div>
-          <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">AI活用の相談・業務の洗い出し・自動化の継続改善</p>
-          <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
+    <div class="sv-grid">
+      <article class="sv-card" style="--i:0">
+        <div class="sv-photo"><img src="images/cards/card1-partner.webp" alt="事務所の机を挟んで話す2人の後ろ姿" loading="lazy" decoding="async"><span class="sv-no">1</span></div>
+        <div class="sv-body">
+          <p class="sv-tag">月額で継続</p>
+          <h3>AIパートナー</h3>
+          <p>御社のAI担当として、毎月いっしょに改善を続けます。</p>
         </div>
-        <div class="svc-detail">
-          <div class="svc-detail-inner">
-            <span class="svc-item">AI活用の相談はいつでも（回数無制限）</span>
-            <span class="svc-item">業務を洗い出し、自動化する順番を一緒に設計</span>
-            <span class="svc-item">毎月、効果を見ながら自動化と改善を継続</span>
-            <span class="svc-item">「作って終わり」にせず、社内でAIを使いこなせるようになるまで伴走</span>
-          </div>
+      </article>
+      <article class="sv-card" style="--i:1">
+        <div class="sv-photo"><img src="images/cards/card2-automation.webp" alt="伝票の山の横に置かれたノートパソコン" loading="lazy" decoding="async"><span class="sv-no">2</span></div>
+        <div class="sv-body">
+          <p class="sv-tag">単発で依頼</p>
+          <h3>AI業務効率化</h3>
+          <p>転記や連絡など、毎日の手作業を仕組みに置きかえます。</p>
         </div>
-      </div>
-
-      <!-- ── 単発で頼む ── -->
-      <p data-reveal style="font-size:0.62rem;font-weight:500;letter-spacing:0.18em;color:#666;text-transform:uppercase;padding-top:2rem;">単発で頼む</p>
-
-      <!-- 01 AI業務効率化支援 -->
-      <div data-reveal data-d="1">
-        <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:#2563EB;">01</span>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-xl md:text-2xl font-normal tracking-wide">AI業務効率化支援</h3>
-            </div>
-            <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">AIを「使ってみる」で終わらせず、実務に定着する形まで設計・支援します。</p>
-          </div>
-          <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">生成AI活用設計・ツール導入・社内定着まで</p>
-          <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
+      </article>
+      <article class="sv-card" style="--i:2">
+        <div class="sv-photo"><img src="images/cards/card3-web.webp" alt="パソコンとスマホに映るWebサイト" loading="lazy" decoding="async"><span class="sv-no">3</span></div>
+        <div class="sv-body">
+          <p class="sv-tag">単発で依頼</p>
+          <h3>Webサイト制作</h3>
+          <p>伝わる構成で、問い合わせにつながるサイトをつくります。</p>
         </div>
-        <div class="svc-detail">
-          <div class="svc-detail-inner">
-            <span class="svc-item">業務フローのヒアリング・AI活用ポイントの特定</span>
-            <span class="svc-item">ChatGPT・Claude等の生成AIツール選定・導入</span>
-            <span class="svc-item">プロンプト設計・テンプレート作成</span>
-            <span class="svc-item">社内向けマニュアル・運用ルール整備</span>
-            <span class="svc-item">定型業務の自動化（レポート・メール・データ整理等）</span>
-            <span class="svc-item">導入後の定着フォロー・改善提案</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 02 Webサイト・LP制作 -->
-      <div data-reveal data-d="2">
-        <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:#2563EB;">02</span>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-xl md:text-2xl font-normal tracking-wide">Webサイト・LP制作</h3>
-            </div>
-            <p class="text-xs font-light mt-1 svc-desc" style="color:#555;">伝わる構成・導線・成果まで考えたWeb制作を行います。</p>
-          </div>
-          <p class="text-xs font-light svc-desc hidden md:block max-w-xs text-right" style="color:#555;line-height:1.8;">コーポレート・サービスサイト・LP・UI設計</p>
-          <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
-        </div>
-        <div class="svc-detail">
-          <div class="svc-detail-inner">
-            <span class="svc-item">コーポレートサイト新規制作・リニューアル</span>
-            <span class="svc-item">サービス紹介LP・採用LP制作</span>
-            <span class="svc-item">ページ構成・ワイヤーフレーム設計</span>
-            <span class="svc-item">レスポンシブ対応（PC・スマホ）</span>
-            <span class="svc-item">お問い合わせフォーム・問い合わせ導線の設計</span>
-            <span class="svc-item">公開・ドメイン・ホスティング設定サポート</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03-05 まとめ -->
-      <div data-reveal data-d="3">
-        <div class="svc-row" onclick="toggleSvc(this)">
-          <span class="svc-num text-xs font-mono" style="color:rgba(11,17,32,0.2);">+</span>
-          <div>
-            <p class="text-xs font-light mb-2" style="color:#666;letter-spacing:0.08em;">その他のご支援</p>
-            <div class="flex flex-wrap gap-2">
-              <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">Web運用・改善支援</span>
-              <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">SNS運用支援</span>
-              <span style="font-size:0.68rem;padding:0.3rem 0.8rem;border:0.5px solid rgba(0,0,0,0.15);border-radius:99px;color:rgba(11,17,32,0.55);font-weight:300;letter-spacing:0.04em;">AI研修・ハンズオン</span>
-            </div>
-          </div>
-          <span class="svc-toggle text-xl" style="color:#ccc;">+</span>
-        </div>
-        <div class="svc-detail">
-          <div class="svc-other-grid">
-            <div>
-              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#666;text-transform:uppercase;margin-bottom:0.75rem;">Web運用・改善支援</p>
-              <span class="svc-item">既存サイトの課題診断・改善提案</span>
-              <span class="svc-item">キャッチコピー・文言のリライト</span>
-              <span class="svc-item">CV導線・SEO基礎対策</span>
-              <span class="svc-item">月次レポート・継続改善サイクル</span>
-            </div>
-            <div>
-              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#666;text-transform:uppercase;margin-bottom:0.75rem;">SNS運用支援</p>
-              <span class="svc-item">発信コンセプト・ターゲット設計</span>
-              <span class="svc-item">投稿案の企画・ライティング</span>
-              <span class="svc-item">LinkedIn・X等のアカウント運用設計</span>
-              <span class="svc-item">AI活用による投稿案の自動生成</span>
-            </div>
-            <div>
-              <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;color:#666;text-transform:uppercase;margin-bottom:0.75rem;">AI研修・ハンズオン</p>
-              <span class="svc-item">ChatGPT・Claude等の基礎〜実務活用</span>
-              <span class="svc-item">業務に合わせたプロンプト設計・実践</span>
-              <span class="svc-item">個人・少人数・社内研修いずれも対応</span>
-              <span class="svc-item">オンライン・対面どちらも可</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      </article>
     </div>
+    <p class="sv-more">ほかにも：Web運用・改善／SNS運用／AI研修</p>
   </div>
 </section>
 
 <!-- ═══════════ NUMBERS（実績） ═══════════ -->
 <section class="section-numbers px-6 md:px-16 py-12 md:py-20" style="background:#0B1120;border-top:0.5px solid rgba(255,255,255,0.06);">
+  <div class="jv-bg" aria-hidden="true"><video muted loop playsinline preload="metadata" src="videos/jisseki-desk.mp4"></video><div class="jv-shade"></div></div>
   <div class="max-w-5xl mx-auto">
     <p class="section-eyebrow-line section-eyebrow-centered" data-reveal style="font-size:0.6rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:0.75rem;">By the Numbers ・ Works</p>
     <h2 class="sec-title" data-reveal style="color:#fff;text-align:center;margin-bottom:1.5rem;">これまでの実績</h2>
-    <p data-reveal style="text-align:center;color:rgba(255,255,255,0.7);font-size:clamp(0.9rem,1.4vw,1rem);font-weight:300;letter-spacing:0.04em;line-height:1.95;max-width:42rem;margin:0 auto 2.75rem;">企業のAI活用を月額で継続支援しながら、Shisto自身の業務もAIで毎日動かしています。机上の知識ではなく、自分で作り、動かし続けているシステムが土台です。</p>
+    <p data-reveal style="text-align:center;color:rgba(255,255,255,0.7);font-size:clamp(0.9rem,1.4vw,1rem);font-weight:300;letter-spacing:0.04em;line-height:1.95;max-width:42rem;margin:0 auto 2.75rem;">企業のAI活用を月額で継続支援しながら、Shisto自身の業務もAIで毎日動かしています。ご相談の際は、実際に動いている仕組みをそのままお見せします。</p>
     <div class="grid grid-cols-3 gap-4 md:gap-10 text-center">
       <div data-reveal data-d="1">
         <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:300;color:#fff;line-height:1;">28<span style="font-size:0.42em;color:#2563EB;letter-spacing:0.1em;">本</span></div>
@@ -1252,88 +1156,42 @@
   </div>
 </section>
 
-<!-- ═══════════ WHY ═══════════ -->
-<section class="section-why paper-section why-value-section">
-  <div class="why-value-header">
-    <p class="sec-label">Why Shisto</p>
-    <h2>選ばれる理由</h2>
-  </div>
-
-  <!-- 01 -->
-  <div class="vb" data-reveal>
-    <div class="vb-content">
-      <div class="vb-num">01</div>
-      <h3 class="vb-title">相談した相手が、<br>そのまま作る人。</h3>
-      <p class="vb-desc">大手のような営業→ディレクター→外注の伝言ゲームがありません。</p>
-      <ul class="vb-points">
-        <li>窓口・設計・制作まで、代表がひとりで担当</li>
-        <li>実際に動いているシステムを、そのままお見せできます</li>
-        <li>修正は即日〜翌日に反映、中間コストなし</li>
-        <li>「1ページだけ」「発信設計だけ」も歓迎</li>
-        <li>縛りなし、合わなければいつでも止められる</li>
-      </ul>
-    </div>
-    <div>
-      <div class="bi-collage">
-        <img class="bi-img-1" src="images/bi-chart.webp" alt="AIニュースBI チャート" width="1095" height="1307" loading="lazy" decoding="async">
-        <div class="bi-img-2-wrap">
-          <img src="images/bi-prediction.webp" alt="AIニュースBI 業界動向" width="1400" height="828" loading="lazy" decoding="async">
-        </div>
-      </div>
-      <p class="vb-caption">AIニュースBI — AI業界ニュースを自動収集・分析するシステム。設計から制作まで代表が担当し、毎日稼働中。</p>
-    </div>
-  </div>
-
-  <!-- 02 -->
-  <div class="vb" data-reveal style="grid-template-columns:1fr;text-align:left;">
-    <div class="vb-content" style="max-width:780px;margin:0 auto;width:100%;">
-      <div class="vb-num">02</div>
-      <h3 class="vb-title">速くするだけで、終わらない。</h3>
-      <p class="vb-desc">ツールを渡して終わりにはしません。一番めんどうな事務を1つ自動化するところから始め、効果を確かめながら一段ずつ。最終的には、社内の人がAIを当たり前に使い、「前はできなかった挑戦」ができる状態まで伴走します。</p>
-      <ul class="vb-points">
-        <li>まず一番めんどうな業務を1つ自動化（小さく確実に）</li>
-        <li>効果を見ながら、毎月一段ずつ</li>
-        <li>経営者の「打てる手」を増やす</li>
-        <li>最後は社内の皆さんがAIを使いこなし、私は経営の右腕に</li>
-      </ul>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════ FLOW ═══════════ -->
-<section class="section-flow flow-section">
-  <div class="flow-inner">
-    <div class="flow-header">
-      <p class="sec-label" data-reveal>Flow</p>
-      <h2 data-reveal>ご依頼の流れ</h2>
+<section class="section-flow flow-section fw-section paper-section" id="flow">
+  <div class="fs-wrap">
+    <div class="fw-head">
+      <p class="fs-badge"><i></i>Flow in 4 steps</p>
+      <h2 class="fs-title">相談から導入まで、4つの段階で。</h2>
+      <p class="fs-lead"><strong>相談と提案までは無料</strong>・最後まで代表が直接担当します</p>
     </div>
-    <div class="flow-grid">
-      <div class="flow-step" data-reveal data-d="1">
-        <div class="flow-node"><span>01</span></div>
-        <h3 class="flow-title">ヒアリング</h3>
-        <p class="flow-desc">現状の課題・目標・優先したい施策を一緒に整理します。「何を頼めばいいかわからない」という段階でも構いません。</p>
-        <span class="flow-meta">初回30分 / オンライン可</span>
-      </div>
-      <div class="flow-step" data-reveal data-d="2">
-        <div class="flow-node"><span>02</span></div>
-        <h3 class="flow-title">ご提案</h3>
-        <p class="flow-desc">実施内容・進め方・優先順位・費用感をまとめてご提案します。提案だけで終わっても費用は一切かかりません。</p>
-        <span class="flow-meta">ヒアリング後3〜5日</span>
-      </div>
-      <div class="flow-step" data-reveal data-d="3">
-        <div class="flow-node"><span>03</span></div>
-        <h3 class="flow-title">設計・制作・導入</h3>
-        <p class="flow-desc">Web制作・AI導入・運用設計を代表が直接担当します。進捗は随時共有し、途中の修正・方向転換にも柔軟に対応します。</p>
-        <span class="flow-meta">規模・内容により相談</span>
-      </div>
-      <div class="flow-step" data-reveal data-d="4">
-        <div class="flow-node"><span>04</span></div>
-        <h3 class="flow-title">AIパートナーとして継続伴走</h3>
-        <p class="flow-desc">月1回の振り返りから、会社のAI活用を継続的に前進させます。「作って終わり」にしない右腕として伴走します。</p>
-        <span class="flow-meta">月額制・いつでも解約可</span>
-      </div>
-    </div>
-    <p class="flow-note" data-reveal>相談は無料です。まずは現状をお聞かせください。</p>
+    <ol class="fs-steps">
+      <li class="fs-line" aria-hidden="true"><b></b><s></s></li>
+    <li class="fs-step" style="--i:0">
+      <span class="fs-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M4 12a8 7 0 1 1 3.2 5.6L4 19l1.1-3.3A6.8 6.8 0 0 1 4 12z"/></svg></span>
+      <h3>ヒアリング</h3>
+      <span class="fs-tag is-free">無料・30分</span>
+      <p>何を頼めばいいかわからない段階でも大丈夫です。オンライン可。</p>
+    </li>
+    <li class="fs-step" style="--i:1">
+      <span class="fs-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M7 3h7l4 4v14H7z"/><path pathLength="1" d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
+      <h3>ご提案</h3>
+      <span class="fs-tag is-free">無料</span>
+      <p>ヒアリング後3〜5日でお送りします。提案だけで終えても無料です。</p>
+    </li>
+    <li class="fs-step" style="--i:2">
+      <span class="fs-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></span>
+      <h3>制作・導入</h3>
+      <span class="fs-tag">お見積り</span>
+      <p>代表が直接つくり、修正は<span class="nw">即日〜翌日</span>に反映します。</p>
+    </li>
+    <li class="fs-step" style="--i:3">
+      <span class="fs-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M19 12a7 7 0 1 1-2.05-4.95M19 4v4h-4"/></svg></span>
+      <h3>継続伴走</h3>
+      <span class="fs-tag">月額・いつでも解約可</span>
+      <p>月1回の振り返りで、次に減らす手作業を決めて改善を続けます。</p>
+    </li>
+    </ol>
   </div>
 </section>
 
@@ -1361,7 +1219,7 @@
 
 
 <!-- ═══════════ ABOUT ═══════════ -->
-<section id="about" class="section-founder paper-section px-6 md:px-16 pt-14 pb-10 md:pt-44 md:pb-24" style="background:#EEF2FF; border-top:0.5px solid rgba(0,0,0,0.08);">
+<section id="about" class="section-founder px-6 md:px-16 pt-14 pb-10 md:pt-44 md:pb-24" style="border-top:0.5px solid rgba(255,255,255,0.08);">
   <div class="founder-intro max-w-7xl mx-auto">
     <p class="founder-eyebrow" data-reveal>The person behind Shisto</p>
   </div>
@@ -1423,7 +1281,7 @@
 </section>
 
 <!-- ═══════════ FAQ ═══════════ -->
-<section class="section-faq px-6 md:px-16 pt-8 pb-12 md:pt-12 md:pb-20" style="border-top:0.5px solid rgba(0,0,0,0.1);">
+<section class="section-faq paper-section px-6 md:px-16 pt-8 pb-12 md:pt-12 md:pb-20" style="border-top:0.5px solid rgba(0,0,0,0.1);">
   <div class="max-w-7xl mx-auto">
     <p class="sec-label mb-4 md:mb-8" data-reveal>FAQ</p>
     <h2 class="sec-title mb-8 md:mb-10" data-reveal>よくあるご質問</h2>
@@ -1492,7 +1350,7 @@
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section id="contact" style="background:#0B1120;position:relative;" class="section-contact paper-section grain px-6 md:px-16 py-14 md:py-44">
+<section id="contact" style="position:relative;" class="section-contact grain px-6 md:px-16 py-14 md:py-44">
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-20 items-start">
     <div data-reveal="from-left">
       <p class="sec-label mb-6 md:mb-10" style="color:rgba(255,255,255,0.2);">Contact</p>
@@ -1750,7 +1608,8 @@
 </script>
 <script src="scripts/brand-opening.js?v=12" defer></script>
 <script src="scripts/text-decode.js?v=6" defer></script>
-<script src="scripts/hero-ribbons.js?v=6" defer></script>
+<script src="scripts/hero-core.js?v=1" defer></script>
+<script src="scripts/simplify.js?v=1" defer></script>
 <script src="scripts/immersive-sections.js?v=10" defer></script>
 </body>
 </html>

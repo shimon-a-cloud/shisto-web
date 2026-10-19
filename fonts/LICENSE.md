@@ -8,6 +8,7 @@
 |---|---|---|
 | `shippori-400.woff2` | Shippori Mincho Regular | Copyright 2021 The Shippori Mincho Project Authors (https://github.com/fontdasu/ShipporiMincho) |
 | `zenkaku-300.woff2` / `zenkaku-500.woff2` | Zen Kaku Gothic New Light / Medium | Copyright 2022 The Zen Kaku Gothic Project Authors (https://github.com/googlefonts/zen-kakugothic) |
+| `bizudp-400.woff2` / `bizudp-700.woff2` | BIZ UDPGothic Regular / Bold | Copyright 2022 The BIZ UDGothic Project Authors (https://github.com/googlefonts/morisawa-biz-ud-mincho) |
 | `cormorant-300.woff2` / `cormorant-400.woff2` | Cormorant Garamond（可変フォントを wght=300 / 400 に切り出したもの） | Copyright 2015 the Cormorant Project Authors (github.com/CatharsisFonts/Cormorant) |
 | `shistomono-400.woff2` / `shistomono-500.woff2` | **IBM Plex Mono** Regular / Medium（下記のとおり改名しています） | Copyright © 2017 IBM Corp. with Reserved Font Name "Plex" |
 

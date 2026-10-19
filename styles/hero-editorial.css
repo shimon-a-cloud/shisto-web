@@ -2,8 +2,14 @@
    Keep the existing hero children and IDs for the opening/decode handover. */
 @font-face {
   font-family: 'Shisto Hero Zen';
-  src: url('../fonts/zenkaku-500.woff2') format('woff2');
-  font-weight: 400 500;
+  src: url('../fonts/bizudp-400.woff2') format('woff2');
+  font-weight: 100 599;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Shisto Hero Zen';
+  src: url('../fonts/bizudp-700.woff2') format('woff2');
+  font-weight: 600 900;
   font-display: swap;
 }
 

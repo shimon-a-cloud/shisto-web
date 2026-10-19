@@ -40,6 +40,9 @@ FONTS = [
     ("ofl/shipporimincho/ShipporiMincho-Regular.ttf", "shippori-400.woff2", 400, "jp", 3000, None),
     ("ofl/zenkakugothicnew/ZenKakuGothicNew-Light.ttf", "zenkaku-300.woff2", 300, "jp", 3000, None),
     ("ofl/zenkakugothicnew/ZenKakuGothicNew-Medium.ttf", "zenkaku-500.woff2", 500, "jp", 3000, None),
+    # BIZ UDPゴシック（2026-10-19 採用・index.html の見出し書体）
+    ("ofl/bizudpgothic/BIZUDPGothic-Regular.ttf", "bizudp-400.woff2", 400, "jp", 3000, None),
+    ("ofl/bizudpgothic/BIZUDPGothic-Bold.ttf", "bizudp-700.woff2", 700, "jp", 3000, None),
     # Cormorant Garamond は可変フォント1本しか配布されていないため、wght=300/400 に切り出してから使う
     ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-300.woff2", 300, "latin", 400, None),
     ("ofl/cormorantgaramond/CormorantGaramond[wght].ttf", "cormorant-400.woff2", 400, "latin", 400, None),
@@ -56,7 +59,8 @@ FONTS = [
 # ─═＝HTMLコメントの飾り罫・｜＝<title>のみ・―＝保険セット由来で、いずれも画面には描画されない。
 # Google Fonts配信時代から代替表示だった＝サブセット化による悪化ではない。
 # ここに無い文字が「未収録」と出たら本物の漏れ＝必ず --build で再生成すること。
-KNOWN_MISSING = set("─═｜―")
+# 🚨＝works.html のCSSコメント内の絵文字（画面に描画されない・日本語書体に絵文字は無い・2026-10-19 追加）。
+KNOWN_MISSING = set("─═｜―🚨")
 
 # 英字書体（Cormorant Garamond）に収録する文字。
 # 画面に出る英字・数字・記号は限られるが、あとから文言を足したときに1字だけ書体が変わる事故を

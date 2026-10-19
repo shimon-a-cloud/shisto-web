@@ -1,0 +1,211 @@
+/* 2026-10-19 シンプル化（田中さん採用）：サービス・流れ・FAQ・配色・光の核・実績欄の動画 */
+/* ── サービス：写真つきカード ── */
+.sv-section { padding: clamp(4rem, 9vw, 8rem) clamp(1.25rem, 5vw, 5rem); }
+.sv-inner { max-width: 80rem; margin: 0 auto; }
+.sv-head { text-align: center; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.sv-head .sec-label { justify-content: center; }
+.sv-title { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 500; line-height: 1.3; margin-top: 1.2rem; letter-spacing: .02em; }
+.sv-lead { font-size: .95rem; line-height: 1.9; color: #393536; margin-top: 1.2rem; font-weight: 400; }
+.sv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); }
+.sv-card { background: #1B191A; color: #F1F0EB; border-radius: 14px; overflow: hidden; border: 1px solid rgba(0,0,0,.08); }
+.sv-photo { position: relative; aspect-ratio: 16 / 7; overflow: hidden; }
+.sv-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.sv-card:hover .sv-photo img { transform: scale(1.04); }
+.sv-no { position: absolute; top: 1rem; left: 1rem; width: 2.1rem; height: 2.1rem; border-radius: 50%; background: #F1F0EB; color: #1B191A; display: grid; place-items: center; font-size: .9rem; font-weight: 600; }
+.sv-body { padding: 1.6rem 1.7rem 1.9rem; }
+.sv-tag { font-size: .68rem; letter-spacing: .16em; color: rgba(241,240,235,.55); }
+.sv-body h3 { font-size: 1.35rem; font-weight: 500; margin-top: .55rem; letter-spacing: .03em; }
+.sv-body p:last-child { font-size: .95rem; line-height: 1.85; margin-top: .7rem; color: rgba(241,240,235,.85); }
+.sv-more { text-align: center; margin-top: 2.2rem; font-size: .85rem; color: #393536; letter-spacing: .04em; }
+
+/* 既存のサービス欄・流れ欄の装飾と色指定を打ち消す */
+#services.sv-section::before, #services.sv-section::after,
+#flow.fw-section::before, #flow.fw-section::after { content: none !important; display: none !important; }
+#services.sv-section .sv-inner { display: block !important; }
+#services.sv-section .sv-head::before, #services.sv-section .sv-head::after,
+#flow.fw-section .fw-head::before, #flow.fw-section .fw-head::after { content: none !important; display: none !important; }
+#services.sv-section .section-sculpture, #flow.fw-section .section-sculpture { display: none !important; }
+#services.sv-section .sv-grid { border-top: 0 !important; margin-top: 0 !important; }
+#services.sv-section .sv-head, #flow.fw-section .fw-head { min-height: 0 !important; margin-bottom: clamp(2.5rem, 5vw, 4rem) !important; }
+#services.sv-section .sv-head { width: auto !important; max-width: 46rem; margin-left: auto !important; margin-right: auto !important; text-align: center !important; }
+#services.sv-section .sv-card .sv-tag { color: rgba(241,240,235,.6) !important; }
+#services.sv-section .sv-card h3 { color: #F1F0EB !important; }
+#services.sv-section .sv-card .sv-body p:last-child { color: rgba(241,240,235,.85) !important; }
+#flow.fw-section { padding: clamp(4rem, 9vw, 8rem) clamp(1.25rem, 5vw, 5rem) !important; overflow: hidden !important; }
+
+@media (max-width: 767px) {
+  .sv-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+}
+
+/* 白い紙の上の流れ欄：カードは黒のまま、番号は白抜きを保つ */
+/* 黒に変えた代表紹介・問合せ（canvas が描けない時の地の色） */
+body #about.section-founder, body #contact.section-contact { background-color: #1B191A; color: #F1F0EB; }
+/* 黒にした欄の水色をやめ、実績欄と同じ生成りにそろえる */
+body #about.section-founder, body #contact.section-contact { --immersive-blue: #E9E2D6; }
+
+/* ── 流れ：4つの丸を線でつなぐ（線が届いた順に丸が出る） ── */
+#flow .fs-wrap { position: relative; max-width: 72rem; margin: 0 auto; background: #fff; border: 1px solid #e3dfda; border-radius: 28px; padding: clamp(2.6rem, 5vw, 4.2rem) clamp(1.2rem, 4vw, 3.5rem) clamp(2.6rem, 5vw, 3.8rem); box-shadow: 0 30px 60px -40px rgba(35,31,32,.35); overflow: hidden; }
+#flow .fs-wrap::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, #231f20, #b9ab95 50%, #231f20); transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.65,0,.35,1); }
+#flow .fs-wrap::after { content: ''; position: absolute; width: 38rem; height: 38rem; left: 50%; top: -20rem; translate: -50% 0; background: radial-gradient(closest-side, rgba(233,226,214,.7), transparent); pointer-events: none; }
+#flow .fs-wrap.is-in::before { transform: scaleX(1); }
+#flow .fw-head { position: relative; z-index: 1; text-align: center; margin-bottom: clamp(2.6rem, 5vw, 3.6rem) !important; }
+#flow .fs-badge { display: inline-flex; align-items: center; gap: .6rem; padding: .5rem 1.1rem; border: 1px solid #d4cfcb; border-radius: 999px; background: #faf8f4; font-size: .7rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: #393536 !important; }
+#flow .fs-badge i { width: 6px; height: 6px; border-radius: 50%; background: #231f20; box-shadow: 0 0 0 0 rgba(35,31,32,.4); animation: fs-ping 2.4s ease-out infinite; }
+#flow .fs-title { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 500; letter-spacing: .03em; margin-top: 1.1rem; color: #231f20 !important; }
+#flow .fs-lead { margin-top: .8rem; font-size: .92rem; color: #6b6566 !important; letter-spacing: .03em; }
+#flow .fs-lead strong { color: #231f20 !important; font-weight: 600; }
+/* 見出しは下からそろって出る */
+#flow .fw-head > * { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+#flow .fw-head > :nth-child(2) { transition-delay: .1s; } #flow .fw-head > :nth-child(3) { transition-delay: .2s; }
+#flow .is-in .fw-head > * { opacity: 1; transform: none; }
+
+#flow .fs-steps { --dot: 4.25rem; --dur: 1.8s; position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+/* 線：灰色の下地の上を墨色が左から伸び、伸び切ると光の点が流れ続ける */
+#flow .fs-line { position: absolute; left: 12.5%; right: 12.5%; top: calc(var(--dot) / 2); height: 2px; margin-top: -1px; background: #ebe7e2; border-radius: 2px; }
+#flow .fs-line b { position: absolute; inset: 0; background: #231f20; border-radius: 2px; transform: scaleX(0); transform-origin: left; transition: transform var(--dur) cubic-bezier(.45,0,.25,1) .5s; }
+#flow .fs-line s { position: absolute; top: 50%; left: 0; width: 64px; height: 6px; margin: -3px 0 0 -32px; border-radius: 50%; background: radial-gradient(closest-side, #f6ecd8, rgba(233,226,214,0)); opacity: 0; }
+#flow .is-in .fs-line b { transform: scaleX(1); }
+#flow .is-in .fs-line s { animation: fs-run 4.2s cubic-bezier(.45,0,.55,1) calc(var(--dur) + .9s) infinite; }
+
+#flow .fs-step { position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; }
+#flow .fs-dot { position: relative; width: var(--dot); height: var(--dot); border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 30% 25%, #4a4445, #231f20 70%); box-shadow: 0 0 0 6px #fff, 0 0 0 7px #e3dfda, 0 14px 24px -10px rgba(35,31,32,.55); transform: scale(.4); opacity: 0; transition: transform .7s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, box-shadow .4s ease; transition-delay: calc(.5s + var(--i) * var(--dur) / 3); }
+/* 丸が出た瞬間に一度だけ波紋 */
+#flow .fs-dot::after { content: ''; position: absolute; inset: -7px; border-radius: 50%; border: 1.5px solid #b9ab95; opacity: 0; }
+#flow .is-in .fs-dot { transform: scale(1); opacity: 1; }
+#flow .is-in .fs-dot::after { animation: fs-ring 1.1s ease-out calc(.6s + var(--i) * var(--dur) / 3) 1 both; }
+#flow .fs-dot svg { width: 1.55rem; height: 1.55rem; fill: none; stroke: #f1f0eb; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+#flow .fs-dot path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .9s ease; transition-delay: calc(.85s + var(--i) * var(--dur) / 3); }
+#flow .is-in .fs-dot path { stroke-dashoffset: 0; }
+#flow .fs-step:hover .fs-dot { transform: translateY(-4px) scale(1.04); box-shadow: 0 0 0 6px #fff, 0 0 0 7px #b9ab95, 0 22px 30px -12px rgba(35,31,32,.55); transition-delay: 0s; }
+
+#flow .fs-step h3, #flow .fs-tag, #flow .fs-step p { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); transition-delay: calc(.95s + var(--i) * var(--dur) / 3); }
+#flow .fs-tag { transition-delay: calc(1.05s + var(--i) * var(--dur) / 3); }
+#flow .fs-step p { transition-delay: calc(1.15s + var(--i) * var(--dur) / 3); }
+#flow .is-in .fs-step h3, #flow .is-in .fs-tag, #flow .is-in .fs-step p { opacity: 1; transform: none; }
+#flow .fs-step h3 { margin-top: 1.4rem; font-size: 1.08rem; font-weight: 600; letter-spacing: .05em; color: #231f20 !important; }
+#flow .fs-tag { margin-top: .7rem; padding: .3rem .85rem; border: 1px solid #d4cfcb; border-radius: 999px; font-size: .7rem; font-weight: 600; letter-spacing: .06em; color: #393536 !important; background: #fff; white-space: nowrap; }
+#flow .fs-tag.is-free { background: #f3eee5; border-color: #e0d6c5 !important; color: #231f20 !important; }
+#flow .fs-step p { margin-top: .9rem; max-width: 15em; font-size: .82rem; line-height: 1.85; color: #6b6566 !important; }
+#flow .nw { white-space: nowrap; color: inherit !important; }
+
+@keyframes fs-run { 0% { left: 0; opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes fs-ring { 0% { opacity: .9; transform: scale(.9); } 100% { opacity: 0; transform: scale(1.55); } }
+@keyframes fs-ping { 0% { box-shadow: 0 0 0 0 rgba(35,31,32,.35); } 70%, 100% { box-shadow: 0 0 0 7px rgba(35,31,32,0); } }
+
+@media (max-width: 767px) {
+  #flow .fs-steps { grid-template-columns: 1fr; gap: 2rem; }
+  #flow .fs-line { left: calc(var(--dot) / 2); right: auto; top: calc(var(--dot) / 2); bottom: calc(var(--dot) / 2); width: 2px; height: auto; margin: 0 0 0 -1px; }
+  #flow .fs-line b { transform: scaleY(0); transform-origin: top; }
+  #flow .is-in .fs-line b { transform: scaleY(1); }
+  #flow .fs-line s { display: none; }
+  #flow .fs-step { display: grid; grid-template-columns: var(--dot) 1fr; column-gap: 1.2rem; text-align: left; align-items: start; justify-items: start; }
+  #flow .fs-dot { grid-row: span 3; }
+  #flow .fs-step h3 { margin-top: .4rem; }
+  #flow .fs-step p { margin-top: .6rem; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #flow .fs-wrap *, #flow .fs-wrap::before { transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  #flow .fs-line s { display: none; }
+}
+
+/* ── 頼めること：出し方とカーソルの反応（10/19 ブラッシュアップ） ── */
+/* 出し方：幕が下から上がり、写真はぼかし→ピント、番号と文字が続く */
+#services .sv-grid { perspective: 1400px; }
+#services .sv-card { position: relative; isolation: isolate; clip-path: inset(100% 0 0 0 round 14px); transform: translateY(40px); transition: clip-path 1.1s cubic-bezier(.77,0,.18,1), transform 1.1s cubic-bezier(.2,.7,.2,1), opacity .5s ease; transition-delay: calc(var(--i) * .16s); }
+#services.is-in .sv-card { clip-path: inset(0 0 0 0 round 14px); transform: none; }
+#services .sv-photo img { transform: scale(1.25); filter: blur(10px) brightness(.7); transition: transform 1.6s cubic-bezier(.2,.7,.2,1), filter 1.2s ease; transition-delay: calc(.25s + var(--i) * .16s); }
+#services.is-in .sv-photo img { transform: scale(1); filter: none; }
+#services .sv-no { transform: scale(0); transition: transform .6s cubic-bezier(.34,1.56,.64,1); transition-delay: calc(.8s + var(--i) * .16s); }
+#services.is-in .sv-no { transform: scale(1); }
+#services .sv-body > * { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+#services .sv-body > :nth-child(1) { transition-delay: calc(.75s + var(--i) * .16s); }
+#services .sv-body > :nth-child(2) { transition-delay: calc(.85s + var(--i) * .16s); }
+#services .sv-body > :nth-child(3) { transition-delay: calc(.95s + var(--i) * .16s); }
+#services.is-in .sv-body > * { opacity: 1; transform: none; }
+#services .sv-head > *, #services .sv-more { opacity: 0; transform: translateY(16px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+#services .sv-head > :nth-child(2) { transition-delay: .1s; } #services .sv-head > :nth-child(3) { transition-delay: .2s; }
+#services .sv-more { transition-delay: 1.2s; }
+#services.is-in .sv-head > *, #services.is-in .sv-more { opacity: 1; transform: none; }
+/* 写真の下側を本文の黒へなじませる */
+#services .sv-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,25,26,0) 45%, rgba(27,25,26,.75)); transition: opacity .5s ease; pointer-events: none; }
+
+/* カーソル：光（::before）・縁の光（::after）・下から立ち上がる光（.sv-body::before） */
+#services .sv-card::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .45s ease; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(246,236,216,.30), transparent 60%); mix-blend-mode: screen; }
+#services .sv-card::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: 14px; padding: 1px; opacity: 0; transition: opacity .45s ease; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(246,236,216,.95), rgba(246,236,216,.15) 45%, transparent 70%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+#services .sv-body { position: relative; }
+#services .sv-body::before { content: ''; position: absolute; inset: -40% 0 0 0; z-index: -1; pointer-events: none; background: radial-gradient(120% 90% at 50% 100%, rgba(205,186,155,.55), rgba(185,171,149,.14) 55%, transparent 75%); transform: translateY(60%); opacity: 0; transition: transform .8s cubic-bezier(.2,.7,.2,1), opacity .6s ease; }
+@media (hover: hover) {
+  #services.is-in .sv-card { transition: clip-path 1.1s cubic-bezier(.77,0,.18,1), transform .5s cubic-bezier(.2,.7,.2,1), opacity .5s ease, box-shadow .5s ease; }
+  #services.is-in .sv-card.is-hover { transition-delay: 0s; transform: translateY(-10px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); box-shadow: 0 40px 60px -30px rgba(35,31,32,.6), 0 0 0 1px rgba(246,236,216,.08); }
+  #services .sv-card.is-hover::before, #services .sv-card.is-hover::after { opacity: 1; }
+  #services .sv-card.is-hover .sv-body::before { transform: none; opacity: 1; }
+  #services.is-in .sv-card.is-hover .sv-photo img { transform: scale(1.07); filter: brightness(1.12) saturate(1.08); transition: transform 1.2s cubic-bezier(.2,.7,.2,1), filter .6s ease; transition-delay: 0s; }
+  #services .sv-card.is-hover .sv-photo::after { opacity: .55; }
+  #services .sv-card.is-hover .sv-no { background: #e9e2d6; }
+  #services .sv-card:hover .sv-photo img { transform: none; }
+  /* 合わせていない2枚は控えめに */
+  #services.is-in .sv-grid.has-hover .sv-card:not(.is-hover) { transform: scale(.97); transition-delay: 0s; }
+  #services.is-in .sv-grid.has-hover .sv-card:not(.is-hover) .sv-photo img { filter: grayscale(.8) brightness(.55); transition: filter .5s ease, transform 1.2s ease; transition-delay: 0s; }
+  #services .sv-grid.has-hover .sv-card:not(.is-hover) .sv-body > * { opacity: .55; transition-delay: 0s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #services .sv-card, #services .sv-photo img, #services .sv-no, #services .sv-body > *, #services .sv-head > *, #services .sv-more { clip-path: none !important; transform: none !important; filter: none !important; opacity: 1 !important; transition: none !important; }
+}
+
+/* よくある質問の大きな「04」を消す（他の欄の番号は撤去済み・10/19 田中さん指示） */
+.section-faq > div:first-child::after { content: none !important; display: none !important; }
+
+/* ヒーロー本文：文の途中で折れないよう、1文ずつ塊にする（幅が足りなければ塊の中で折れる） */
+.hero-introduction .hi-s { display: inline-block; }
+
+/* よくある質問：白い欄にしたのに、開いた項目だけ暗い欄用の紺（dark-contrast.css）が残っていたので、流れ欄と同じ白いカードにそろえる */
+.section-faq.paper-section details[open] {
+  background: #fff !important;
+  border: 1px solid #d4cfcb !important;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px -18px rgba(35,31,32,.25);
+}
+.section-faq.paper-section details[open] summary,
+.section-faq.paper-section details[open] summary * { color: #231f20 !important; }
+.section-faq.paper-section details[open] p { color: #393536 !important; }
+.section-faq.paper-section .faq-icon { color: #231f20 !important; }
+
+/* ── ヒーロー：光の核（scripts/hero-core.js）の土台 ── */
+.hc-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.hero .hero-architecture.hc-stage { background: #1b191a; overflow: hidden; }
+.hero .hero-architecture.hc-stage::before,
+.hero .hero-architecture.hc-stage::after { content: none !important; display: none !important; }
+.hc-canvas { opacity: 0; transition: opacity 1.2s ease; }
+.hc-canvas.is-on { opacity: 1; }
+.hero .hero-headline, .hero .hero-introduction { text-shadow: 0 2px 24px rgba(10, 9, 12, .55); }
+.hc-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(16,14,17,.6), rgba(16,14,17,0) 62%), linear-gradient(0deg, #1b191a, rgba(27,25,26,0) 16%); }
+
+/* 実績欄：見出しと数字の背景に動画を敷く */
+.section-numbers { position: relative; overflow: hidden; }
+.section-numbers > .jv-bg { position: absolute; inset: 0 0 auto 0; height: min(100vh, 58rem); z-index: 0; pointer-events: none; }
+.jv-bg video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 1.2s ease; }
+.jv-bg.is-on video { opacity: .55; }
+/* 文字を読ませるため上下を背景色へ溶かす */
+.jv-shade { position: absolute; inset: 0; background:
+  linear-gradient(180deg, rgba(27,25,26,.55) 0%, rgba(27,25,26,.25) 35%, rgba(27,25,26,.6) 75%, #1B191A 100%); }
+.section-numbers > div:not(.jv-bg) { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .jv-bg { display: none; } }
+/* 既存の「.section-numbers > div { max-width:76rem }」から動画枠だけ外す */
+.section-numbers > div.jv-bg { max-width: none !important; width: 100% !important; margin: 0 !important; padding: 0 !important; left: 0 !important; right: 0 !important; transform: none !important; }
+.jv-bg video { max-width: none !important; }
+
+body[data-section-depth-charcoal] .section-numbers { --jp-bg: rgba(35,31,32,.62); --jp-line: rgba(241,240,235,.16); --jp-accent: #E9E2D6; --jp-blur: 10px; }
+body[data-section-depth-charcoal] .section-numbers > div > .grid.grid-cols-3,
+body[data-section-depth-charcoal] .section-numbers .work-card {
+  background: var(--jp-bg) !important;
+  border-color: var(--jp-line) !important;
+  -webkit-backdrop-filter: blur(var(--jp-blur)); backdrop-filter: blur(var(--jp-blur));
+}
+body[data-section-depth-charcoal] .section-numbers > div > .grid.grid-cols-3 > div + div { border-color: var(--jp-line) !important; }
+body[data-section-depth-charcoal] .section-numbers > div > .grid.grid-cols-3 span,
+body[data-section-depth-charcoal] .section-numbers > div > p:first-child,
+body[data-section-depth-charcoal] .section-numbers .work-card p:nth-child(2) { color: var(--jp-accent) !important; }
+body[data-section-depth-charcoal] .section-numbers > div > p:first-child::before { background: var(--jp-accent) !important; border-color: var(--jp-accent) !important; }
+body[data-section-depth-charcoal] .section-numbers .work-card:hover { border-color: rgba(241,240,235,.5) !important; }

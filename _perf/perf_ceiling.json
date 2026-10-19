@@ -2,7 +2,7 @@
  "説明": "表示の重さの上限（_perf/perf_ratchet.py）。上げるのは --raise（田中さんの承認＋理由）だけ。手で書き換えない",
  "metrics": {
   "index.html:CSS合計バイト": {
-   "ceiling": 81907,
+   "ceiling": 102400,
    "files": {
     "styles/tailwind.css": 11900,
     "styles/home-2026.css": 13242,
@@ -11,38 +11,42 @@
     "styles/text-decode.css": 2809,
     "styles/immersive-sections.css": 27864,
     "styles/dark-contrast.css": 1348,
-    "styles/section-depth.css": 6510,
-    "styles/hero-editorial.css": 4979,
-    "styles/paper-sections.css": 4388
+    "styles/section-depth.css": 6490,
+    "styles/hero-editorial.css": 5130,
+    "styles/paper-sections.css": 4388,
+    "styles/simplify.css": 20362
    }
   },
   "index.html:JS合計バイト": {
-   "ceiling": 105981,
+   "ceiling": 79711,
    "files": {
     "scripts/brand-opening.js": 30357,
     "scripts/text-decode.js": 26024,
-    "scripts/hero-ribbons.js": 10179,
-    "scripts/immersive-sections.js": 10358,
-    "scripts/section-depth.js": 29063
+    "scripts/hero-core.js": 10040,
+    "scripts/simplify.js": 2932,
+    "scripts/immersive-sections.js": 10358
    }
   },
   "index.html:動画合計バイト": {
-   "ceiling": 0,
-   "files": {}
+   "ceiling": 615623,
+   "files": {
+    "videos/jisseki-desk.mp4": 615623
+   }
   },
   "index.html:外部読込数": {
    "ceiling": 0,
    "files": {}
   },
   "index.html:画像合計バイト": {
-   "ceiling": 568214,
+   "ceiling": 513352,
    "files": {
     "favicon.png": 1122,
     "apple-touch-icon.png": 19305,
     "images/logo-mark-light.png": 11045,
     "images/logo-mark-dark.png": 13358,
-    "images/bi-chart.webp": 43198,
-    "images/bi-prediction.webp": 110352,
+    "images/cards/card1-partner.webp": 21168,
+    "images/cards/card2-automation.webp": 35760,
+    "images/cards/card3-web.webp": 41760,
     "images/marquee-bball2.webp": 60274,
     "images/marquee-bball3.webp": 93384,
     "images/marquee-work1.webp": 31028,
@@ -53,17 +57,18 @@
    }
   },
   "index.html:読込数": {
-   "ceiling": 33,
+   "ceiling": 36,
    "files": {
     "apple-touch-icon.png": 1,
     "favicon.png": 1,
+    "fonts/bizudp-400.woff2": 1,
+    "fonts/bizudp-700.woff2": 1,
     "fonts/cormorant-300.woff2": 1,
     "fonts/cormorant-400.woff2": 1,
     "fonts/shippori-400.woff2": 1,
-    "fonts/zenkaku-300.woff2": 1,
-    "fonts/zenkaku-500.woff2": 1,
-    "images/bi-chart.webp": 1,
-    "images/bi-prediction.webp": 1,
+    "images/cards/card1-partner.webp": 1,
+    "images/cards/card2-automation.webp": 1,
+    "images/cards/card3-web.webp": 1,
     "images/founder.webp": 1,
     "images/logo-mark-dark.png": 1,
     "images/logo-mark-light.png": 1,
@@ -74,9 +79,9 @@
     "images/marquee-face1.webp": 1,
     "images/marquee-work1.webp": 1,
     "scripts/brand-opening.js": 1,
-    "scripts/hero-ribbons.js": 1,
+    "scripts/hero-core.js": 1,
     "scripts/immersive-sections.js": 1,
-    "scripts/section-depth.js": 1,
+    "scripts/simplify.js": 1,
     "scripts/text-decode.js": 1,
     "styles/dark-contrast.css": 1,
     "styles/hero-editorial.css": 1,
@@ -86,8 +91,10 @@
     "styles/liquid-glass.css": 1,
     "styles/paper-sections.css": 1,
     "styles/section-depth.css": 1,
+    "styles/simplify.css": 1,
     "styles/tailwind.css": 1,
-    "styles/text-decode.css": 1
+    "styles/text-decode.css": 1,
+    "videos/jisseki-desk.mp4": 1
    }
   },
   "privacy.html:CSS合計バイト": {
@@ -130,18 +137,17 @@
    }
   },
   "works.html:CSS合計バイト": {
-   "ceiling": 14785,
+   "ceiling": 14765,
    "files": {
-    "styles/section-depth.css": 6510,
+    "styles/section-depth.css": 6490,
     "styles/works-depth.css": 5466,
     "styles/text-decode.css": 2809
    }
   },
   "works.html:JS合計バイト": {
-   "ceiling": 58941,
+   "ceiling": 29878,
    "files": {
     "scripts/works-shisto-embed.js": 2284,
-    "scripts/section-depth.js": 29063,
     "scripts/works-depth.js": 1570,
     "scripts/text-decode.js": 26024
    }
@@ -187,17 +193,17 @@
    }
   },
   "works.html:読込数": {
-   "ceiling": 39,
+   "ceiling": 38,
    "files": {
     "apple-touch-icon.png": 1,
     "favicon.png": 1,
+    "fonts/bizudp-400.woff2": 1,
+    "fonts/bizudp-700.woff2": 1,
     "fonts/cormorant-300.woff2": 1,
     "fonts/cormorant-400.woff2": 1,
     "fonts/shippori-400.woff2": 1,
     "fonts/shistomono-400.woff2": 1,
     "fonts/shistomono-500.woff2": 1,
-    "fonts/zenkaku-300.woff2": 1,
-    "fonts/zenkaku-500.woff2": 1,
     "images/logo-mark-light.png": 1,
     "images/works/work-dashboard.webp": 1,
     "images/works/work-debate.webp": 1,
@@ -217,7 +223,6 @@
     "images/works/work-subs.webp": 1,
     "images/works/work-xlikes.webp": 1,
     "index.html": 1,
-    "scripts/section-depth.js": 1,
     "scripts/text-decode.js": 1,
     "scripts/works-depth.js": 1,
     "scripts/works-shisto-embed.js": 1,
@@ -394,6 +399,68 @@
    "to": 58941,
    "reason": "2026-10-11 M1で本番反映済みのスクロール修正(336a62d・5c33431)の分。上限が10/5のままだったため現行本番に合わせる",
    "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "上げた",
+   "metric": "index.html:CSS合計バイト",
+   "from": 81907,
+   "to": 102400,
+   "reason": "トップページ簡素化でサービス欄・流れ・実績動画の表示用CSSを追加",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "上げた",
+   "metric": "index.html:動画合計バイト",
+   "from": 0,
+   "to": 615623,
+   "reason": "実績欄の背景に10秒の無音ループ動画を追加（画面内だけ再生）",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "上げた",
+   "metric": "index.html:読込数",
+   "from": 33,
+   "to": 36,
+   "reason": "サービスカード写真3枚・見出し書体2本・ヒーロー描画と簡素化のJS・CSSを追加",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "下げた",
+   "metric": "index.html:JS合計バイト",
+   "from": 105981,
+   "to": 79711
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "下げた",
+   "metric": "index.html:画像合計バイト",
+   "from": 568214,
+   "to": 513352
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "下げた",
+   "metric": "works.html:CSS合計バイト",
+   "from": 14785,
+   "to": 14765
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "下げた",
+   "metric": "works.html:JS合計バイト",
+   "from": 58941,
+   "to": 29878
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "下げた",
+   "metric": "works.html:読込数",
+   "from": 39,
+   "to": 38
   }
  ]
 }

@@ -593,7 +593,8 @@ body > .sculpture-motion-control:focus-visible { outline: 2px solid #fff; outlin
   .section-services .svc-row .hidden { display: none !important; }
   .section-services .svc-row:hover { translate: 0; }
   .section-services .section-sculpture { width: 18rem; height: 11rem; margin-top: 1rem; opacity: .82; transform: scale(.82); transform-origin: left bottom; }
-  .section-contact .section-sculpture { position: relative; width: 16rem; height: 10rem; left: auto; bottom: auto; margin: 1rem 0 0; opacity: .70; transform: scale(.82); transform-origin: left bottom; }
+  /* スマホでは見えない飾りが約150pxの空白を作っていた（2026-10-22）＝場所ごと消す */
+  .section-contact .section-sculpture { display: none !important; }
   .section-numbers > div > .grid.grid-cols-3 { border-radius: 12px; }
   .section-numbers > div > .grid.grid-cols-3 > div { padding: 1.15rem .35rem; }
   .section-numbers .work-card { border-radius: 12px !important; }

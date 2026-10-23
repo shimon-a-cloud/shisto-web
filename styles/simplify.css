@@ -187,6 +187,7 @@ body #about.section-founder, body #contact.section-contact { --immersive-blue: #
 .section-numbers > .jv-bg { position: absolute; inset: 0 0 auto 0; height: min(100vh, 58rem); z-index: 0; pointer-events: none; }
 .jv-bg video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 1.2s ease; }
 .jv-bg.is-on video { opacity: .55; }
+.jv-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
 /* 文字を読ませるため上下を背景色へ溶かす */
 .jv-shade { position: absolute; inset: 0; background:
   linear-gradient(180deg, rgba(27,25,26,.55) 0%, rgba(27,25,26,.25) 35%, rgba(27,25,26,.6) 75%, #1B191A 100%); }

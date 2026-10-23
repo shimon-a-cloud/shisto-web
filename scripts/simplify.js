@@ -54,17 +54,41 @@
 })();
 
 // 実績欄の背景動画：画面に入っている間だけ再生する
+// iPhoneの低電力モード等で自動再生を断られたら、同じ動画を画像として流し（Safariは<img>で動画を動かせる）、
+// 画面に触れた時・別のアプリから戻った時に動画の再生をやり直す
 (function () {
   var bg = document.querySelector('.section-numbers > .jv-bg');
   if (!bg || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var video = bg.querySelector('video');
+  var inView = false, still = null, wait = 0;
+  function showStill() {
+    if (still || !inView || !video.paused) return;
+    still = new Image();
+    still.alt = ''; still.decoding = 'async';
+    still.onerror = function () { still.remove(); };
+    still.src = video.currentSrc || video.src;
+    bg.insertBefore(still, video.nextSibling);
+  }
+  function play() {
+    if (!inView || !video.paused) return;
+    bg.classList.add('is-on');
+    var p = video.play();
+    if (p && p.catch) p.catch(showStill);
+    clearTimeout(wait);
+    wait = setTimeout(showStill, 2500);
+  }
+  video.addEventListener('playing', function () {
+    clearTimeout(wait);
+    if (still) { still.remove(); still = null; }
+  });
+  ['touchend', 'click', 'keydown'].forEach(function (t) {
+    document.addEventListener(t, play, { passive: true, capture: true });
+  });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
+  addEventListener('pageshow', play);
   new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) {
-      bg.classList.add('is-on');
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
-    } else {
-      video.pause();
-    }
+    inView = entries[0].isIntersecting;
+    if (inView) play();
+    else { clearTimeout(wait); video.pause(); }
   }, { threshold: 0.15 }).observe(bg);
 })();

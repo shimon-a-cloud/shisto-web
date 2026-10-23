@@ -53,18 +53,22 @@
   });
 })();
 
-// 実績欄の背景動画：画面に入っている間だけ再生する
-// iPhoneの低電力モード等で自動再生を断られたら、同じ動画を画像として流し（Safariは<img>で動画を動かせる）、
-// 画面に触れた時・別のアプリから戻った時に動画の再生をやり直す
+// 実績欄の背景動画：画面内だけ再生・断られたら<img>で流す・縦長は軽版
 (function () {
   var bg = document.querySelector('.section-numbers > .jv-bg');
   if (!bg || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var video = bg.querySelector('video');
   var inView = false, still = null, wait = 0;
+  function pick() {
+    var src = video.getAttribute(bg.clientWidth / bg.clientHeight <= 0.66 ? 'data-src-sp' : 'data-src');
+    if (video.getAttribute('src') !== src) { video.src = src; if (still) still.src = src; play(); }
+  }
+  pick();
+  addEventListener('resize', pick);
   function showStill() {
     if (still || !inView || !video.paused) return;
     still = new Image();
-    still.alt = ''; still.decoding = 'async';
+    still.alt = '';
     still.onerror = function () { still.remove(); };
     still.src = video.currentSrc || video.src;
     bg.insertBefore(still, video.nextSibling);
@@ -82,7 +86,7 @@
     if (still) { still.remove(); still = null; }
   });
   ['touchend', 'click', 'keydown'].forEach(function (t) {
-    document.addEventListener(t, play, { passive: true, capture: true });
+    document.addEventListener(t, play, true);
   });
   document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
   addEventListener('pageshow', play);

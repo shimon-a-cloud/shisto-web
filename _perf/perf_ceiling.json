@@ -2,28 +2,28 @@
  "説明": "表示の重さの上限（_perf/perf_ratchet.py）。上げるのは --raise（田中さんの承認＋理由）だけ。手で書き換えない",
  "metrics": {
   "index.html:CSS合計バイト": {
-   "ceiling": 102400,
+   "ceiling": 102487,
    "files": {
     "styles/tailwind.css": 11900,
     "styles/home-2026.css": 13242,
     "styles/liquid-glass.css": 6325,
     "styles/hero-opening.css": 2542,
     "styles/text-decode.css": 2809,
-    "styles/immersive-sections.css": 27864,
+    "styles/immersive-sections.css": 27846,
     "styles/dark-contrast.css": 1348,
     "styles/section-depth.css": 6490,
     "styles/hero-editorial.css": 5130,
     "styles/paper-sections.css": 4388,
-    "styles/simplify.css": 20362
+    "styles/simplify.css": 20467
    }
   },
   "index.html:JS合計バイト": {
-   "ceiling": 79711,
+   "ceiling": 80857,
    "files": {
     "scripts/brand-opening.js": 30357,
     "scripts/text-decode.js": 26024,
     "scripts/hero-core.js": 10040,
-    "scripts/simplify.js": 2932,
+    "scripts/simplify.js": 4078,
     "scripts/immersive-sections.js": 10358
    }
   },
@@ -506,6 +506,24 @@
    "from": 38,
    "to": 52,
    "reason": "実績32本すべてに画像を付けた（14枚追加・遅延読込）",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "上げた",
+   "metric": "index.html:JS合計バイト",
+   "from": 79711,
+   "to": 80857,
+   "reason": "実績欄の背景動画を低電力モードでも流すため",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "上げた",
+   "metric": "index.html:CSS合計バイト",
+   "from": 102400,
+   "to": 102487,
+   "reason": "実績欄の背景動画を低電力モードでも流すため",
    "approved_by": "田中志門"
   }
  ]

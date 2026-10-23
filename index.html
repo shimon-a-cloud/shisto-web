@@ -10,7 +10,13 @@
   <script>
     /* Keep the hero behind the opening until its first frame is ready. */
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash &&
-        performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
+        performance.getEntriesByType('navigation')[0]?.type !== 'back_forward' && !(() => {
+          /* The opening plays on the first visit only; later visits open straight onto the hero. */
+          let seen = null;
+          try { if (window.self === window.top) { seen = localStorage.getItem('shisto-opening-seen'); localStorage.setItem('shisto-opening-seen', '1'); } } catch (e) {}
+          if (seen) window.__brandOpeningPreflightExpired = true;
+          return seen;
+        })()) {
       document.documentElement.classList.add('brand-opening-preflight');
       window.__brandOpeningPreflightTimer = window.setTimeout(() => {
         /* A missing or failed deferred script must never leave the hero hidden. */

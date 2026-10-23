@@ -47,7 +47,7 @@
   "isPartOf": { "@id": "https://shisto.jp/#website", "@type": "WebSite", "url": "https://shisto.jp/", "name": "合同会社Shisto" },
   "about": { "@id": "https://shisto.jp/#organization" },
   "datePublished": "2026-08-16",
-  "dateModified": "2026-08-16"
+  "dateModified": "2026-10-23"
 }
 </script>
 
@@ -179,6 +179,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-sub);
 }
 .intro .facts b{ font-weight: 500; color: var(--ink); }
+.intro .facts .nw{ white-space: nowrap; }
 
 /* ══════ 一覧 ══════ */
 .list{ padding-bottom: 4rem; }
@@ -450,11 +451,11 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
   <div class="intro-inner">
   <h1>IN PRODUCTION</h1>
   <p class="lead">いま、本番で動いているもの。</p>
-  <p>合同会社Shistoは、中小企業の仕事をAIで自動化しています。ここに並ぶ32本は、<time datetime="2026-03">2026年3月</time>から<time datetime="2026-10">10月</time>までの8か月で作ったものです。1本を除き、いまも動いています。企画から設計、開発、運用まで、すべて一人で行っています。</p>
+  <p>合同会社Shistoは、中小企業の仕事をAIで自動化しています。ここに並ぶ32本は、<time datetime="2026-03">2026年3月</time>から<time datetime="2026-10">10月</time>までの8か月で作ったものです。2本を除き、いまも動いています。企画から設計、開発、運用まで、すべて一人で行っています。</p>
   <p>作るときに決めているのは、AIに任せないところです。個人情報や社外に出せないものは端末の中だけで扱い、外部のAIには送りません。報告に載る数字はAIに書かせず、そのつど元のデータを数え直します。送信するか、確定するかは、必ず人が決めます。</p>
   <div class="facts">
     <span><b>8</b> か月で <b>32</b> 本</span>
-    <span><b>30</b> 本が本番稼働・<b>1</b> 本が試験運用・<b>1</b> 本が運用終了</span>
+    <span><span class="nw"><b>29</b> 本が本番稼働・</span><span class="nw"><b>1</b> 本が試験運用・</span><span class="nw"><b>1</b> 本が更新停止・</span><span class="nw"><b>1</b> 本が運用終了</span></span>
     <span>設計から運用まで <b>1</b> 人</span>
   </div>
   </div>
@@ -763,7 +764,7 @@ footer a:hover, footer a:focus-visible{ color: var(--ink); border-bottom-color: 
       <figure><img src="images/works/work-newsbi.webp" loading="lazy" fetchpriority="low" alt="ニュース分析基盤のトレンド画面。記事数の30日推移の折れ線グラフと、カテゴリ別の円グラフが並んでいる。" width="1180" height="820" decoding="async"><figcaption>トレンドの画面（公開ニュースを集計した実データ）</figcaption></figure>
       <dl>
         <dt>課題</dt><dd>業界の動きを追うのに毎日ニュースを読み、しかも読んだそばから忘れていく。</dd>
-        <dt>作ったもの</dt><dd>ニュースを毎日集め、<strong>件数の推移・分野の偏り・出どころの内訳をグラフで見られる</strong>ようにしました。週次・月次でまとめて読み返せます。</dd>
+        <dt>作ったもの</dt><dd>ニュースを毎日集め、<strong>件数の推移・分野の偏り・出どころの内訳をグラフで見られる</strong>ようにしました。週次・月次でまとめて読み返せます。<time datetime="2026-09">2026年9月</time>に自動の収集を止め、現在は更新を停止しています。</dd>
       </dl>
       <div class="stack">Python ／ DuckDB ／ YouTube Data API</div>
     </div>

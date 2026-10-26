@@ -11,9 +11,9 @@
     /* Keep the hero behind the opening until its first frame is ready. */
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash &&
         performance.getEntriesByType('navigation')[0]?.type !== 'back_forward' && !(() => {
-          /* The opening plays on the first visit only; later visits open straight onto the hero. */
+          /* The opening plays once per visit (per tab); returning from works.html in the same tab opens straight onto the hero. */
           let seen = null;
-          try { if (window.self === window.top) { seen = localStorage.getItem('shisto-opening-seen'); localStorage.setItem('shisto-opening-seen', '1'); } } catch (e) {}
+          try { if (window.self === window.top) { seen = sessionStorage.getItem('shisto-opening-seen'); sessionStorage.setItem('shisto-opening-seen', '1'); } } catch (e) {}
           if (seen) window.__brandOpeningPreflightExpired = true;
           return seen;
         })()) {

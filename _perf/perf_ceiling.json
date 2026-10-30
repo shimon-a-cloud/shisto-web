@@ -18,12 +18,12 @@
    }
   },
   "index.html:JS合計バイト": {
-   "ceiling": 80857,
+   "ceiling": 81106,
    "files": {
     "scripts/brand-opening.js": 30357,
     "scripts/text-decode.js": 26024,
     "scripts/hero-core.js": 10040,
-    "scripts/simplify.js": 4078,
+    "scripts/simplify.js": 4327,
     "scripts/immersive-sections.js": 10358
    }
   },
@@ -524,6 +524,15 @@
    "from": 102400,
    "to": 102487,
    "reason": "実績欄の背景動画を低電力モードでも流すため",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-10-30",
+   "kind": "上げた",
+   "metric": "index.html:JS合計バイト",
+   "from": 80857,
+   "to": 81106,
+   "reason": "省電力モードで止まった背景動画が透けて見えないようにする直し（約250バイト）",
    "approved_by": "田中志門"
   }
  ]

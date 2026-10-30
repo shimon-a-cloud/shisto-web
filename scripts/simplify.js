@@ -69,6 +69,8 @@
     if (still || !inView || !video.paused) return;
     still = new Image();
     still.alt = '';
+    // 止まった動画は半透明の画像越しに再生ボタンが透ける＝画像を出す間は隠す。画像も出せない時は何も出さない（2026-10-30）
+    video.style.visibility = 'hidden';
     still.onerror = function () { still.remove(); };
     still.src = video.currentSrc || video.src;
     bg.insertBefore(still, video.nextSibling);
@@ -84,6 +86,7 @@
   video.addEventListener('playing', function () {
     clearTimeout(wait);
     if (still) { still.remove(); still = null; }
+    video.style.visibility = '';
   });
   ['touchend', 'click', 'keydown'].forEach(function (t) {
     document.addEventListener(t, play, true);

@@ -54,14 +54,17 @@
 })();
 
 // 実績欄の背景動画：画面内だけ再生・断られたら<img>で流す・縦長は軽版
+// X等のアプリ内は再生で全画面に飛ぶ＝<img>だけ
 (function () {
   var bg = document.querySelector('.section-numbers > .jv-bg');
   if (!bg || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var video = bg.querySelector('video');
-  var inView = false, still = null, wait = 0;
+  var ua = navigator.userAgent, lock = /iP(hone|ad)/.test(ua) && !/Safari\//.test(ua);
+  var inView = false, still = null, wait = 0, src = '';
+  if (lock) video.remove();
   function pick() {
-    var src = video.getAttribute(bg.clientWidth / bg.clientHeight <= 0.66 ? 'data-src-sp' : 'data-src');
-    if (video.getAttribute('src') !== src) { video.src = src; if (still) still.src = src; play(); }
+    var s = video.getAttribute(bg.clientWidth / bg.clientHeight <= 0.66 ? 'data-src-sp' : 'data-src');
+    if (s !== src) { src = s; if (!lock) video.src = s; if (still) still.src = s; play(); }
   }
   pick();
   addEventListener('resize', pick);
@@ -69,15 +72,15 @@
     if (still || !inView || !video.paused) return;
     still = new Image();
     still.alt = '';
-    // 止まった動画は半透明の画像越しに再生ボタンが透ける＝画像を出す間は隠す。画像も出せない時は何も出さない（2026-10-30）
-    video.style.visibility = 'hidden';
+    video.style.visibility = 'hidden'; // 止まった動画は再生ボタンが透ける
     still.onerror = function () { still.remove(); };
-    still.src = video.currentSrc || video.src;
-    bg.insertBefore(still, video.nextSibling);
+    still.src = src;
+    bg.prepend(still);
   }
   function play() {
     if (!inView || !video.paused) return;
     bg.classList.add('is-on');
+    if (lock) return showStill();
     var p = video.play();
     if (p && p.catch) p.catch(showStill);
     clearTimeout(wait);
@@ -87,6 +90,9 @@
     clearTimeout(wait);
     if (still) { still.remove(); still = null; }
     video.style.visibility = '';
+  });
+  video.addEventListener('webkitbeginfullscreen', function () {
+    lock = 1; video.webkitExitFullscreen(); video.pause(); video.remove(); showStill();
   });
   ['touchend', 'click', 'keydown'].forEach(function (t) {
     document.addEventListener(t, play, true);

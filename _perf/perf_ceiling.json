@@ -18,12 +18,12 @@
    }
   },
   "index.html:JS合計バイト": {
-   "ceiling": 81106,
+   "ceiling": 81305,
    "files": {
     "scripts/brand-opening.js": 30357,
     "scripts/text-decode.js": 26024,
     "scripts/hero-core.js": 10040,
-    "scripts/simplify.js": 4327,
+    "scripts/simplify.js": 4526,
     "scripts/immersive-sections.js": 10358
    }
   },
@@ -533,6 +533,15 @@
    "from": 80857,
    "to": 81106,
    "reason": "省電力モードで止まった背景動画が透けて見えないようにする直し（約250バイト）",
+   "approved_by": "田中志門"
+  },
+  {
+   "date": "2026-11-04",
+   "kind": "上げた",
+   "metric": "index.html:JS合計バイト",
+   "from": 81106,
+   "to": 81305,
+   "reason": "アプリ内ブラウザで背景動画が全画面再生に飛ぶ不具合の修正（+199B）",
    "approved_by": "田中志門"
   }
  ]
